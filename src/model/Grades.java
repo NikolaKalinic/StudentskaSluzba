@@ -13,9 +13,9 @@ public class Grades {
 	public Grades(Student studentPassed, Subject subject, int grades, Date dateExam) {
 		super();
 		this.studentPassed = studentPassed;
-		if(grades>5 && grades<=10)
-			this.subject = subject;  			/*Potential error*/
-		this.grades = grades;
+		this.subject = subject;
+		if(grades>5 && grades<=10)			/*Potential error*/
+			this.grades = grades;
 		this.dateExam = dateExam;
 	}
 	
