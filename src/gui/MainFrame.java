@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -20,7 +21,11 @@ public class MainFrame extends JFrame{
 		setTitle("Studenska služba");
 		
 		MyMenuBar mb = new MyMenuBar();
+		MyToolBar tb = new MyToolBar();
 		this.setJMenuBar(mb);
+		
+		add(tb, BorderLayout.NORTH);
+		
 		setVisible(true);
 		
 		
