@@ -19,6 +19,8 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Studenska služba");
 		
+		MyMenuBar mb = new MyMenuBar();
+		this.setJMenuBar(mb);
 		setVisible(true);
 		
 		
