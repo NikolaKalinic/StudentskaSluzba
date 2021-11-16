@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 enum Status{B,S};
@@ -9,9 +9,9 @@ public class Student {
 	/*Fields*/
 	private String surname;
 	private String name;
-	private Date daateOfBirth;
+	private LocalDate dateOfBirth;
 	private Adress adress; 
-	private int contactPhone;
+	private String phoneNumber;
 	private String email;
 	private String index;
 	private int yearOfEnrollment;
@@ -22,15 +22,15 @@ public class Student {
 	private Set<Subject> failedExams;
 	
 	/*Constructor*/
-	public Student(String surname, String name, Date daateOfBirth, String adress, int contactPhone, String email,
+	public Student(String surname, String name, LocalDate daateOfBirth, String adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status, double avgMark, Adress adress1,
 			Set<Subject> passedExams, Set<Subject> failedExams) {
 		super();
 		this.surname = surname;
 		this.name = name;
-		this.daateOfBirth = daateOfBirth;
+		this.dateOfBirth = daateOfBirth;
 		this.adress = adress1;
-		this.contactPhone = contactPhone;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.index = index;
 		this.yearOfEnrollment = yearOfEnrollment;
@@ -58,8 +58,8 @@ public class Student {
 		this.name = name;
 	}
 
-	public Date getDaateOfBirth() {
-		return daateOfBirth;
+	public LocalDate getDaateOfBirth() {
+		return dateOfBirth;
 	}
 
 	public Adress getAdress() {
@@ -70,12 +70,12 @@ public class Student {
 		this.adress = adress;
 	}
 
-	public int getContactPhone() {
-		return contactPhone;
+	public String getContactPhone() {
+		return phoneNumber;
 	}
 
-	public void setContactPhone(int contactPhone) {
-		this.contactPhone = contactPhone;
+	public void setContactPhone(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {

@@ -10,7 +10,7 @@ public class Subject {
 	private String name;
 	private Semestar semestar;
 	private int yearOfStudySub;
-	private Professor professor;  						//Profesor
+	private Professor professor;  						
 	private int espb;
 	private Set<Student> studentsPassed;
 	private Set<Student> studentsFailed;
