@@ -26,6 +26,8 @@ public class MainFrame extends JFrame{
 		
 		add(tb, BorderLayout.NORTH);
 		
+		MyStatusBar sb = new MyStatusBar(this);
+		
 		setVisible(true);
 		
 		
