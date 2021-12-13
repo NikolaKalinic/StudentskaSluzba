@@ -2,7 +2,8 @@ package controller;
 
 import java.time.LocalDate;
 
-import gui.MainFrame;
+import gui.MyStudentPanel;
+import gui.MyTabbedPane;
 import model.Adress;
 import model.Status;
 import model.Student;
@@ -25,7 +26,7 @@ private static StudentController instance = null;
 	public void addStudent(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status){
 		StudentDB.getInstance().addStudent(surname,name,dateOfBirth,adress,phoneNumber,email,index,yearOfEnrollment,currYearOfStudy,status);
-		//MainFrame.getInstance().updateView();
+		MyStudentPanel.getInstance().updateView();
 	}
 	
 	public void deleteStudent(int rowSelectedIndex) {
@@ -34,7 +35,7 @@ private static StudentController instance = null;
 		}
     	Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
 		StudentDB.getInstance().deleteStudent(student.getIndex());
-		//MainFrame.getInstance().updateView();
+		MyStudentPanel.getInstance().updateView();
     }
 	
 	public void editStudent(int rowSelectedIndex,String surname, String name, Adress adress, String phoneNumber, String email,
@@ -44,6 +45,6 @@ private static StudentController instance = null;
 		}
 		Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
 		StudentDB.getInstance().editStudent(surname, name, adress, phoneNumber, email, student.getIndex(), yearOfEnrollment, currYearOfStudy, status);
-		//MainFrame.getInstance().updateView();
+		MyStudentPanel.getInstance().updateView();
 	}
 }

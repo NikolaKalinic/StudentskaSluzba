@@ -1,10 +1,14 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class MainFrame extends JFrame{
@@ -33,7 +37,17 @@ public class MainFrame extends JFrame{
 		this.setJMenuBar(mb);
 		
 		add(tb, BorderLayout.NORTH);
+		////////////////
 		
+	
+		MyTabPane tp = new MyTabPane();
+		add(tp,BorderLayout.CENTER);
+		
+		
+		
+		
+		
+		/////////
 		MyStatusBar sb = new MyStatusBar(this);
 		
 		setVisible(true);

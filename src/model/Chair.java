@@ -7,10 +7,10 @@ public class Chair {
 	private String idChair;
 	private String nameOfChair;
 	private String headOfChair; 		
-	private Set<String> professors;
+	private Set<Professor> professors;
 	
 	/*Construcor*/
-	public Chair(String idChair, String nameOfChair, String headOfChair, Set<String> professors) {
+	public Chair(String idChair, String nameOfChair, String headOfChair, Set<Professor> professors) {
 		super();
 		this.idChair = idChair;
 		this.nameOfChair = nameOfChair;
@@ -43,11 +43,11 @@ public class Chair {
 		this.headOfChair = headOfChair;
 	}
 
-	public Set<String> getProfessors() {
+	public Set<Professor> getProfessors() {
 		return professors;
 	}
 
-	public void setProfessors(Set<String> professors) {
+	public void setProfessors(Set<Professor> professors) {
 		this.professors = professors;
 	}
 	
