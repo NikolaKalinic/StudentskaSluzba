@@ -9,7 +9,15 @@ import javax.swing.WindowConstants;
 
 public class MainFrame extends JFrame{
 	
-	public MainFrame(){
+	private static MainFrame instance = null;
+
+	public static MainFrame getInstance() {
+		if (instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
+	private MainFrame(){
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = kit.getScreenSize();
 		int sHeight = d.height;

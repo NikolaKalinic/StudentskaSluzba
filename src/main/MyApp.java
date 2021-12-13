@@ -1,11 +1,15 @@
 package main;
 
+import controller.StudentController;
 import gui.MainFrame;
+import model.StudentDB;
 
 public class MyApp {
 
 	public static void main(String[] args) {
-		MainFrame mf = new MainFrame();
+		StudentDB dbs= StudentDB.getInstance();
+		StudentController sc= StudentController.getInstance();
+		MainFrame mf = MainFrame.getInstance();
 	}
 
 }
