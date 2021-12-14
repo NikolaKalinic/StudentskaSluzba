@@ -7,7 +7,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
+import model.StudentDB;
+
 public class MyStudentTable extends JTable {
+	public static int selectedRow=-1;
 	public MyStudentTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
@@ -19,6 +22,7 @@ public class MyStudentTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(new Color(153,204,255));
+			selectedRow=row;
 		}else
 			if (row%2==0) {
 				c.setBackground(Color.LIGHT_GRAY);
@@ -26,6 +30,5 @@ public class MyStudentTable extends JTable {
 				c.setBackground(Color.WHITE);
 			}
 		return c;
-		
 	}
 }
