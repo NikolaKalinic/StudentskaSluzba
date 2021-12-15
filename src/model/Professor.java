@@ -13,12 +13,13 @@ public class Professor {
 	private Adress workAdress;
 	private String phoneNumber;
 	private String id;
+	private String calling;
 	private String title;
 	private int experience;
 	private Set<Subject> courseList; 
 
 	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String title, int experience, Set<Subject> courseList) {
+			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience, Set<Subject> courseList) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -28,12 +29,32 @@ public class Professor {
 		this.workAdress = workAdress;
 		this.phoneNumber = phoneNumber;
 		this.id = id;
+		this.calling = calling;
 		this.title = title;
 		this.experience = experience;
 		this.courseList = courseList;
 	}
 	
 	
+	
+	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
+			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
+		super();
+		this.surname = surname;
+		this.name = name;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.homeAdress = homeAdress;
+		this.workAdress = workAdress;
+		this.phoneNumber = phoneNumber;
+		this.id = id;
+		this.calling = calling;
+		this.title = title;
+		this.experience = experience;
+	}
+
+
+
 	public Set<Subject> getCourseList() {
 		return courseList;
 	}
@@ -104,6 +125,18 @@ public class Professor {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+
+	public String getCalling() {
+		return calling;
+	}
+
+
+
+	public void setCalling(String calling) {
+		this.calling = calling;
+	}
+
 
 
 	public String getTitle() {

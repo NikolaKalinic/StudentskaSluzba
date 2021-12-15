@@ -19,7 +19,7 @@ public class MyTabbedPane extends JTabbedPane{
 	}
 	private MyTabbedPane() {
 		addTab("Studenti",MyStudentPanel.getInstance());
-		addTab("Profesori",new JPanel());
+		addTab("Profesori",MyProfessorPanel.getInstance());
 		addTab("Predmeti",new JPanel());
 	}
 }

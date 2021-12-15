@@ -39,6 +39,8 @@ public class Adress {
 		this.country = country;
 	}
 	
-	
+	public String toString() {
+		return street + number + ", " + city + ", " + country;
+	}
 
 }
