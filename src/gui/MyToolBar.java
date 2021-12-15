@@ -1,17 +1,20 @@
 package gui;
 import java.awt.Color;
-
-import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import controller.StudentController;
+import model.StudentDB;
 
 public class MyToolBar extends JToolBar {
 	
@@ -35,7 +38,18 @@ public class MyToolBar extends JToolBar {
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
 		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
-                
+        create.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}
+					
+				
+			}
+		});
 		
 		add(create);
 		
@@ -62,6 +76,28 @@ public class MyToolBar extends JToolBar {
 		delete.setBorderPainted(false);
 		delete.setFocusPainted(false);
 		delete.setBackground(Color.white);
+		
+		/*Listener for delete*/
+		delete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer==JOptionPane.YES_OPTION) {
+							StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+							MyStudentTable.selectedRow=-1;
+						}
+					}
+				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
+					//TODO for profesor
+				//else
+					//TODO for subject
+			}
+		});
 		
 		add(delete);
 

@@ -1,8 +1,5 @@
 package gui;
 
-
-
-
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
