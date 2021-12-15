@@ -46,7 +46,6 @@ public class MainFrame extends JFrame{
 		
 		
 		
-		
 		/////////
 		MyStatusBar sb = new MyStatusBar(this);
 		

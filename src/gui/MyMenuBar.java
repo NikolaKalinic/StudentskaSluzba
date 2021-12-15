@@ -38,7 +38,17 @@ public class MyMenuBar extends JMenuBar {
 		Image iconNew = img.getScaledInstance(20,20, 4);
 		Icon fileIconNew = new ImageIcon(iconNew);
 		fileNew.setIcon(fileIconNew);
-		
+		fileNew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}
+			}
+		});
+	
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.setMnemonic('s');
 		fileSave.setCursor(new Cursor(12));
@@ -189,7 +199,7 @@ public class MyMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if(MyStudentTable.selectedRow >= (StudentDB.getInstance().getStudents().size())-1) {
+					if(MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size())) {
 						StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
 						MyStudentTable.selectedRow=-1;
 					}

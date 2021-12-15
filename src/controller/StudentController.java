@@ -22,6 +22,7 @@ private static StudentController instance = null;
 	/*constructors*/
 	private StudentController() {}
 	
+	
 	/*data manipulation methods*/
 	public void addStudent(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status){

@@ -1,7 +1,5 @@
 package gui;
 import java.awt.Color;
-
-import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -39,7 +37,18 @@ public class MyToolBar extends JToolBar {
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
 		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
-                
+        create.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}
+					
+				
+			}
+		});
 		
 		add(create);
 		
@@ -73,7 +82,7 @@ public class MyToolBar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if(MyStudentTable.selectedRow >= (StudentDB.getInstance().getStudents().size())-1) {
+					if(MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size())) {
 						StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
 						MyStudentTable.selectedRow=-1;
 					}
