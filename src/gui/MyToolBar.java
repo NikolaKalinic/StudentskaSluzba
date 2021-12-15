@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -82,9 +83,14 @@ public class MyToolBar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if(MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size())) {
-						StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
-						MyStudentTable.selectedRow=-1;
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer==JOptionPane.YES_OPTION) {
+							StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+							MyStudentTable.selectedRow=-1;
+						}
 					}
 				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
 					//TODO for profesor

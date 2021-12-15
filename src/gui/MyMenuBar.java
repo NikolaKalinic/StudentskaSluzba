@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -159,7 +160,7 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getInstance().disable();;
+				MainFrame.getInstance().dispose();
 			}
 		});
 		
@@ -199,9 +200,14 @@ public class MyMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if(MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size())) {
-						StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
-						MyStudentTable.selectedRow=-1;
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer==JOptionPane.YES_OPTION) {
+							StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+							MyStudentTable.selectedRow=-1;
+						}
 					}
 				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
 					//TODO for profesor
