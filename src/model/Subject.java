@@ -30,6 +30,15 @@ public class Subject {
 		this.studentsPassed = studentsPassed;
 		this.studentsFailed = studentsFailed;
 	}
+	
+	public Subject(String idSubject, String name, int espb, int yearOfStudySub, Semestar semestar) {
+		this.idSubject = idSubject;
+		this.name = name;
+		this.espb = espb;
+		this.yearOfStudySub = yearOfStudySub;
+		this.semestar = semestar;
+		
+	}
 
 	/* Seters and geters*/
 	public String getIdSubject() {

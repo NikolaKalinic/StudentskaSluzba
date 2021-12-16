@@ -116,7 +116,7 @@ public class MyMenuBar extends JMenuBar {
 				
 			}
 		});
-		subject.addActionListener(new ActionListener() {
+		professor.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -124,7 +124,7 @@ public class MyMenuBar extends JMenuBar {
 				
 			}
 		});
-		professor.addActionListener(new ActionListener() {
+		subject.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

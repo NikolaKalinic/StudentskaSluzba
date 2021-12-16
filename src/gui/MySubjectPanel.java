@@ -1,0 +1,50 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+public class MySubjectPanel extends JPanel {
+
+	private static MySubjectPanel instance = null;
+	
+	public static MySubjectPanel getInstance() {
+		if (instance == null) {
+			instance = new MySubjectPanel();
+		}
+		return instance;
+	}
+	private JTable subjectTable;
+	private MySubjectPanel() {
+		setLayout(new BorderLayout());
+		JPanel panNorht = new JPanel();
+		panNorht.setPreferredSize(new Dimension(100,30));
+		add(panNorht,BorderLayout.NORTH);
+		
+		JPanel panWest= new JPanel();
+		panWest.setPreferredSize(new Dimension(100,30));
+		add(panWest,BorderLayout.WEST);
+		
+		JPanel panEast= new JPanel();
+		panEast.setPreferredSize(new Dimension(100,30));
+		add(panEast,BorderLayout.EAST);
+		
+		JPanel panSouth= new JPanel();
+		panSouth.setPreferredSize(new Dimension(100,30));
+		add(panSouth,BorderLayout.SOUTH);
+		subjectTableView();
+	}
+	private void subjectTableView() {
+		subjectTable = new MySubjectTable();
+		JScrollPane scrollPane = new JScrollPane(subjectTable);
+		add(scrollPane, BorderLayout.CENTER);
+	}
+	public void updateView() {
+		AbstractTableModelSubject model = (AbstractTableModelSubject) subjectTable.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
+}
