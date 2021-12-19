@@ -40,7 +40,7 @@ public class Adress {
 	}
 	
 	public String toString() {
-		return street + number + ", " + city + ", " + country;
+		return street + ", " + number + ", " + city + ", " + country;
 	}
 
 }

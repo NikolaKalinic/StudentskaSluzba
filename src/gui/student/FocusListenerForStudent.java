@@ -1,4 +1,4 @@
-package gui;
+package gui.student;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;
@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JTextField;
+
 
 import model.Adress;
 
@@ -36,6 +37,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("name")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite Ime...")) {
 				txt.setText("Unesite Ime...");
+				name="Unesite Ime...";
 				key = key & 0b00000000;
 				txt.setForeground(Color.RED);
 			} else {
@@ -45,9 +47,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					name=txt.getText().substring(0,1).toUpperCase()+txt.getText().substring(1);
 					key = key | 0b00000001;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Unesite Ime...");
+					name="Unesite Ime...";
 					key = key & 0b00000000;
 					txt.setForeground(Color.RED);
 				}
@@ -58,6 +62,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("surname")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite Prezime...")) {
 				txt.setText("Unesite Prezime...");
+				surname="Unesite Prezime...";
 				key = key & 0b00000001;
 				txt.setForeground(Color.RED);
 			} else {
@@ -67,9 +72,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					surname=txt.getText().substring(0,1).toUpperCase()+txt.getText().substring(1);
 					key = key | 0b00000010;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Unesite Prezime...");
+					surname="Unesite Prezime...";
 					key = key & 0b00000001;
 					txt.setForeground(Color.RED);
 				}
@@ -81,6 +88,7 @@ public class FocusListenerForStudent implements FocusListener {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite datum...")) {
 				txt.setText("Unesite datum...");
 				key = key & 0b00000011;
+				date = LocalDate.of(1111,1, 1);
 				txt.setForeground(Color.RED);
 			} else {
 				String regex ="[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4}";
@@ -93,6 +101,7 @@ public class FocusListenerForStudent implements FocusListener {
 					int day = Integer.parseInt(splits[0]);
 					if( mounth == 0 || mounth > 12 ) {
 						txt.setText("Mesec nije validan..");
+						date = LocalDate.of(1111,1, 1);
 						key = key & 0b00000011;
 						txt.setForeground(Color.RED);
 					}
@@ -103,21 +112,25 @@ public class FocusListenerForStudent implements FocusListener {
 						}
 						else 
 							txt.setText("Dan nije validan...");
+							date = LocalDate.of(1111,1, 1);
 							txt.setForeground(Color.RED);
 					}
 					if(mounth == 1 ||mounth == 3 || mounth == 5 || mounth == 7 ||mounth == 8 ||mounth == 10 ||mounth == 12 )
 						if(day == 0 || day>31 ) {
 							txt.setText("Dan nije validan..");
+							date = LocalDate.of(1111,1, 1);
 							txt.setForeground(Color.RED);
 					}
 					if(mounth == 4 ||mounth == 6 || mounth == 9 || mounth == 11 )
 						 if(day==0 || day>30){
 						txt.setText("Dan nije validan..");
+						date = LocalDate.of(1111,1, 1);
 						key = key & 0b0000000011;
 						txt.setForeground(Color.RED);
 					}
 					date=LocalDate.of(year,mounth,day);
 					key = key | 0b00000100;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Format:\"DD-MM-YYYY\"");
@@ -132,6 +145,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("adress")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite adresu...")) {
 				txt.setText("Unesite adresu...");
+				adress = new Adress("Adresa","a1","Nije","Validna");
 				key = key & 0b00000111;
 				txt.setForeground(Color.RED);
 			} else {
@@ -142,9 +156,11 @@ public class FocusListenerForStudent implements FocusListener {
 					String [] splits =txt.getText().split(",");
 					adress = new Adress(splits[0],splits[1],splits[2],splits[3]);
 					key = key | 0b00001000;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("\"ulica,broj,grad,drzava\"");
+					adress = new Adress("Adresa","a1","Nije","Validna");
 					key = key & 0b00000111;
 					txt.setForeground(Color.RED);
 				}
@@ -155,6 +171,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("number")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite broj...")) {
 				txt.setText("Unesite broj...");
+				number = "Unesite broj...";
 				key = key & 0b00001111;
 				txt.setForeground(Color.RED);
 			} else {
@@ -164,9 +181,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					number=txt.getText();
 					key = key | 0b00010000;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Unesite broj...");
+					number = "Unesite broj...";
 					key = key & 0b00001111;
 					txt.setForeground(Color.RED);
 				}
@@ -176,6 +195,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("email")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite email...")) {
 				txt.setText("Unesite emal...");
+				email="Unesite emal...";
 				key = key & 0b00011111;
 				txt.setForeground(Color.RED);
 			} else {
@@ -185,9 +205,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					email=txt.getText();
 					key = key | 0b00100000;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Unesite email...");
+					email="Unesite emal...";
 					key = key & 0b00011111;
 					txt.setForeground(Color.RED);
 				}
@@ -197,6 +219,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("index")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite index...")) {
 				txt.setText("Unesite index...");
+				index = "Unesite index...";
 				key = key & 0b00111111;
 				txt.setForeground(Color.RED);
 			} else {
@@ -206,9 +229,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					index=txt.getText();
 					key = key | 0b001000000;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("\"RA-1-2021\"");
+					index = "Unesite index...";
 					key = key & 0b00111111;
 					txt.setForeground(Color.RED);
 				}
@@ -219,6 +244,7 @@ public class FocusListenerForStudent implements FocusListener {
 		if (txt.getName().equals("yearOfEntrollment")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite godinu upisa...")) {
 				txt.setText("Unesite godinu upisa...");
+				yearOfEntrollment=-1;
 				key = key & 0b01111111;
 				txt.setForeground(Color.RED);
 			} else {
@@ -228,9 +254,11 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					yearOfEntrollment=Integer.parseInt(txt.getText());
 					key = key | 0b10000000;
+					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
 				} else {
 					txt.setText("Unesite godinu upisa...");
+					yearOfEntrollment=-1;
 					key = key & 0b01111111;
 					txt.setForeground(Color.RED);
 				}
@@ -274,6 +302,43 @@ public class FocusListenerForStudent implements FocusListener {
 	public int getYearOfEntrollment() {
 		return yearOfEntrollment;
 	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public void setAdress(Adress adress) {
+		this.adress = adress;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setIndex(String index) {
+		this.index = index;
+	}
+
+	public void setYearOfEntrollment(int yearOfEntrollment) {
+		this.yearOfEntrollment = yearOfEntrollment;
+	}
+	
 
 	
 }

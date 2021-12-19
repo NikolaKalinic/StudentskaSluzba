@@ -19,6 +19,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 import controller.StudentController;
+import gui.student.MyAddingStudentDialog;
+import gui.student.MyStudentTable;
 import model.StudentDB;
 
 public class MyMenuBar extends JMenuBar {

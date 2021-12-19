@@ -3,6 +3,8 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import gui.student.MyStudentPanel;
+
 
 public class MyTabbedPane extends JTabbedPane{
 
