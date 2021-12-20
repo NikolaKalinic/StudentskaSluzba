@@ -30,7 +30,7 @@ public class MainFrame extends JFrame{
 		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Studenska sluûba");
+		setTitle("Studenska slu≈æba");
 		
 		MyMenuBar mb = new MyMenuBar();
 		MyToolBar tb = new MyToolBar();

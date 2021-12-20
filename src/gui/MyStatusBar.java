@@ -26,18 +26,18 @@ public class MyStatusBar {
 		statusPanel.setPreferredSize(new Dimension(mf.getWidth(), 20));
 		BoxLayout box = new BoxLayout(statusPanel, BoxLayout.X_AXIS);
 		statusPanel.setLayout(box);
-		JLabel statusLabel = new JLabel("Studentska Sluûba-Studenti");
+		JLabel statusLabel = new JLabel("Studentska SluÔøΩba-Studenti");
 		new Timer(100,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					statusLabel.setText("Studentska Sluûba-Studenti");
+					statusLabel.setText("Studentska Slu≈æba-Studenti");
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
-					statusLabel.setText("Studentska Sluûba-Profesori");
+					statusLabel.setText("Studentska Slu≈æba-Profesori");
 				else
-				statusLabel.setText("Studentska Sluûba-Predmeti");
+				statusLabel.setText("Studentska Slu≈æba-Predmeti");
 			}
 		}).start();
 		

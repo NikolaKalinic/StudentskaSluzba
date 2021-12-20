@@ -2,8 +2,8 @@ package controller;
 
 import java.time.LocalDate;
 
-import gui.MyStudentPanel;
 import gui.MyTabbedPane;
+import gui.student.MyStudentPanel;
 import model.Adress;
 import model.Status;
 import model.Student;
@@ -39,13 +39,19 @@ private static StudentController instance = null;
 		MyStudentPanel.getInstance().updateView();
     }
 	
-	public void editStudent(int rowSelectedIndex,String surname, String name, Adress adress, String phoneNumber, String email,
+	public void editStudent(int rowSelectedIndex,String surname, String name,LocalDate date, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
-		StudentDB.getInstance().editStudent(surname, name, adress, phoneNumber, email, student.getIndex(), yearOfEnrollment, currYearOfStudy, status);
+		StudentDB.getInstance().editStudent(surname, name,date, adress, phoneNumber, email, student.getIndex(), yearOfEnrollment, currYearOfStudy, status);
 		MyStudentPanel.getInstance().updateView();
 	}
+	
+	public Student getSelectedStudent(int rowSelectedIndex) {
+		Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
+		return student;
+	}
+	
 }

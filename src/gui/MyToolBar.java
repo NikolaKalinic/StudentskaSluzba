@@ -16,6 +16,10 @@ import javax.swing.SwingConstants;
 import controller.ProfessorController;
 import controller.StudentController;
 import model.ProfessorDB;
+import gui.student.MyAddingStudentDialog;
+import gui.student.MyEditingStudentDialog;
+import gui.student.MyStudentTable;
+import model.Student;
 import model.StudentDB;
 
 public class MyToolBar extends JToolBar {
@@ -77,6 +81,21 @@ public class MyToolBar extends JToolBar {
 		edit.setBorderPainted(false);
 		edit.setFocusPainted(false);
 		edit.setBackground(Color.white);
+		edit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						Student student = StudentController.getInstance().getSelectedStudent(MyStudentTable.selectedRow);
+						//TODO POZVATI DIALOG STO CES SADA NAPRAVITI I PROSLEDITI MU STUDENTA
+						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
+					}
+				else {
+					//TODO ZA PROFU I PREDMET
+				}
+			}
+		});
 
 		add(edit);
 		

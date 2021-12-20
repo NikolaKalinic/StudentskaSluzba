@@ -44,6 +44,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel ime = new JLabel("Ime*");
 		JTextField tfIme = new JTextField();
+		tfIme.setToolTipText("Unesite ime profesora");
 		GridBagConstraints cIme =  new GridBagConstraints();
 		cIme.gridx = 0;
 		cIme.gridy = 0;
@@ -60,6 +61,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel prezime = new JLabel("Prezime*");
 		JTextField tfPrezime = new JTextField();
+		tfPrezime.setToolTipText("Unesite prezime profesora");
 		GridBagConstraints cPrezime =  new GridBagConstraints();
 		cPrezime.gridx = 0;
 		cPrezime.gridy = 1;
@@ -74,6 +76,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel email = new JLabel("E-mail*");
 		JTextField tfEmail = new JTextField();
+		tfEmail.setToolTipText("Unesite e-mail profesora");
 		GridBagConstraints cEmail =  new GridBagConstraints();
 		cEmail.gridx = 0;
 		cEmail.gridy = 2;
@@ -88,6 +91,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel birthDate = new JLabel("Godina rodjenja*");
 		JTextField tfBirthDate = new JTextField();
+		tfBirthDate.setToolTipText("Unesite datum rodjenja [YYYY/MM/DD]");
 		GridBagConstraints cBirthDate =  new GridBagConstraints();
 		cBirthDate.gridx = 0;
 		cBirthDate.gridy = 3;
@@ -102,6 +106,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel homeAdress = new JLabel("Kucna adresa*");
 		JTextField tfStreet = new JTextField();
+		tfStreet.setToolTipText("Unesite kucnu adresu [Ulica/Broj/Grad/Drzava]");
 		GridBagConstraints cHA =  new GridBagConstraints();
 		cHA.gridx = 0;
 		cHA.gridy = 4;
@@ -116,6 +121,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel workAdress = new JLabel("Radna adresa*");
 		JTextField tfStreetW = new JTextField();
+		tfStreetW.setToolTipText("Unesite poslovnu adresu [Ulica/Broj/Grad/Drzava]");
 		GridBagConstraints cHAW =  new GridBagConstraints();
 		cHAW.gridx = 0;
 		cHAW.gridy = 5;
@@ -131,6 +137,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel phoneNumber = new JLabel("Broj telefona*");
 		JTextField tfPhoneNumber = new JTextField();
+		tfPhoneNumber.setToolTipText("Unesite broj telefona");
 		GridBagConstraints cPhoneNumber =  new GridBagConstraints();
 		cPhoneNumber.gridx = 0;
 		cPhoneNumber.gridy = 6;
@@ -145,6 +152,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel id = new JLabel("Broj licne karte*");
 		JTextField tfId = new JTextField();
+		tfId.setToolTipText("Unesite broj licne karte");
 		GridBagConstraints cId =  new GridBagConstraints();
 		cId.gridx = 0;
 		cId.gridy = 7;
@@ -188,6 +196,7 @@ public class ProfessorDialog extends JDialog {
 		
 		JLabel exp = new JLabel("Godine iskustva*");
 		JTextField tfExp = new JTextField();
+		tfExp.setToolTipText("Unesite godine iskustva [int]");
 		GridBagConstraints cExp =  new GridBagConstraints();
 		cExp.gridx = 0;
 		cExp.gridy = 10;

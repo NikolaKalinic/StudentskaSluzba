@@ -4,7 +4,7 @@ package main;
 
 import controller.StudentController;
 import gui.MainFrame;
-import gui.MyAddingStudentDialog;
+import gui.student.MyAddingStudentDialog;
 import model.StudentDB;
 
 public class MyApp {

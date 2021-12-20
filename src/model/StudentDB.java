@@ -38,9 +38,6 @@ public class StudentDB {
 	private void initStudent() {
 		this.students=new ArrayList<Student>();
 		students.add(new Student( "Perovic","Petar", LocalDate.parse("15.01.1965.", DateTimeFormatter.ofPattern("dd.MM.yyyy.")),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA 1/2019",2019,3,Status.B));
-		students.add(new Student( "Ivanovic","Ivan", LocalDate.of(2002,11,8),new Adress("Ivanova","2","Novi Sad","Srbija"), "06636666","ivan@gmail.com","RA 2/2019",2019,3,Status.S));
-		students.add(new Student( "Markovic","Marko", LocalDate.of(2001,2,1),new Adress("Markova","3","Novi Sad","Srbija"), "06666266","marko@gmail.com","RA 3/2019",2019,3,Status.B));
-		students.add(new Student( "Aleksic","Aleksa", LocalDate.of(2005,12,7),new Adress("Aleksina","4","Novi Sad","Srbija"), "062366666","Aleksa@gmail.com","SW 1/2019",2019,3,Status.B));
 		students.add(new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B));
 		students.add(new Student( "Ivanovic","Ivan", LocalDate.of(2002,11,8),new Adress("Ivanova","2","Novi Sad","Srbija"), "06636666","ivan@gmail.com","RA-2-2019",2019,3,Status.S));
 		students.add(new Student( "Markovic","Marko", LocalDate.of(2001,2,1),new Adress("Markova","3","Novi Sad","Srbija"), "06666266","marko@gmail.com","RA-3-2019",2019,3,Status.B));
@@ -113,12 +110,13 @@ public class StudentDB {
 		}
 	}
 	
-	public void editStudent(String surname, String name, Adress adress, String phoneNumber, String email,
+	public void editStudent(String surname, String name,LocalDate date, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
 		for(Student s : students) {
 			if(s.getIndex().equals(index)) {
 				s.setSurname(surname);
 				s.setName(name);
+				s.setDateOfBirth(date);
 				s.setAdress(adress);
 				s.setContactPhone(phoneNumber);
 				s.setEmail(email);
