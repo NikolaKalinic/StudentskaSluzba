@@ -13,7 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import controller.ProfessorController;
 import controller.StudentController;
+import model.ProfessorDB;
 import model.StudentDB;
 
 public class MyToolBar extends JToolBar {
@@ -50,6 +52,18 @@ public class MyToolBar extends JToolBar {
 				
 			}
 		});
+        
+        create.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					ProfessorDialog pd = new ProfessorDialog();
+				}
+			}
+        });
+        
 		
 		add(create);
 		
@@ -79,6 +93,24 @@ public class MyToolBar extends JToolBar {
 		
 		/*Listener for delete*/
 		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
+						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
+						if (a == JOptionPane.YES_OPTION) {
+							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
+							MyProfessorTable.rowIndex = -1;
+						}
+					}
+				 }	
+			}
+		});
+		
+		
+		delete.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -92,8 +124,18 @@ public class MyToolBar extends JToolBar {
 							MyStudentTable.selectedRow=-1;
 						}
 					}
-				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
-					//TODO for profesor
+				//else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+				//	if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
+				//		int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
+				//		if (a == JOptionPane.YES_OPTION) {
+				//			ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
+				//			MyProfessorTable.rowIndex = -1;
+				//		}
+				//	}
+					
+					
+				//}
+					
 				//else
 					//TODO for subject
 			}
