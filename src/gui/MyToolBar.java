@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import controller.ProfessorController;
 import controller.StudentController;
+import model.Professor;
 import model.ProfessorDB;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
@@ -95,6 +96,23 @@ public class MyToolBar extends JToolBar {
 					//TODO ZA PROFU I PREDMET
 				}
 			}
+		});
+		
+		edit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)){
+						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
+						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+					}
+				}
+				
+			}
+			
+		
+			
 		});
 
 		add(edit);

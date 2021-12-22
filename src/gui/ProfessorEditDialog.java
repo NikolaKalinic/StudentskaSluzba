@@ -21,16 +21,17 @@ import javax.swing.JTextField;
 
 import controller.ProfessorController;
 import model.Adress;
+import model.Professor;
 
-public class ProfessorDialog extends JDialog {
+public class ProfessorEditDialog extends JDialog {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProfessorDialog() {
-		super(MainFrame.getInstance(), "Dodavanje profesora", true);
+	public ProfessorEditDialog(Professor professor) {
+		super(MainFrame.getInstance(), "Izmena profesora", true);
 		setSize(300, 400);
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
@@ -40,7 +41,7 @@ public class ProfessorDialog extends JDialog {
 		this.add(panel, BorderLayout.CENTER);
 		
 		JLabel ime = new JLabel("Ime*");
-		JTextField tfIme = new JTextField();
+		JTextField tfIme = new JTextField(professor.getName());
 		tfIme.setToolTipText("Unesite ime profesora");
 		GridBagConstraints cIme =  new GridBagConstraints();
 		cIme.gridx = 0;
@@ -58,7 +59,7 @@ public class ProfessorDialog extends JDialog {
 		
 		
 		JLabel prezime = new JLabel("Prezime*");
-		JTextField tfPrezime = new JTextField();
+		JTextField tfPrezime = new JTextField(professor.getSurname());
 		tfPrezime.setToolTipText("Unesite prezime profesora");
 		GridBagConstraints cPrezime =  new GridBagConstraints();
 		cPrezime.gridx = 0;
@@ -74,7 +75,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfPrezime, cPrezimeTf);
 		
 		JLabel email = new JLabel("E-mail*");
-		JTextField tfEmail = new JTextField();
+		JTextField tfEmail = new JTextField(professor.getEmail());
 		tfEmail.setToolTipText("Unesite e-mail profesora");
 		GridBagConstraints cEmail =  new GridBagConstraints();
 		cEmail.gridx = 0;
@@ -90,7 +91,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfEmail, cEmailTf);
 		
 		JLabel birthDate = new JLabel("Godina rodjenja*");
-		JTextField tfBirthDate = new JTextField();
+		JTextField tfBirthDate = new JTextField(professor.getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 		tfBirthDate.setToolTipText("Unesite datum rodjenja [DAY-MONTH-YEAR]");
 		GridBagConstraints cBirthDate =  new GridBagConstraints();
 		cBirthDate.gridx = 0;
@@ -106,8 +107,8 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfBirthDate, cBirthDateTf);
 		
 		JLabel homeAdress = new JLabel("Kucna adresa*");
-		JTextField tfStreet = new JTextField();
-		tfStreet.setToolTipText("Unesite kucnu adresu [Ulica,Broj,Grad,Drzava]");
+		JTextField tfStreet = new JTextField(professor.getHomeAdress().toString());
+		tfStreet.setToolTipText("Unesite kucnu adresu [Ulica/Broj/Grad/Drzava]");
 		GridBagConstraints cHA =  new GridBagConstraints();
 		cHA.gridx = 0;
 		cHA.gridy = 4;
@@ -122,7 +123,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfStreet, cStreetTf);
 		
 		JLabel workAdress = new JLabel("Radna adresa*");
-		JTextField tfStreetW = new JTextField();
+		JTextField tfStreetW = new JTextField(professor.getWorkAdress().toString());
 		tfStreetW.setToolTipText("Unesite poslovnu adresu [Ulica,Broj,Grad,Drzava]");
 		GridBagConstraints cHAW =  new GridBagConstraints();
 		cHAW.gridx = 0;
@@ -139,7 +140,7 @@ public class ProfessorDialog extends JDialog {
 		
 		
 		JLabel phoneNumber = new JLabel("Broj telefona*");
-		JTextField tfPhoneNumber = new JTextField();
+		JTextField tfPhoneNumber = new JTextField(professor.getPhoneNumber());
 		tfPhoneNumber.setToolTipText("Unesite broj telefona");
 		GridBagConstraints cPhoneNumber =  new GridBagConstraints();
 		cPhoneNumber.gridx = 0;
@@ -155,7 +156,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfPhoneNumber, cPhoneNumberTf);
 		
 		JLabel id = new JLabel("Broj licne karte*");
-		JTextField tfId = new JTextField();
+		JTextField tfId = new JTextField(professor.getId());
 		tfId.setToolTipText("Unesite broj licne karte");
 		GridBagConstraints cId =  new GridBagConstraints();
 		cId.gridx = 0;
@@ -173,6 +174,7 @@ public class ProfessorDialog extends JDialog {
 		JLabel calling = new JLabel("Zvanje");
 		String[] callings = {"-", "Asistent", "Docent", "Vanredni profesor", "Profesor"};
 		JComboBox<String> comboCalling = new JComboBox<String>(callings);
+		comboCalling.setSelectedItem(professor.getCalling());
 		GridBagConstraints cCalling =  new GridBagConstraints();
 		cCalling.gridx = 0;
 		cCalling.gridy = 8;
@@ -190,6 +192,7 @@ public class ProfessorDialog extends JDialog {
 		GridBagConstraints cTitle =  new GridBagConstraints();
 		String [] titles = {"-", "Master", "Doktor"};
 		JComboBox<String> comboTitle = new JComboBox<String>(titles);
+		comboTitle.setSelectedItem(professor.getTitle());
 		cTitle.gridx = 0;
 		cTitle.gridy = 9;
 		cTitle.fill = GridBagConstraints.HORIZONTAL;
@@ -202,7 +205,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(comboTitle, cComboTitle);
 		
 		JLabel exp = new JLabel("Godine iskustva*");
-		JTextField tfExp = new JTextField();
+		JTextField tfExp = new JTextField(Integer.toString(professor.getExperience()));
 		tfExp.setToolTipText("Unesite godine iskustva [int]");
 		GridBagConstraints cExp =  new GridBagConstraints();
 		cExp.gridx = 0;
@@ -330,9 +333,10 @@ public class ProfessorDialog extends JDialog {
 				Adress home = new Adress(split1[0], split1[1], split1[2], split1[3]);
 				String split2[] = tfStreetW.getText().split(",");
 				Adress work = new Adress(split2[0], split2[1], split2[2], split2[3]);
-				ProfessorController.getInstance().addProfessor(tfPrezime.getText(), tfIme.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), comboTitle.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
+				ProfessorController.getInstance().editProfessor(MyProfessorTable.rowIndex, tfPrezime.getText(), tfIme.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), comboTitle.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
 				
-				
+				JOptionPane.showMessageDialog(MainFrame.getInstance(), "Profesor uspesno izmenjen!", "Izmena zavrsena!", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 				
 				
 				

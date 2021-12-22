@@ -18,9 +18,12 @@ import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
+import controller.ProfessorController;
 import controller.StudentController;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyStudentTable;
+import model.Professor;
+import model.ProfessorDB;
 import model.StudentDB;
 
 public class MyMenuBar extends JMenuBar {
@@ -188,6 +191,18 @@ public class MyMenuBar extends JMenuBar {
 		Icon editIconEdit = new ImageIcon(iconEdit);
 		editEdit.setIcon(editIconEdit);
 		
+		editEdit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
+						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
+						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+						}
+					}			
+		});
+		
 		JMenuItem editDelete = new JMenuItem("Delete");
 		editDelete.setCursor(new Cursor(12));
 		editDelete.setMnemonic('d');
@@ -217,6 +232,27 @@ public class MyMenuBar extends JMenuBar {
 					//TODO for subject
 			}
 		});
+		
+		editDelete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
+						int answer = JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete profesora", "Brisanje profesora", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer == JOptionPane.YES_OPTION) {
+							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
+							MyProfessorTable.rowIndex = -1;
+						}
+					}
+				
+			}
+			
+		});
+		
+		
 		
 		editDelete.setIcon(editIconDelete);
 		edit.add(editEdit);
