@@ -255,7 +255,6 @@ public class MyEditigStudentInformation extends JPanel {
 		//BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setPreferredSize(new Dimension(1,30));
-		panBottom.setBackground(Color.BLUE);
 		JButton btnOk=new JButton("Potvrdi");
 		btnOk.setPreferredSize(new Dimension(90,30));
         btnOk.addActionListener(new ActionListener() {

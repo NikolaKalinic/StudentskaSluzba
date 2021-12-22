@@ -20,8 +20,14 @@ import javax.swing.border.Border;
 
 import controller.StudentController;
 import gui.student.MyAddingStudentDialog;
+import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentTable;
+import gui.subject.MyAddingSubjectDialog;
+import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectTable;
+import model.Student;
 import model.StudentDB;
+import model.SubjectDB;
 
 public class MyMenuBar extends JMenuBar {
 	
@@ -48,6 +54,10 @@ public class MyMenuBar extends JMenuBar {
 				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					ProfessorDialog pd = new ProfessorDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					MyAddingSubjectDialog pd = new MyAddingSubjectDialog();
 				}
 			}
 		});
@@ -187,6 +197,22 @@ public class MyMenuBar extends JMenuBar {
 		Image iconEdit = img4.getScaledInstance(15, 15, 4);
 		Icon editIconEdit = new ImageIcon(iconEdit);
 		editEdit.setIcon(editIconEdit);
+		editEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						//TODO POZVATI DIALOG STO CES SADA NAPRAVITI I PROSLEDITI MU STUDENTA
+						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
+					}
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
+						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+					}
+			}
+		});
 		
 		JMenuItem editDelete = new JMenuItem("Delete");
 		editDelete.setCursor(new Cursor(12));

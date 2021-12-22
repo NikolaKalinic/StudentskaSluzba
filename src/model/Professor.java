@@ -34,7 +34,10 @@ public class Professor {
 		this.experience = experience;
 		this.courseList = courseList;
 	}
-	
+	public Professor(String name,String surname) {
+		this.name=name;
+		this.surname=surname;
+	}
 	
 	
 	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
@@ -173,6 +176,10 @@ public class Professor {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getProfNameAndSurname() {
+		String ret = name + " " + surname;
+		return ret;
 	}
 	
 

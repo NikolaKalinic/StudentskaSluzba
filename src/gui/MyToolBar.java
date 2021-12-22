@@ -19,8 +19,12 @@ import model.ProfessorDB;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentTable;
+import gui.subject.MyAddingSubjectDialog;
+import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectTable;
 import model.Student;
 import model.StudentDB;
+import model.SubjectDB;
 
 public class MyToolBar extends JToolBar {
 	
@@ -51,22 +55,14 @@ public class MyToolBar extends JToolBar {
 				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyAddingStudentDialog masd = new MyAddingStudentDialog();
-				}
-					
-				
-			}
-		});
-        
-        create.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					ProfessorDialog pd = new ProfessorDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					MyAddingSubjectDialog pd = new MyAddingSubjectDialog();
 				}
 			}
-        });
+			
+		});
         
 		
 		add(create);
@@ -87,13 +83,12 @@ public class MyToolBar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
 					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
-						Student student = StudentController.getInstance().getSelectedStudent(MyStudentTable.selectedRow);
-						//TODO POZVATI DIALOG STO CES SADA NAPRAVITI I PROSLEDITI MU STUDENTA
 						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
 					}
-				else {
-					//TODO ZA PROFU I PREDMET
-				}
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
+						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+					}
 			}
 		});
 

@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import gui.student.MyStudentPanel;
+import gui.subject.MySubjectPanel;
 
 
 public class MyTabbedPane extends JTabbedPane{

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Set;
 
-enum Semestar {Summer,Winter};
+
 
 public class Subject {
 	/*Fields*/
@@ -29,6 +29,16 @@ public class Subject {
 		this.espb = espb;
 		this.studentsPassed = studentsPassed;
 		this.studentsFailed = studentsFailed;
+	}
+	
+	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+		super();
+		this.idSubject = idSubject;
+		this.name = name;
+		this.semestar = semestar;
+		this.yearOfStudySub = yearOfStudySub;
+		this.professor = profesor;
+		this.espb = espb;
 	}
 	
 	public Subject(String idSubject, String name, int espb, int yearOfStudySub, Semestar semestar) {

@@ -72,9 +72,38 @@ public class SubjectDB {
 		case 3:
 			return String.valueOf(subject.getYearOfStudySub());
 		case 4:
-			return subject.getSemestar().name();
+			if(subject.getSemestar().equals(Semestar.Summer))
+				return "Letnji";
+			else
+				return "Zimski";
 		default:
 			return null;	
 		}
 	}
+	private boolean existsSubject(String id) {
+		for(Subject s : subjects ) {
+			String s1 = s.getIdSubject().toUpperCase();
+			if(s1.equals(id.toUpperCase()))
+				return false;
+		}
+		return true;
+	}
+	
+	public void addSubject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+		if(existsSubject(idSubject))
+			this.subjects.add(new Subject(idSubject,name, semestar, yearOfStudySub, profesor, espb));
+	}
+	public void editSubject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+		for(Subject s : subjects) {
+			if(s.getIdSubject().equals(idSubject)) {
+				s.setIdSubject(idSubject);
+				s.setName(name);
+				s.setSemestar(semestar);
+				s.setYearOfStudySub(yearOfStudySub);
+				s.setProfesor(profesor);
+				s.setEspb(espb);
+			}
+		}
+	}
+	
 	}
