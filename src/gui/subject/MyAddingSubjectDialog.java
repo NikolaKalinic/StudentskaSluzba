@@ -196,6 +196,7 @@ public class MyAddingSubjectDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b1111) {
 					SubjectController.getInstance().addSubject(focusListener.getIdSubject(), focusListener.getName(), smestar, year, focusListener.getProfessor(), focusListener.getEspb());
+					dispose();
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
 				

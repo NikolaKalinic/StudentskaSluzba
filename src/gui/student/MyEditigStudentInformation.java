@@ -264,39 +264,30 @@ public class MyEditigStudentInformation extends JPanel {
 				/*validation if the field does not get focus and focus lost*/
 				if(s.getName()==focusListener.getName()) {
 					focusListener.setKey(focusListener.getKey() | 0b00000001);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getSurname()==focusListener.getSurname()) {
 					focusListener.setKey(focusListener.getKey() | 0b00000010);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getDaateOfBirth()==focusListener.getDate()) {
 					focusListener.setKey(focusListener.getKey() | 0b00000100);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getAdress()==focusListener.getAdress()) {
 					focusListener.setKey(focusListener.getKey() | 0b00001000);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getContactPhone()==focusListener.getNumber()) {
 					focusListener.setKey(focusListener.getKey() | 0b00010000);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getEmail()==focusListener.getEmail()) {
 					focusListener.setKey(focusListener.getKey() | 0b00100000);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getIndex()==focusListener.getIndex()) {
 					focusListener.setKey(focusListener.getKey() | 0b01000000);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(s.getYearOfEnrollment()==focusListener.getYearOfEntrollment()) {
 					focusListener.setKey(focusListener.getKey() | 0b10000000);
-					//System.out.println("Kljuc"+Integer. toBinaryString(focusListener.getKey()));
 				}
 				if(focusListener.getKey()==0b11111111) {
 					StudentController.getInstance().editStudent(MyStudentTable.selectedRow,focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), currYear, stat);
-					
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
 				

@@ -7,6 +7,11 @@ import model.ProfessorDB;
 public class AbstractTableModelProfessors extends AbstractTableModel {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AbstractTableModelProfessors() {
 	}
 

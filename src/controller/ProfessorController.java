@@ -4,6 +4,8 @@ import gui.MyProfessorPanel;
 import model.Adress;
 import model.Professor;
 import model.ProfessorDB;
+import model.Student;
+import model.StudentDB;
 
 public class ProfessorController {
 	
@@ -41,5 +43,9 @@ public class ProfessorController {
 		MyProfessorPanel.getInstance().updateView();
 	}
 
+	public Professor getSelectedProfessor(int rowSelectedIndex) {
+		Professor professor = ProfessorDB.getInstance().getRow(rowSelectedIndex);
+		return professor;
+	}
 
 }

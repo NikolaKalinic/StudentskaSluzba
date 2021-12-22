@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import controller.ProfessorController;
 import controller.StudentController;
+import model.Professor;
 import model.ProfessorDB;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
@@ -89,9 +90,15 @@ public class MyToolBar extends JToolBar {
 					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
 						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
 					}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)){
+						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
+						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+					}
+				}
 			}
 		});
-
+		
 		add(edit);
 		
 		addSeparator();
@@ -110,7 +117,6 @@ public class MyToolBar extends JToolBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				 if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
 						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
@@ -119,45 +125,22 @@ public class MyToolBar extends JToolBar {
 							MyProfessorTable.rowIndex = -1;
 						}
 					}
-				 }	
-			}
-		});
-		
-		
-		delete.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
-						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
-						        JOptionPane.YES_NO_OPTION);
-						if(answer==JOptionPane.YES_OPTION) {
-							StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
-							MyStudentTable.selectedRow=-1;
+				 }
+				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+						if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+								MyStudentTable.selectedRow=-1;
+							}
 						}
-					}
-				//else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
-				//	if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
-				//		int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
-				//		if (a == JOptionPane.YES_OPTION) {
-				//			ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
-				//			MyProfessorTable.rowIndex = -1;
-				//		}
-				//	}
-					
-					
-				//}
-					
-				//else
-					//TODO for subject
 			}
 		});
-		
+			
 		add(delete);
 
-		
 		add(Box.createHorizontalGlue());
 		
 		

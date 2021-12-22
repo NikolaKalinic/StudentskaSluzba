@@ -221,7 +221,7 @@ public class MyEditingSubjectDialog extends JDialog{
 //				}
 				if(focusListener.getKey()==0b0111) {
 					SubjectController.getInstance().editStudent(MySubjectTable.selectedRow, focusListener.getIdSubject(), focusListener.getName(),smestar , year, new Professor("Novi","Prof"), focusListener.getEspb());
-					System.out.println("aaaa");
+					dispose();
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
 				

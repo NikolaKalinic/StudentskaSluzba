@@ -233,7 +233,7 @@ public class MyAddingStudentDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b11111111) {
 					StudentController.getInstance().addStudent(focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), currYear, stat);
-					
+					dispose();
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
 				

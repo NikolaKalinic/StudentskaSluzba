@@ -32,10 +32,10 @@ public class ProfessorDB {
 	
 	private void initProfessors() {
 		this.professors = new ArrayList<Professor>();
-		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01.01.1960.", DateTimeFormatter.ofPattern("dd.MM.yyyy.")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069/123/324", "20021", "Redovni profesor", "Dr", 1));
-		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12.05.1962.", DateTimeFormatter.ofPattern("dd.MM.yyyy.")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062/222/222", "24521", "Asistent", "Mr", 21));
-		professors.add(new Professor("Strahinjic", "Vera", "svera@uns.ac.rs", LocalDate.parse("25.10.1949.", DateTimeFormatter.ofPattern("dd.MM.yyyy.")), new Adress("Filipova", "2", "Sremska Mitrovica", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "063/234/123", "22321", "Redovni profesor", "Dr Mr", 15));
-		professors.add(new Professor("Milenovic", "Dragutin", "mdragutin@uns.ac.rs", LocalDate.parse("02.03.1989.", DateTimeFormatter.ofPattern("dd.MM.yyyy.")), new Adress("Suzanina", "3", "Beograd", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069/452/231", "25521", "Vanredni profesor", "Docent", 22));
+		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent", "Doktor", 1));
+		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Docent", "Master", 21));
+		professors.add(new Professor("Strahinjic", "Vera", "svera@uns.ac.rs", LocalDate.parse("25-10-1949", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Filipova", "2", "Sremska Mitrovica", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "063234123", "22321", "Profesor", "Doktor", 15));
+		professors.add(new Professor("Milenovic", "Dragutin", "mdragutin@uns.ac.rs", LocalDate.parse("02-03-1989", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Suzanina", "3", "Beograd", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069452231", "25521", "Vanredni profesor", "Doktor", 22));
 		}
 	
 	/*getters/setter*/
@@ -77,7 +77,7 @@ public class ProfessorDB {
 	}
 	
 	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
-		this.professors.add(new Professor(surname, name, email, LocalDate.parse(birthDate), homeAdress, workAdress, phoneNumber, id, calling, title, experience));
+		this.professors.add(new Professor(surname, name, email, LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")), homeAdress, workAdress, phoneNumber, id, calling, title, experience));
 	}
 	
 	public void deleteProfessor(String id) {
@@ -95,7 +95,7 @@ public class ProfessorDB {
 				p.setSurname(surname);
 				p.setName(name);
 				p.setEmail(email);
-				p.setBirthDate(LocalDate.parse(birthDate));
+				p.setBirthDate(LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 				p.setHomeAdress(homeAdress);
 				p.setWorkAdress(workAdress);
 				p.setPhoneNumber(phoneNumber);
