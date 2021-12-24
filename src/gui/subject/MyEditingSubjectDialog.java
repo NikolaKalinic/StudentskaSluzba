@@ -44,7 +44,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		
 		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectTable.selectedRow);
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3));
+		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();

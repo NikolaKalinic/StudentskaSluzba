@@ -1,11 +1,8 @@
 package controller;
 
-import gui.student.MyStudentPanel;
 import gui.subject.MySubjectPanel;
 import model.Professor;
 import model.Semestar;
-import model.Student;
-import model.StudentDB;
 import model.Subject;
 import model.SubjectDB;
 
@@ -33,7 +30,7 @@ public class SubjectController {
 			return;
 		}
 		Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
-		SubjectDB.getInstance().editSubject(subject.getIdSubject(), name, semestar, yearOfStudySub, profesor, espb);
+		SubjectDB.getInstance().editSubject(subject,idSubject, name, semestar, yearOfStudySub, profesor, espb);
 		MySubjectPanel.getInstance().updateView();
 	}
 	public Subject getSelectedSubject(int rowSelectedIndex) {

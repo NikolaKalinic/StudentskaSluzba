@@ -19,8 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import controller.StudentController;
+import gui.MainFrame;
 import model.Status;
 import model.Student;
 
@@ -49,6 +51,8 @@ public class MyEditigStudentInformation extends JPanel {
 		
 		
 		/*Panel for name*/
+	
+		
 		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
         JLabel lName=new JLabel("Ime*");
         lName.setPreferredSize(dim);
@@ -183,7 +187,7 @@ public class MyEditigStudentInformation extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				currYear=combo.getSelectedIndex();		//KRECE OD NULE TRBEACE TI NEGDE
+				currYear=combo.getSelectedIndex()+1;		//KRECE OD NULE TRBEACE TI NEGDE
 			}
 			
 			@Override
@@ -207,6 +211,7 @@ public class MyEditigStudentInformation extends JPanel {
         String[] status = { "Budzet", "Samofinansiranje"};
         JComboBox<String> combo1 = new JComboBox<String>(status);
         combo1.setSelectedIndex(s.getStatus()==Status.B?0:1);
+        stat=s.getStatus();
         combo1.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -224,6 +229,33 @@ public class MyEditigStudentInformation extends JPanel {
 				
 			}
 		});
+        /*validation if the field does not get focus and focus lost*/		
+        if(s.getName()==focusListener.getName()) {
+			focusListener.setKey(focusListener.getKey() | 0b00000001);
+		}
+		if(s.getSurname()==focusListener.getSurname()) {
+			focusListener.setKey(focusListener.getKey() | 0b00000010);
+		}
+		if(s.getDaateOfBirth()==focusListener.getDate()) {
+			focusListener.setKey(focusListener.getKey() | 0b00000100);
+		}
+		if(s.getAdress()==focusListener.getAdress()) {
+			focusListener.setKey(focusListener.getKey() | 0b00001000);
+		}
+		if(s.getContactPhone()==focusListener.getNumber()) {
+			focusListener.setKey(focusListener.getKey() | 0b00010000);
+		}
+		if(s.getEmail()==focusListener.getEmail()) {
+			focusListener.setKey(focusListener.getKey() | 0b00100000);
+		}
+		if(s.getIndex()==focusListener.getIndex()) {
+			focusListener.setKey(focusListener.getKey() | 0b01000000);
+		}
+		if(s.getYearOfEnrollment()==focusListener.getYearOfEntrollment()) {
+			focusListener.setKey(focusListener.getKey() | 0b10000000);
+		}
+        
+        
         
         
         combo1.setPreferredSize(dim);
@@ -246,48 +278,36 @@ public class MyEditigStudentInformation extends JPanel {
         panCenter.add(pStatus);
         panCenter.add(Box.createVerticalStrut(25)); 
         
-        //
-      //  add(panCenter,BorderLayout.CENTER);
-        //
+
         panel.add(panCenter,BorderLayout.CENTER);
 		
         JPanel panBottom=new JPanel();
-		//BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setPreferredSize(new Dimension(1,30));
 		JButton btnOk=new JButton("Potvrdi");
+		btnOk.setEnabled(false);
+		new Timer(100,new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(focusListener.getKey()==0b11111111) {
+					btnOk.setEnabled(true);
+				}else { 
+					btnOk.setEnabled(false);
+				}
+			}
+			
+		}).start();
 		btnOk.setPreferredSize(new Dimension(90,30));
         btnOk.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*validation if the field does not get focus and focus lost*/
-				if(s.getName()==focusListener.getName()) {
-					focusListener.setKey(focusListener.getKey() | 0b00000001);
-				}
-				if(s.getSurname()==focusListener.getSurname()) {
-					focusListener.setKey(focusListener.getKey() | 0b00000010);
-				}
-				if(s.getDaateOfBirth()==focusListener.getDate()) {
-					focusListener.setKey(focusListener.getKey() | 0b00000100);
-				}
-				if(s.getAdress()==focusListener.getAdress()) {
-					focusListener.setKey(focusListener.getKey() | 0b00001000);
-				}
-				if(s.getContactPhone()==focusListener.getNumber()) {
-					focusListener.setKey(focusListener.getKey() | 0b00010000);
-				}
-				if(s.getEmail()==focusListener.getEmail()) {
-					focusListener.setKey(focusListener.getKey() | 0b00100000);
-				}
-				if(s.getIndex()==focusListener.getIndex()) {
-					focusListener.setKey(focusListener.getKey() | 0b01000000);
-				}
-				if(s.getYearOfEnrollment()==focusListener.getYearOfEntrollment()) {
-					focusListener.setKey(focusListener.getKey() | 0b10000000);
-				}
 				if(focusListener.getKey()==0b11111111) {
-					StudentController.getInstance().editStudent(MyStudentTable.selectedRow,focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), currYear, stat);
+					StudentController.getInstance().editStudent(MyStudentTable.selectedRow,focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), combo.getSelectedIndex()+1, stat);
+					btnOk.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().setVisible(false);
+					MyStudentTable.selectedRow=-1;
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
 				
@@ -301,7 +321,10 @@ public class MyEditigStudentInformation extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da odustanete ?", "Potvrda odustajanja", JOptionPane.YES_NO_OPTION);
+				if (a == JOptionPane.YES_OPTION) {
+					btnCancel.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().setVisible(false);
+				}
 			}
 		});
 		JPanel botWest = new JPanel();

@@ -1,7 +1,6 @@
  package model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,20 +108,32 @@ public class StudentDB {
 		}
 	}
 	
-	public void editStudent(String surname, String name,LocalDate date, Adress adress, String phoneNumber, String email,
+	public void editStudent(Student s,String surname, String name,LocalDate date, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
-		for(Student s : students) {
-			if(s.getIndex().equals(index)) {
+		if(existsStudent(index)) {
 				s.setSurname(surname);
 				s.setName(name);
 				s.setDateOfBirth(date);
 				s.setAdress(adress);
 				s.setContactPhone(phoneNumber);
 				s.setEmail(email);
+				s.setIndex(index);
 				s.setYearOfEnrollment(yearOfEnrollment);
 				s.setCurrYearOfStudy(currYearOfStudy);
 				s.setStatus(status);
-			}
+		}else if (s.getIndex()==index){
+			s.setSurname(surname);
+			s.setName(name);
+			s.setDateOfBirth(date);
+			s.setAdress(adress);
+			s.setContactPhone(phoneNumber);
+			s.setEmail(email);
+			s.setIndex(index);
+			s.setYearOfEnrollment(yearOfEnrollment);
+			s.setCurrYearOfStudy(currYearOfStudy);
+			s.setStatus(status);
+		}else {
+			System.out.println("Student sa tim indexom vec postoji.");
 		}
 	}
 }

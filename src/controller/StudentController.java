@@ -45,7 +45,7 @@ private static StudentController instance = null;
 			return;
 		}
 		Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
-		StudentDB.getInstance().editStudent(surname, name,date, adress, phoneNumber, email, student.getIndex(), yearOfEnrollment, currYearOfStudy, status);
+		StudentDB.getInstance().editStudent(student,surname, name,date, adress, phoneNumber, email, index, yearOfEnrollment, currYearOfStudy, status);
 		MyStudentPanel.getInstance().updateView();
 	}
 	

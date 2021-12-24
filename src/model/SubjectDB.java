@@ -93,17 +93,15 @@ public class SubjectDB {
 		if(existsSubject(idSubject))
 			this.subjects.add(new Subject(idSubject,name, semestar, yearOfStudySub, profesor, espb));
 	}
-	public void editSubject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
-		for(Subject s : subjects) {
-			if(s.getIdSubject().equals(idSubject)) {
+	public void editSubject(Subject s,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+
 				s.setIdSubject(idSubject);
 				s.setName(name);
 				s.setSemestar(semestar);
 				s.setYearOfStudySub(yearOfStudySub);
 				s.setProfesor(profesor);
 				s.setEspb(espb);
-			}
-		}
+
 	}
 	
 	}

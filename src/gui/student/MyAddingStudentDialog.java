@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,9 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import controller.StudentController;
 import gui.MainFrame;
+import gui.MyTabbedPane;
 import model.Status;
 
 public class MyAddingStudentDialog extends JDialog{
@@ -146,6 +149,8 @@ public class MyAddingStudentDialog extends JDialog{
         pYearOfEntrollment.add(lYearOfEntrollment);
         pYearOfEntrollment.add(fYearOfEntrollment);
         
+        
+        
         /*Panel for current year of study*/
         JPanel pCurrYearOfStudy = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lCurrYearOfStudy = new JLabel("Trenutna godina studija*");
@@ -159,7 +164,7 @@ public class MyAddingStudentDialog extends JDialog{
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				currYear=combo.getSelectedIndex();		//KRECE OD NULE TRBEACE TI NEGDE
+				currYear=combo.getSelectedIndex()+1;		//KRECE OD NULE TRBEACE TI NEGDE
 			}
 			
 			@Override
@@ -168,7 +173,6 @@ public class MyAddingStudentDialog extends JDialog{
 				
 			}
 		});
-		
 		combo.setPreferredSize(dim);
         pCurrYearOfStudy.add(Box.createHorizontalStrut(konst));
         pCurrYearOfStudy.add(lCurrYearOfStudy);
@@ -191,6 +195,8 @@ public class MyAddingStudentDialog extends JDialog{
 					stat=Status.B;
 				else
 					stat=Status.S;
+				
+				
 			}
 			
 			@Override
@@ -199,7 +205,6 @@ public class MyAddingStudentDialog extends JDialog{
 				
 			}
 		});
-        
         
         combo1.setPreferredSize(dim);
         pStatus.add(Box.createHorizontalStrut(konst));
@@ -226,6 +231,22 @@ public class MyAddingStudentDialog extends JDialog{
 		panBottom.setLayout(box);
 		
 		JButton btnOk=new JButton("Potvrdi");
+		btnOk.setEnabled(false);
+		
+		new Timer(100,new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(focusListener.getKey()==0b11111111) {
+					btnOk.setEnabled(true);
+				}else { 
+					btnOk.setEnabled(false);
+				}
+			}
+			
+		}).start();
+		
 		btnOk.setPreferredSize(new Dimension(90,30));
         btnOk.addActionListener(new ActionListener() {
 			

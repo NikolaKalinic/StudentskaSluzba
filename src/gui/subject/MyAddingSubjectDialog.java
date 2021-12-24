@@ -34,7 +34,7 @@ public class MyAddingSubjectDialog extends JDialog{
 	public MyAddingSubjectDialog() {
 		super(MainFrame.getInstance(),"Dodavanje predmeta",true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3));
+		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
@@ -156,7 +156,7 @@ public class MyAddingSubjectDialog extends JDialog{
         JTextField fProfesor = new JTextField();
         fProfesor.setToolTipText("Unesite predmetnog profesora.");
         fProfesor.setName("profesor");
-        fProfesor.addFocusListener(focusListener);
+        //fProfesor.addFocusListener(focusListener);
         JToggleButton button1 = new JToggleButton("+");
         JToggleButton button2 = new JToggleButton("-");
         button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
@@ -194,7 +194,7 @@ public class MyAddingSubjectDialog extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(focusListener.getKey()==0b1111) {
+				if(focusListener.getKey()==0b0111) {
 					SubjectController.getInstance().addSubject(focusListener.getIdSubject(), focusListener.getName(), smestar, year, focusListener.getProfessor(), focusListener.getEspb());
 					dispose();
 				}else

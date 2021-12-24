@@ -59,12 +59,12 @@ public class PassedExam extends JPanel{
 		JLabel label2 = new JLabel("Prosečna ESPB: ");
 		
 		JPanel panLabel = new JPanel();
-		panLabel.setPreferredSize(new Dimension(kit.getScreenSize().height/6,kit.getScreenSize().height/10));
+		panLabel.setPreferredSize(new Dimension(kit.getScreenSize().width/8,kit.getScreenSize().height/10));
 		panLabel.setLayout(new BorderLayout());
 		panLabel.add(label1,BorderLayout.NORTH);
 		
 		JPanel margin = new JPanel();
-		margin.setPreferredSize(new Dimension(kit.getScreenSize().height/6,kit.getScreenSize().height/10));
+		margin.setPreferredSize(new Dimension(kit.getScreenSize().width/8,kit.getScreenSize().height/10));
 		margin.setLayout(new BorderLayout());
 		panLabel.add(margin,BorderLayout.CENTER);
 		margin.add(label2,BorderLayout.NORTH);
