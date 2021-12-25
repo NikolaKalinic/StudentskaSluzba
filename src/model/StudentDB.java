@@ -121,7 +121,7 @@ public class StudentDB {
 				s.setYearOfEnrollment(yearOfEnrollment);
 				s.setCurrYearOfStudy(currYearOfStudy);
 				s.setStatus(status);
-		}else if (s.getIndex()==index){
+		}else if (s.getIndex().equals(index)){
 			s.setSurname(surname);
 			s.setName(name);
 			s.setDateOfBirth(date);

@@ -100,11 +100,12 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11111110;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[A-Za-z][a-z]+";
+				String regex =" *[A-Za-z][a-z]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					name=txt.getText().substring(0,1).toUpperCase()+txt.getText().substring(1);
+					name=txt.getText().trim();
+					name=name.substring(0,1).toUpperCase()+name.substring(1);
 					nameBackUp=name;
 					key = key | 0b00000001;
 					System.out.println(Integer. toBinaryString(key));
@@ -128,11 +129,12 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11111101;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[A-Za-z][a-z]+";
+				String regex =" *[A-Za-z][a-z]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					surname=txt.getText().substring(0,1).toUpperCase()+txt.getText().substring(1);
+					surname=txt.getText().trim();
+					surname=surname.substring(0,1).toUpperCase()+surname.substring(1);
 					surnameBackUp=surname;
 					key = key | 0b00000010;
 					System.out.println(Integer. toBinaryString(key));
@@ -156,13 +158,14 @@ public class FocusListenerForStudent implements FocusListener {
 				date = LocalDate.of(1111,1, 1);
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4}";
+				String regex =" *[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
 					if(isDateValid(txt.getText())) {
 					dateBackUp=txt.getText();
-					String [] splits =txt.getText().split("-");
+					String tmp = txt.getText().trim();
+					String [] splits =tmp.split("-");
 					int year =  Integer.parseInt(splits[2]);
 					int mounth =Integer.parseInt(splits[1]);
 					int day = Integer.parseInt(splits[0]);
@@ -197,12 +200,13 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11110111;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[A-Za-z]+( *[A-Za-z])* ?, ?[A-Za-z0-9]+ ?, ?[A-Za-z]+( *[A-Za-z])* ?, ?[A-Za-z]+( *[A-Za-z])*";
+				String regex =" *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z0-9]+ *, *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z]+( *[A-Za-z])* *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					String [] splits =txt.getText().split(",");
-					adress = new Adress(splits[0],splits[1],splits[2],splits[3]);
+					String tmp = txt.getText().trim();
+					String [] splits =tmp.split(",");
+					adress = new Adress(splits[0].trim(),splits[1].trim(),splits[2].trim(),splits[3].trim());
 					key = key | 0b00001000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
@@ -225,11 +229,11 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11101111;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="\\+?[0-9]+";
+				String regex =" *\\+?[0-9]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					number=txt.getText();
+					number = txt.getText().trim();
 					numberBackUp=number;
 					key = key | 0b00010000;
 					System.out.println(Integer. toBinaryString(key));
@@ -252,11 +256,11 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11011111;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}";
+				String regex ="^[ *\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					email=txt.getText();
+					email=txt.getText().trim();
 					emailBackUp=txt.getText();
 					key = key | 0b00100000;
 					System.out.println(Integer. toBinaryString(key));
@@ -279,11 +283,11 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b10111111;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[A-Za-z]{1,3}-[0-9]{1,3}-[0-9]{1,4}";
+				String regex =" *[A-Za-z]{1,3}-[0-9]{1,3}-[0-9]{1,4} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					index=txt.getText();
+					index=txt.getText().trim();
 					indexBackUp=txt.getText();
 					key = key | 0b001000000;
 					System.out.println(Integer. toBinaryString(key));
@@ -307,12 +311,12 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b01111111;
 				txt.setForeground(Color.RED);
 			} else {
-				String regex ="[1-9][0-9]{3,3}";
+				String regex =" *[1-9][0-9]{3,3} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					yearOfEntrollment=Integer.parseInt(txt.getText());
-					yearBackUp=txt.getText();
+					yearOfEntrollment=Integer.parseInt(txt.getText().trim());
+					yearBackUp=txt.getText().trim();
 					key = key | 0b10000000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
