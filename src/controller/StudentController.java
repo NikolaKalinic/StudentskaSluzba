@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import gui.MyTabbedPane;
 import gui.student.MyStudentPanel;
+import gui.student.MyStudentTable;
 import model.Adress;
 import model.Status;
 import model.Student;
@@ -52,6 +53,21 @@ private static StudentController instance = null;
 	public Student getSelectedStudent(int rowSelectedIndex) {
 		Student student = StudentDB.getInstance().getRow(rowSelectedIndex);
 		return student;
+	}
+	
+	public boolean existsStudent(String id) {
+		return StudentDB.getInstance().existsStudent(id);
+	}
+	
+	public boolean editExistsStudent(String id) {
+		 if(StudentDB.getInstance().existsStudent(id)) {
+			 return true;
+		 }else {
+			 if (getSelectedStudent(MyStudentTable.selectedRow).getIndex().equals(id)) {
+				 return true;
+			 }else
+				 return false;
+		 }
 	}
 	
 }

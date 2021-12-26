@@ -38,7 +38,7 @@ public class MyAddingStudentDialog extends JDialog{
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
 		int konst=kit.getScreenSize().width/20;
-		FocusListenerForStudent focusListener = new FocusListenerForStudent();
+		FocusListenerForStudent focusListener = new FocusListenerForStudent(1);
 		
 		/*Panel for name*/
 		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -249,11 +249,9 @@ public class MyAddingStudentDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b11111111) {
-					StudentController.getInstance().addStudent(focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), currYear, stat);
-					dispose();
-				}else
-					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
-				
+						StudentController.getInstance().addStudent(focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), currYear, stat);
+						dispose();
+				}
 			}
 		});
 		

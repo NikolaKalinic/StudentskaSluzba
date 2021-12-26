@@ -83,13 +83,13 @@ public class StudentDB {
 		}
 	}
 	
-	private boolean existsStudent(String id) {
+	public boolean existsStudent(String id) {
 		for(Student s : students ) {
 			String s1 = s.getIndex().toUpperCase();
 			if(s1.equals(id.toUpperCase()))
-				return false;
+				return false;		//AKO POSTOJI VRACA FALSE
 		}
-		return true;
+		return true;				//AKO NE POSTOJI VRACA TRUE
 	}
 	
 	/*data manipulation methods*/

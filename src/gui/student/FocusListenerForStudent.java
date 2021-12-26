@@ -11,10 +11,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import controller.StudentController;
 import model.Adress;
 
 public class FocusListenerForStudent implements FocusListener {
@@ -36,7 +38,10 @@ public class FocusListenerForStudent implements FocusListener {
 	private String indexBackUp;
 	private  int yearOfEntrollment;
 	private String yearBackUp;
-	
+	private int i;
+	public FocusListenerForStudent(int i) {
+		this.i=i;
+	}
 	/*stackoverflow*/
 	final static String DATE_FORMAT = "dd-MM-yyyy";
 
@@ -314,10 +319,38 @@ public class FocusListenerForStudent implements FocusListener {
 				if(matcher.matches()) {
 					index=txt.getText().trim();
 					indexBackUp=txt.getText();
-					key = key | 0b001000000;
-					System.out.println(Integer. toBinaryString(key));
-					txt.setForeground(Color.BLACK);
-					txt.setBorder(defaultBorder);
+					if(i==1) {				//1-POZIVAM IZ DODAVANJA 2-POZIVAM IZ IZMENE
+						if(!StudentController.getInstance().existsStudent(index)) {
+							//JOptionPane.showMessageDialog(null, "Student sa tim indexom vec postoji ! ");
+							txt.setText("Index već postoji !");
+							index = "Unesite index...";
+							key = key & 0b10111111;
+							txt.setForeground(Color.RED);
+							txt.setBorder(invalidBorder);
+						}else {
+							key = key | 0b001000000;
+							System.out.println(Integer. toBinaryString(key));
+							txt.setForeground(Color.BLACK);
+							txt.setBorder(defaultBorder);
+						}
+					}else {
+						if(!StudentController.getInstance().editExistsStudent(index)) {
+							key = key & 0b10111111;
+							//JOptionPane.showMessageDialog(null, "Student sa tim indexom vec postoji ! ");
+							txt.setText("Index već postoji !");
+							index = "Unesite index...";
+							System.out.println(Integer. toBinaryString(key));
+							txt.setForeground(Color.RED);
+							txt.setBorder(invalidBorder);
+						}else {
+							key = key | 0b001000000;
+							System.out.println(Integer. toBinaryString(key));
+							System.out.println(Integer. toBinaryString(key));
+							txt.setForeground(Color.BLACK);
+							txt.setBorder(defaultBorder);
+						}
+					}
+					
 				} else {
 					indexBackUp=txt.getText();
 					txt.setText("\"RA-1-2021\"");

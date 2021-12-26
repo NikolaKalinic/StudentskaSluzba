@@ -47,7 +47,7 @@ public class MyEditigStudentInformation extends JPanel {
 		panCenter.setLayout(boxCenter);		
 		Dimension dim=new Dimension(kit.getScreenSize().width/14,kit.getScreenSize().height/50);
 		int konst=kit.getScreenSize().width/15;
-		FocusListenerForStudent focusListener = new FocusListenerForStudent();
+		FocusListenerForStudent focusListener = new FocusListenerForStudent(2);
 		
 		
 		/*Panel for name*/
@@ -308,8 +308,7 @@ public class MyEditigStudentInformation extends JPanel {
 					StudentController.getInstance().editStudent(MyStudentTable.selectedRow,focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), combo.getSelectedIndex()+1, stat);
 					btnOk.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().setVisible(false);
 					MyStudentTable.selectedRow=-1;
-				}else
-					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
+				}
 				
 			}
 		});
