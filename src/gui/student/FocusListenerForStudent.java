@@ -10,7 +10,10 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
 
 import model.Adress;
 
@@ -90,6 +93,8 @@ public class FocusListenerForStudent implements FocusListener {
 	@Override
 	public void focusLost(FocusEvent e) {
 		JTextField txt = (JTextField) e.getComponent();
+		Border defaultBorder = UIManager.getBorder("TextField.border");
+		Border invalidBorder = BorderFactory.createLineBorder(Color.red);
 		
 		/*Vadilidation for name*/
 		if (txt.getName().equals("name")) {
@@ -99,6 +104,7 @@ public class FocusListenerForStudent implements FocusListener {
 				name="Unesite Ime...";
 				key = key & 0b11111110;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[A-Za-z][a-z]+ *";
 				Pattern pattern = Pattern.compile(regex);
@@ -110,12 +116,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00000001;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					nameBackUp=txt.getText();
 					txt.setText("Unesite Ime...");
 					name="Unesite Ime...";
 					key = key & 0b11111110;;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 				
 			}
@@ -128,6 +136,7 @@ public class FocusListenerForStudent implements FocusListener {
 				surname="Unesite Prezime...";
 				key = key & 0b11111101;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[A-Za-z][a-z]+ *";
 				Pattern pattern = Pattern.compile(regex);
@@ -139,12 +148,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00000010;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					surnameBackUp=txt.getText();
 					txt.setText("Unesite Prezime...");
 					surname="Unesite Prezime...";
 					key = key & 0b11111101;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 				
 			}
@@ -157,6 +168,7 @@ public class FocusListenerForStudent implements FocusListener {
 				key = key & 0b11111011;
 				date = LocalDate.of(1111,1, 1);
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4} *";
 				Pattern pattern = Pattern.compile(regex);
@@ -174,11 +186,13 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00000100;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 					}else {
 						dateBackUp=txt.getText();
 						txt.setText("Format:\"DD-MM-YYYY\"");
 						key = key & 0b11111011;
 						txt.setForeground(Color.RED);
+						txt.setBorder(invalidBorder);
 					}
 					
 				} else {
@@ -186,6 +200,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setText("Format:\"DD-MM-YYYY\"");
 					key = key & 0b11111011;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 			}
 		}
@@ -199,6 +214,7 @@ public class FocusListenerForStudent implements FocusListener {
 				adress = new Adress("Adresa","a1","Nije","Validna");
 				key = key & 0b11110111;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z0-9]+ *, *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z]+( *[A-Za-z])* *";
 				Pattern pattern = Pattern.compile(regex);
@@ -210,12 +226,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00001000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					adressBackUp=txt.getText();
 					txt.setText("\"ulica,broj,grad,drzava\"");
 					adress = new Adress("Adresa","a1","Nije","Validna");
 					key = key & 0b11110111;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 			}
 		}
@@ -228,8 +246,9 @@ public class FocusListenerForStudent implements FocusListener {
 				number = "Unesite broj...";
 				key = key & 0b11101111;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *\\+?[0-9]+ *";
+				String regex =" *\\+? *[0-9]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -238,12 +257,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00010000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					numberBackUp=txt.getText();
 					txt.setText("Unesite broj...");
 					number = "Unesite broj...";
 					key = key & 0b11101111;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 			}
 		}
@@ -255,6 +276,7 @@ public class FocusListenerForStudent implements FocusListener {
 				email="Unesite emal...";
 				key = key & 0b11011111;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex ="^[ *\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4} *";
 				Pattern pattern = Pattern.compile(regex);
@@ -265,12 +287,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b00100000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					emailBackUp=txt.getText();
 					txt.setText("Unesite email...");
 					email="Unesite emal...";
 					key = key & 0b11011111;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 			}
 		}
@@ -282,6 +306,7 @@ public class FocusListenerForStudent implements FocusListener {
 				index = "Unesite index...";
 				key = key & 0b10111111;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[A-Za-z]{1,3}-[0-9]{1,3}-[0-9]{1,4} *";
 				Pattern pattern = Pattern.compile(regex);
@@ -292,12 +317,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b001000000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					indexBackUp=txt.getText();
 					txt.setText("\"RA-1-2021\"");
 					index = "Unesite index...";
 					key = key & 0b10111111;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 			}
 		}
@@ -310,6 +337,7 @@ public class FocusListenerForStudent implements FocusListener {
 				yearOfEntrollment=-1;
 				key = key & 0b01111111;
 				txt.setForeground(Color.RED);
+				txt.setBorder(invalidBorder);
 			} else {
 				String regex =" *[1-9][0-9]{3,3} *";
 				Pattern pattern = Pattern.compile(regex);
@@ -320,12 +348,14 @@ public class FocusListenerForStudent implements FocusListener {
 					key = key | 0b10000000;
 					System.out.println(Integer. toBinaryString(key));
 					txt.setForeground(Color.BLACK);
+					txt.setBorder(defaultBorder);
 				} else {
 					yearBackUp=txt.getText();
 					txt.setText("Unesite godinu upisa...");
 					yearOfEntrollment=-1;
 					key = key & 0b01111111;
 					txt.setForeground(Color.RED);
+					txt.setBorder(invalidBorder);
 				}
 				
 			}

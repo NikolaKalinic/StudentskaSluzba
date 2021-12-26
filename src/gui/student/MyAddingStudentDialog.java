@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseListener;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,10 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-
 import controller.StudentController;
 import gui.MainFrame;
-import gui.MyTabbedPane;
 import model.Status;
 
 public class MyAddingStudentDialog extends JDialog{
@@ -45,7 +41,7 @@ public class MyAddingStudentDialog extends JDialog{
 		FocusListenerForStudent focusListener = new FocusListenerForStudent();
 		
 		/*Panel for name*/
-		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
+		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lName=new JLabel("Ime*");
         lName.setPreferredSize(dim);
         JTextField fName=new JTextField();
@@ -210,7 +206,7 @@ public class MyAddingStudentDialog extends JDialog{
         pStatus.add(Box.createHorizontalStrut(konst));
         pStatus.add(lStatus);
         pStatus.add(combo1);
-        
+       
         
         panCenter.add(Box.createVerticalStrut(25));
         panCenter.add(pName);
