@@ -1,4 +1,4 @@
-package gui;
+package gui.professor;
 
 import java.awt.Color;
 import java.awt.Component;

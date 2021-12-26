@@ -1,6 +1,6 @@
 package controller;
 
-import gui.MyProfessorPanel;
+import gui.professor.MyProfessorPanel;
 import model.Adress;
 import model.Professor;
 import model.ProfessorDB;

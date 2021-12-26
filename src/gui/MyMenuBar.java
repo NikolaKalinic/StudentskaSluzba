@@ -20,6 +20,9 @@ import javax.swing.border.Border;
 
 import controller.ProfessorController;
 import controller.StudentController;
+import gui.professor.MyProfessorTable;
+import gui.professor.ProfessorDialog;
+import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentTable;

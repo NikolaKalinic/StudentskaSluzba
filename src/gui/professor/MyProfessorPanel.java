@@ -1,4 +1,4 @@
-package gui;
+package gui.professor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +10,10 @@ import javax.swing.JTable;
 
 public class MyProfessorPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static MyProfessorPanel instance = null;
 	
 	public static MyProfessorPanel getInstance() {
