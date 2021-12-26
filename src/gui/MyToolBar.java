@@ -1,17 +1,34 @@
 package gui;
 import java.awt.Color;
-
-import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import controller.ProfessorController;
+import controller.StudentController;
+import model.Professor;
+import model.ProfessorDB;
+import gui.professor.MyProfessorTable;
+import gui.professor.ProfessorDialog;
+import gui.professor.ProfessorEditDialog;
+import gui.student.MyAddingStudentDialog;
+import gui.student.MyEditingStudentDialog;
+import gui.student.MyStudentTable;
+import gui.subject.MyAddingSubjectDialog;
+import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectTable;
+import model.Student;
+import model.StudentDB;
+import model.SubjectDB;
 
 public class MyToolBar extends JToolBar {
 	
@@ -35,7 +52,22 @@ public class MyToolBar extends JToolBar {
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
 		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
-                
+        create.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					ProfessorDialog pd = new ProfessorDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					MyAddingSubjectDialog pd = new MyAddingSubjectDialog();
+				}
+			}
+			
+		});
+        
 		
 		add(create);
 		
@@ -49,7 +81,27 @@ public class MyToolBar extends JToolBar {
 		edit.setBorderPainted(false);
 		edit.setFocusPainted(false);
 		edit.setBackground(Color.white);
-
+		edit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
+					}
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
+						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+					}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)){
+						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
+						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+					}
+				}
+			}
+		});
+		
 		add(edit);
 		
 		addSeparator();
@@ -63,9 +115,35 @@ public class MyToolBar extends JToolBar {
 		delete.setFocusPainted(false);
 		delete.setBackground(Color.white);
 		
+		/*Listener for delete*/
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
+						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
+						if (a == JOptionPane.YES_OPTION) {
+							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
+							MyProfessorTable.rowIndex = -1;
+						}
+					}
+				 }
+				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+						if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+								MyStudentTable.selectedRow=-1;
+							}
+						}
+			}
+		});
+			
 		add(delete);
 
-		
 		add(Box.createHorizontalGlue());
 		
 		

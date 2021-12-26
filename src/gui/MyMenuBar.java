@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
@@ -12,9 +13,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+
+import controller.ProfessorController;
+import controller.StudentController;
+import gui.professor.MyProfessorTable;
+import gui.professor.ProfessorDialog;
+import gui.professor.ProfessorEditDialog;
+import gui.student.MyAddingStudentDialog;
+import gui.student.MyEditingStudentDialog;
+import gui.student.MyStudentTable;
+import gui.subject.MyAddingSubjectDialog;
+import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectTable;
+import model.Professor;
+import model.ProfessorDB;
+import model.StudentDB;
+import model.SubjectDB;
 
 public class MyMenuBar extends JMenuBar {
 	
@@ -34,7 +52,21 @@ public class MyMenuBar extends JMenuBar {
 		Image iconNew = img.getScaledInstance(20,20, 4);
 		Icon fileIconNew = new ImageIcon(iconNew);
 		fileNew.setIcon(fileIconNew);
-		
+		fileNew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyAddingStudentDialog masd = new MyAddingStudentDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					ProfessorDialog pd = new ProfessorDialog();
+				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					MyAddingSubjectDialog pd = new MyAddingSubjectDialog();
+				}
+			}
+		});
+	
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.setMnemonic('s');
 		fileSave.setCursor(new Cursor(12));
@@ -61,6 +93,7 @@ public class MyMenuBar extends JMenuBar {
 		Icon iconStud = new ImageIcon(imgStud);
 		student.setIcon(iconStud);
 		
+		
 		JMenuItem subject = new JMenuItem("Predmeti");
 		subject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
 		subject.setMnemonic('p');
@@ -69,6 +102,7 @@ public class MyMenuBar extends JMenuBar {
 		Icon iconSubj = new ImageIcon(imgSubj);
 		subject.setIcon(iconSubj);
 		subject.setCursor(new Cursor(12));
+		
 		
 		JMenuItem professor = new JMenuItem("Profesori");
 		professor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK));
@@ -89,6 +123,42 @@ public class MyMenuBar extends JMenuBar {
 		subject.setCursor(new Cursor(12));
 		chair.setCursor(new Cursor(12));
 		
+		
+		/*Listener for swiching tab with mnemonik and accelerator*/
+		student.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyTabbedPane.getInstance().setSelectedIndex(0);;
+				
+			}
+		});
+		professor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyTabbedPane.getInstance().setSelectedIndex(1);;
+				
+			}
+		});
+		subject.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyTabbedPane.getInstance().setSelectedIndex(2);;
+				
+			}
+		});
+		chair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+				
+			}
+		});
+		
+		
 		fileOpen.add(student);
 		fileOpen.add(subject);
 		fileOpen.add(professor);
@@ -102,6 +172,15 @@ public class MyMenuBar extends JMenuBar {
 		Image iconClose = img3.getScaledInstance(15, 15, 4);
 		Icon fileIconClose = new ImageIcon(iconClose);
 		fileClose.setIcon(fileIconClose);
+		
+		fileClose.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getInstance().dispose();
+			}
+		});
+		
 		
 		file.add(fileNew);
 		file.addSeparator();
@@ -123,7 +202,26 @@ public class MyMenuBar extends JMenuBar {
 		Image iconEdit = img4.getScaledInstance(15, 15, 4);
 		Icon editIconEdit = new ImageIcon(iconEdit);
 		editEdit.setIcon(editIconEdit);
-		
+		editEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
+					}
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
+						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+					}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
+						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
+						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+						}
+			}
+		});
+				
 		JMenuItem editDelete = new JMenuItem("Delete");
 		editDelete.setCursor(new Cursor(12));
 		editDelete.setMnemonic('d');
@@ -131,6 +229,49 @@ public class MyMenuBar extends JMenuBar {
 		Image img5 = kit.getImage("images/delete.png");
 		Image iconDelete = img5.getScaledInstance(15, 15, 4);
 		Icon editIconDelete = new ImageIcon(iconDelete);
+		
+		/*Listener for delete*/
+		editDelete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer==JOptionPane.YES_OPTION) {
+							StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
+							MyStudentTable.selectedRow=-1;
+						}
+					}
+				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
+					//TODO for profesor
+				//else
+					//TODO for subject
+			}
+		});
+		
+		editDelete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
+					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
+						int answer = JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete profesora", "Brisanje profesora", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer == JOptionPane.YES_OPTION) {
+							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
+							MyProfessorTable.rowIndex = -1;
+						}
+					}
+				
+			}
+			
+		});
+		
+		
 		
 		editDelete.setIcon(editIconDelete);
 		edit.add(editEdit);

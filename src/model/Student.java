@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDate;
 import java.util.Set;
 
-enum Status{B,S};
 
 public class Student {
 	/*Fields*/
@@ -22,14 +21,14 @@ public class Student {
 	private Set<Subject> failedExams;
 	
 	/*Constructor*/
-	public Student(String surname, String name, LocalDate daateOfBirth, String adress, String phoneNumber, String email,
-			String index, int yearOfEnrollment, int currYearOfStudy, Status status, double avgMark, Adress adress1,
-			Set<Subject> passedExams, Set<Subject> failedExams) {
+
+	public Student(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			String index, int yearOfEnrollment, int currYearOfStudy, Status status, double avgMark,Set<Subject> passedExams, Set<Subject> failedExams) {
 		super();
 		this.surname = surname;
 		this.name = name;
-		this.dateOfBirth = daateOfBirth;
-		this.adress = adress1;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.index = index;
@@ -40,7 +39,20 @@ public class Student {
 		this.passedExams = passedExams;
 		this.failedExams = failedExams;
 	}
-
+	public Student (String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
+		super();
+		this.surname = surname;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.index = index;
+		this.yearOfEnrollment = yearOfEnrollment;
+		this.currYearOfStudy = currYearOfStudy;
+		this.status = status;
+	}
 	/*Seters and geters*/
 	public String getSurname() {
 		return surname;
@@ -57,7 +69,9 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 	public LocalDate getDaateOfBirth() {
 		return dateOfBirth;
 	}
@@ -140,6 +154,13 @@ public class Student {
 
 	public void setFailedExams(Set<Subject> failedExams) {
 		this.failedExams = failedExams;
+	}
+	@Override
+	public String toString() {
+		return "Student [surname=" + surname + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", adress=" + adress
+				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", index=" + index + ", yearOfEnrollment="
+				+ yearOfEnrollment + ", currYearOfStudy=" + currYearOfStudy + ", status=" + status + ", avgMark="
+				+ avgMark + ", passedExams=" + passedExams + ", failedExams=" + failedExams + "]";
 	}
 	
 	
