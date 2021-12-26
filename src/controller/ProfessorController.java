@@ -1,6 +1,7 @@
 package controller;
 
 import gui.professor.MyProfessorPanel;
+import gui.professor.MyProfessorTable;
 import model.Adress;
 import model.Professor;
 import model.ProfessorDB;
@@ -40,6 +41,7 @@ public class ProfessorController {
 		}
 		
 		ProfessorDB.getInstance().editProfessor(surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, title, experience);
+		MyProfessorTable.rowIndex = -1;
 		MyProfessorPanel.getInstance().updateView();
 	}
 
