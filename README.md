@@ -6,6 +6,9 @@
 - Menu bar
 - Status bar
 - Prikaz studenta
+- Dodavanje studenta
+- Izmena studenta
+- Brisanje studenta
 
 
 ### **Aleksa Ignjatovic** - Student 2:
@@ -15,3 +18,8 @@
 - Adresa
 - Glavni prozor
 - Toolbar
+- Prikaz predmeta
+- Prikaz profesora
+- Dodavanje profesora
+- Izmena profesora
+- Brisanje profesora
