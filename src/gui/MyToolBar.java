@@ -25,6 +25,7 @@ import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectPanel;
 import gui.subject.MySubjectTable;
 import model.Student;
 import model.StudentDB;
@@ -89,10 +90,11 @@ public class MyToolBar extends JToolBar {
 					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
 						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
 					}
-				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
-					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
-						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+					if(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< SubjectDB.getInstance().getSubjects().size() && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()>=0) {
+						MyEditingSubjectDialog ms = new MyEditingSubjectDialog();
 					}
+				}
 				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)){
 						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);

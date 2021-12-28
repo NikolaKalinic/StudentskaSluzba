@@ -1,8 +1,10 @@
 package controller;
 
+import gui.student.MyStudentTable;
 import gui.subject.MySubjectPanel;
 import model.Professor;
 import model.Semestar;
+import model.StudentDB;
 import model.Subject;
 import model.SubjectDB;
 
@@ -38,5 +40,19 @@ public class SubjectController {
 		return subject;
 	}
 	
+	public boolean existsSubject(String id) {
+		return SubjectDB.getInstance().existsSubject(id);
+	}
+	
+	public boolean editExistsSubject(String id) {
+		 if(SubjectDB.getInstance().existsSubject(id)) {
+			 return true;
+		 }else {
+			 if (getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()).getIdSubject().equals(id)) {
+				 return true;
+			 }else
+				 return false;
+		 }
+	}
 
 }

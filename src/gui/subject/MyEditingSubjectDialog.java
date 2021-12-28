@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
 
 import controller.SubjectController;
 import gui.MainFrame;
@@ -29,20 +30,13 @@ import model.Subject;
 
 public class MyEditingSubjectDialog extends JDialog{
 
-	/* IMPORTANTTT */
-	/* IMPORTANTTT */
-	/* IMPORTANTTT */
-	/*SKINUO SAM SVAKU VALIDACIJU SA PROFE JEL TI TREBA TO DA REALIZUJES PA RADI KAKO TI JE VOLJA */
-	/* IMPORTANTTT */
-	/* IMPORTANTTT */
-	/* IMPORTANTTT */
 	
 	public int year=1;
 	public Semestar smestar=Semestar.Summer;
 	public MyEditingSubjectDialog() {
 		super(MainFrame.getInstance(),"Izmena predmeta",true);
-		
-		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectTable.selectedRow);
+		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		smestar=s.getSemestar();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
 		setResizable(false);
@@ -53,7 +47,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
 		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/50);
 		int konst=kit.getScreenSize().width/30;
-		FocusListenerForSubject focusListener = new FocusListenerForSubject();
+		FocusListenerForSubject focusListener = new FocusListenerForSubject(2);
 		
 		/*Panel for code subject*/
 		JPanel pCode=new JPanel(new FlowLayout(FlowLayout.LEFT));	
@@ -167,6 +161,7 @@ public class MyEditingSubjectDialog extends JDialog{
         JLabel lProfesor = new JLabel("Profesor*");
         lProfesor.setPreferredSize(dim);
         JTextField fProfesor = new JTextField();
+        fProfesor.setFocusable(false);
         fProfesor.setName("profesor");
         //fProfesor.addFocusListener(focusListener);
         //fProfesor.setText(s.getProfesor().getProfNameAndSurname());
@@ -187,9 +182,9 @@ public class MyEditingSubjectDialog extends JDialog{
         
         
         panCenter.add(Box.createVerticalStrut(25));
+        panCenter.add(pYear);
         panCenter.add(pCode);
         panCenter.add(pName);
-        panCenter.add(pYear);
         panCenter.add(pSemestar);
         panCenter.add(pESPB);
         panCenter.add(pProfesor);
@@ -204,23 +199,40 @@ public class MyEditingSubjectDialog extends JDialog{
 		
 		JButton btnOk=new JButton("Potvrdi");
 		btnOk.setPreferredSize(new Dimension(90,30));
+		
+		if(s.getIdSubject()==focusListener.getIdSubject())
+			focusListener.setKey(focusListener.getKey() | 0b0001);
+		if(s.getName()==focusListener.getName()) {
+			focusListener.setKey(focusListener.getKey() | 0b0010);
+		}
+		if(s.getEspb()==focusListener.getEspb()) {
+			focusListener.setKey(focusListener.getKey() | 0b0100);
+		}
+//		if(s.getProfesor().equals(focusListener.getProfessor())) {
+//			focusListener.setKey(focusListener.getKey() | 0b1000);
+//		}
+		
+		btnOk.setEnabled(false);
+		
+		new Timer(100,new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(focusListener.getKey()==0b0111) {
+					btnOk.setEnabled(true);
+				}else { 
+					btnOk.setEnabled(false);
+				}
+			}
+			
+		}).start();
         btnOk.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(s.getIdSubject()==focusListener.getIdSubject())
-					focusListener.setKey(focusListener.getKey() | 0b0001);
-				if(s.getName()==focusListener.getName()) {
-					focusListener.setKey(focusListener.getKey() | 0b0010);
-				}
-				if(s.getEspb()==focusListener.getEspb()) {
-					focusListener.setKey(focusListener.getKey() | 0b0100);
-				}
-//				if(s.getProfesor().equals(focusListener.getProfessor())) {
-//					focusListener.setKey(focusListener.getKey() | 0b1000);
-//				}
 				if(focusListener.getKey()==0b0111) {
-					SubjectController.getInstance().editStudent(MySubjectTable.selectedRow, focusListener.getIdSubject(), focusListener.getName(),smestar , year, new Professor("Novi","Prof"), focusListener.getEspb());
+					SubjectController.getInstance().editStudent(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, new Professor("Novi","Prof"), focusListener.getEspb());
 					dispose();
 				}else
 					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
@@ -248,7 +260,6 @@ public class MyEditingSubjectDialog extends JDialog{
 		panBottom.add(Box.createGlue());
 		add(panBottom,BorderLayout.SOUTH);
         
-		
 		setVisible(true);
 		pack();
 	}

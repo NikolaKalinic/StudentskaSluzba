@@ -80,7 +80,7 @@ public class SubjectDB {
 			return null;	
 		}
 	}
-	private boolean existsSubject(String id) {
+	public boolean existsSubject(String id) {
 		for(Subject s : subjects ) {
 			String s1 = s.getIdSubject().toUpperCase();
 			if(s1.equals(id.toUpperCase()))

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
 
 import controller.ProfessorController;
 import controller.StudentController;
@@ -43,7 +44,7 @@ public class MyAddingSubjectDialog extends JDialog{
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
 		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/50);
 		int konst=kit.getScreenSize().width/30;
-		FocusListenerForSubject focusListener = new FocusListenerForSubject();
+		FocusListenerForSubject focusListener = new FocusListenerForSubject(1);
 		
 		/*Panel for code subject*/
 		JPanel pCode=new JPanel(new FlowLayout(FlowLayout.LEFT));	
@@ -159,6 +160,7 @@ public class MyAddingSubjectDialog extends JDialog{
         //fProfesor.addFocusListener(focusListener);
         JToggleButton button1 = new JToggleButton("+");
         JToggleButton button2 = new JToggleButton("-");
+        button2.setEnabled(false);
         button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
         button2.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
         
@@ -173,9 +175,9 @@ public class MyAddingSubjectDialog extends JDialog{
         
         
         panCenter.add(Box.createVerticalStrut(25));
+        panCenter.add(pYear);
         panCenter.add(pCode);
         panCenter.add(pName);
-        panCenter.add(pYear);
         panCenter.add(pSemestar);
         panCenter.add(pESPB);
         panCenter.add(pProfesor);
@@ -190,6 +192,22 @@ public class MyAddingSubjectDialog extends JDialog{
 		
 		JButton btnOk=new JButton("Potvrdi");
 		btnOk.setPreferredSize(new Dimension(90,30));
+		btnOk.setEnabled(false);
+		
+		new Timer(100,new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(focusListener.getKey()==0b0111) {
+					btnOk.setEnabled(true);
+				}else { 
+					btnOk.setEnabled(false);
+				}
+			}
+			
+		}).start();
+		
         btnOk.addActionListener(new ActionListener() {
 			
 			@Override

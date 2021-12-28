@@ -52,4 +52,9 @@ public class MySubjectPanel extends JPanel {
 		model.fireTableDataChanged();
 		validate();
 	}
+	public JTable getSubjectTable() {
+		return subjectTable;
+	}
+
+	
 }

@@ -7,10 +7,12 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
+import gui.student.MyStudentPanel;
+
 public class MySubjectTable extends JTable {
 
 	private static final long serialVersionUID = 8900651367165240112L;
-	public static int selectedRow=-1;
+
 	public MySubjectTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
@@ -23,7 +25,6 @@ public class MySubjectTable extends JTable {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
 			c.setBackground(new Color(153, 204, 255));
-			selectedRow=row;
 		} else
 			if (row % 2 == 0) {
 				c.setBackground(Color.LIGHT_GRAY);
