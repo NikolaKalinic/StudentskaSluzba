@@ -114,6 +114,11 @@ public class Subject {
 	public void setStudentsFailed(Set<Student> studentsFailed) {
 		this.studentsFailed = studentsFailed;
 	}
+
+	@Override
+	public String toString() {
+		return  idSubject + "  -  " + name;
+	}
 	
 	
 	
