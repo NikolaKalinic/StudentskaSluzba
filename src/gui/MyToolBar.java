@@ -22,6 +22,7 @@ import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
+import gui.student.MyStudentPanel;
 import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
@@ -87,7 +88,7 @@ public class MyToolBar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+					if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
 					}
 				if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
@@ -132,13 +133,12 @@ public class MyToolBar extends JToolBar {
 					}
 				 }
 				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-						if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+						if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
 									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
-								StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
-								MyStudentTable.selectedRow=-1;
+								StudentController.getInstance().deleteStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow());
 							}
 						}
 			}

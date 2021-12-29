@@ -63,7 +63,7 @@ private static StudentController instance = null;
 		 if(StudentDB.getInstance().existsStudent(id)) {
 			 return true;
 		 }else {
-			 if (getSelectedStudent(MyStudentTable.selectedRow).getIndex().equals(id.toUpperCase())) {
+			 if (getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getIndex().equals(id.toUpperCase())) {
 				 return true;
 			 }else
 				 return false;

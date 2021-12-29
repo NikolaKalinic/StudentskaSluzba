@@ -1,16 +1,16 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Grades {
 	/*Fields*/
 	private Student studentPassed;
 	private Subject subject;
 	private int grades;
-	private Date dateExam;
+	private LocalDate dateExam;
 	
 	/*Constructors*/
-	public Grades(Student studentPassed, Subject subject, int grades, Date dateExam) {
+	public Grades(Student studentPassed, Subject subject, int grades, LocalDate dateExam) {
 		super();
 		this.studentPassed = studentPassed;
 		this.subject = subject;
@@ -46,11 +46,11 @@ public class Grades {
 		
 	}
 
-	public Date getDateExam() {
+	public LocalDate getDateExam() {
 		return dateExam;
 	}
 
-	public void setDateExam(Date dateExam) {
+	public void setDateExam(LocalDate dateExam) {
 		this.dateExam = dateExam;
 	}
 	

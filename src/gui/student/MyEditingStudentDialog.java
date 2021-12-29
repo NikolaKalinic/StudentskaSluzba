@@ -29,7 +29,7 @@ public class MyEditingStudentDialog extends JDialog{
 		MyEditingStudentTabbedPane mestp = new MyEditingStudentTabbedPane();
 		panel.add(mestp);
 		
-		
+		PassedExam.getInstance().updateLabel();
 		JPanel panelBot = new JPanel();
 		panelBot.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
 		panelBot.setPreferredSize(new Dimension(1,10));	
@@ -37,7 +37,6 @@ public class MyEditingStudentDialog extends JDialog{
 		
 		add(panel);
 		setVisible(true);
-    	pack();
 	}
 	
 }

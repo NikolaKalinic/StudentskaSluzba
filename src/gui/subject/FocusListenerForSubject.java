@@ -216,7 +216,14 @@ public class FocusListenerForSubject implements FocusListener{
 			@Override
 			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {button.requestFocus();}
+			public void mouseEntered(MouseEvent e) {
+				try{
+					Thread.sleep(100);
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+				button.requestFocus();
+			}
 			@Override
 			public void mouseClicked(MouseEvent e) {}
 		});

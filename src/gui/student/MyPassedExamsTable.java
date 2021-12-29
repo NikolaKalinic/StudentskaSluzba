@@ -7,14 +7,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-import model.StudentDB;
+public class MyPassedExamsTable extends JTable{
 
-public class MyStudentTable extends JTable {
-	public MyStudentTable() {
+	public MyPassedExamsTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelStudent());
+		this.setModel(new AbstractTablePassedExams());
 	}
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -23,7 +22,7 @@ public class MyStudentTable extends JTable {
 			c.setBackground(new Color(153,204,255));
 		}else
 			if (row%2==0) {
-				c.setBackground(Color.LIGHT_GRAY);
+				c.setBackground(new Color(208,208,208));
 			} else {
 				c.setBackground(Color.WHITE);
 			}
