@@ -3,6 +3,8 @@ package gui.student;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -393,6 +396,26 @@ public class FocusListenerForStudent implements FocusListener {
 				
 			}
 		}
+	}
+	public void lostFocus(JPanel panel,JButton btnOk) {
+		panel.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				try{
+					Thread.sleep(100);
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+				btnOk.requestFocus();}
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
 	}
 	
 	public int getKey() {

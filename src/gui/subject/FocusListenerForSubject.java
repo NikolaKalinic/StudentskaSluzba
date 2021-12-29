@@ -3,17 +3,20 @@ package gui.subject;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import controller.SubjectController;
 import model.Professor;
-import model.Semestar;
 
 public class FocusListenerForSubject implements FocusListener{
 	
@@ -114,7 +117,7 @@ public class FocusListenerForSubject implements FocusListener{
 				nameBackUp=txt.getText();
 				txt.setText("Unesite Ime...");
 				name="Unesite Ime...";
-				key = key & 0b0001;
+				key = key & 0b1101;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
@@ -132,7 +135,7 @@ public class FocusListenerForSubject implements FocusListener{
 					nameBackUp=txt.getText();
 					txt.setText("Unesite ime predmeta...");
 					name="Unesite Ime...";
-					key = key & 0b0001;
+					key = key & 0b1101;
 					txt.setForeground(Color.RED);
 					txt.setBorder(invalidBorder);
 				}
@@ -146,7 +149,7 @@ public class FocusListenerForSubject implements FocusListener{
 				espbBackUp=txt.getText();
 				txt.setText("Unesite espb...");
 				espb=-1;
-				key = key & 0b0011;
+				key = key & 0b1011;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
@@ -164,7 +167,7 @@ public class FocusListenerForSubject implements FocusListener{
 					espbBackUp=txt.getText();
 					txt.setText("Unesite espb...");
 					espb=-1;
-					key = key & 0b0011;
+					key = key & 0b1011;
 					txt.setForeground(Color.RED);
 					txt.setBorder(invalidBorder);
 				}
@@ -204,7 +207,21 @@ public class FocusListenerForSubject implements FocusListener{
 	}
 
 	
-
+	public void lostFocus(JPanel panel,JButton button) {
+		panel.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {button.requestFocus();}
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
+	}
+	
 	public String getIdSubject() {
 		return idSubject;
 	}

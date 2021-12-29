@@ -34,6 +34,7 @@ public class MyAddingStudentDialog extends JDialog{
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
+		JButton btnOk=new JButton("Potvrdi");
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -52,7 +53,7 @@ public class MyAddingStudentDialog extends JDialog{
         pName.add(Box.createHorizontalStrut(konst));
         pName.add(lName);
         pName.add(fName);
-        
+        focusListener.lostFocus(pName, btnOk);
         
         /*Panel for surname*/
         JPanel pSurname=new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -66,7 +67,7 @@ public class MyAddingStudentDialog extends JDialog{
         pSurname.add(Box.createHorizontalStrut(konst));
         pSurname.add(lSurname);
         pSurname.add(fSurname);
-        
+        focusListener.lostFocus(pSurname, btnOk);
         
         /*Panel for birth date*/
         JPanel pBirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -80,6 +81,7 @@ public class MyAddingStudentDialog extends JDialog{
         pBirthDate.add(Box.createHorizontalStrut(konst));
         pBirthDate.add(lBirthDate);
         pBirthDate.add(fBirthDate);
+        focusListener.lostFocus(pBirthDate, btnOk);
         
         /*Panel for adress*/
         JPanel pAdress = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -93,6 +95,7 @@ public class MyAddingStudentDialog extends JDialog{
         pAdress.add(Box.createHorizontalStrut(konst));
         pAdress.add(lAdress);
         pAdress.add(fAdress);
+        focusListener.lostFocus(pAdress, btnOk);
         
         /*Panel for phone number*/
         JPanel pNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -106,6 +109,7 @@ public class MyAddingStudentDialog extends JDialog{
         pNumber.add(Box.createHorizontalStrut(konst));
         pNumber.add(lNumber);
         pNumber.add(fNumber);
+        focusListener.lostFocus(pNumber, btnOk);
         
         /*Panel for email*/
         JPanel pEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -119,6 +123,7 @@ public class MyAddingStudentDialog extends JDialog{
         pEmail.add(Box.createHorizontalStrut(konst));
         pEmail.add(lEmail);
         pEmail.add(fEmail);
+        focusListener.lostFocus(pEmail, btnOk);
         
         JPanel pId = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lId = new JLabel("Broj indeksa*");
@@ -131,6 +136,7 @@ public class MyAddingStudentDialog extends JDialog{
         pId.add(Box.createHorizontalStrut(konst));
         pId.add(lId);
         pId.add(fId);
+        focusListener.lostFocus(pId, btnOk);
         
         /*Panel for year of entrollment*/
         JPanel pYearOfEntrollment = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -144,7 +150,7 @@ public class MyAddingStudentDialog extends JDialog{
         pYearOfEntrollment.add(Box.createHorizontalStrut(konst));
         pYearOfEntrollment.add(lYearOfEntrollment);
         pYearOfEntrollment.add(fYearOfEntrollment);
-        
+        focusListener.lostFocus(pYearOfEntrollment, btnOk);
         
         
         /*Panel for current year of study*/
@@ -226,7 +232,7 @@ public class MyAddingStudentDialog extends JDialog{
 		BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
 		
-		JButton btnOk=new JButton("Potvrdi");
+		
 		btnOk.setEnabled(false);
 		
 		new Timer(100,new ActionListener() {

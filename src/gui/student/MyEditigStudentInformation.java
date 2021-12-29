@@ -42,6 +42,7 @@ public class MyEditigStudentInformation extends JPanel {
 		
 		
 		JPanel panCenter=new JPanel();
+		JButton btnOk=new JButton("Potvrdi");
 		panCenter.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2-kit.getScreenSize().height/10));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);		
@@ -66,7 +67,7 @@ public class MyEditigStudentInformation extends JPanel {
         pName.add(lName);
         pName.add(Box.createHorizontalStrut(konst/2));
         pName.add(fName);
-        
+        focusListener.lostFocus(pName, btnOk);
         
         /*Panel for surname*/
         JPanel pSurname=new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -82,7 +83,7 @@ public class MyEditigStudentInformation extends JPanel {
         pSurname.add(lSurname);
         pSurname.add(Box.createHorizontalStrut(konst/2));
         pSurname.add(fSurname);
-        
+        focusListener.lostFocus(pSurname, btnOk);
         
         /*Panel for birth date*/
         JPanel pBirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -99,6 +100,7 @@ public class MyEditigStudentInformation extends JPanel {
         pBirthDate.add(lBirthDate);
         pBirthDate.add(Box.createHorizontalStrut(konst/2));
         pBirthDate.add(fBirthDate);
+        focusListener.lostFocus(pBirthDate, btnOk);
         
         /*Panel for adress*/
         JPanel pAdress = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -114,6 +116,7 @@ public class MyEditigStudentInformation extends JPanel {
         pAdress.add(lAdress);
         pAdress.add(Box.createHorizontalStrut(konst/2));
         pAdress.add(fAdress);
+        focusListener.lostFocus(pAdress, btnOk);
         
         /*Panel for phone number*/
         JPanel pNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -129,6 +132,7 @@ public class MyEditigStudentInformation extends JPanel {
         pNumber.add(lNumber);
         pNumber.add(Box.createHorizontalStrut(konst/2));
         pNumber.add(fNumber);
+        focusListener.lostFocus(pNumber, btnOk);
         
         /*Panel for email*/
         JPanel pEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -144,7 +148,9 @@ public class MyEditigStudentInformation extends JPanel {
         pEmail.add(lEmail);
         pEmail.add(Box.createHorizontalStrut(konst/2));
         pEmail.add(fEmail);
+        focusListener.lostFocus(pEmail, btnOk);
         
+        /*Panel for index*/
         JPanel pId = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lId = new JLabel("Broj indeksa*");
         lId.setPreferredSize(dim);
@@ -158,6 +164,7 @@ public class MyEditigStudentInformation extends JPanel {
         pId.add(lId);
         pId.add(Box.createHorizontalStrut(konst/2));
         pId.add(fId);
+        focusListener.lostFocus(pId, btnOk);
         
         /*Panel for year of entrollment*/
         JPanel pYearOfEntrollment = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -173,6 +180,7 @@ public class MyEditigStudentInformation extends JPanel {
         pYearOfEntrollment.add(lYearOfEntrollment);
         pYearOfEntrollment.add(Box.createHorizontalStrut(konst/2));
         pYearOfEntrollment.add(fYearOfEntrollment);
+        focusListener.lostFocus(pYearOfEntrollment, btnOk);
         
         /*Panel for current year of study*/
         JPanel pCurrYearOfStudy = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -284,7 +292,6 @@ public class MyEditigStudentInformation extends JPanel {
         JPanel panBottom=new JPanel();
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setPreferredSize(new Dimension(1,30));
-		JButton btnOk=new JButton("Potvrdi");
 		btnOk.setEnabled(false);
 		new Timer(100,new ActionListener() {
 			

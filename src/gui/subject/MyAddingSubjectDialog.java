@@ -21,17 +21,15 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.Timer;
 
-import controller.ProfessorController;
-import controller.StudentController;
+
 import controller.SubjectController;
 import gui.MainFrame;
 import model.Semestar;
-import model.Status;
 
 public class MyAddingSubjectDialog extends JDialog{
 
 	public int year;
-	public Semestar smestar;
+	public Semestar smestar=Semestar.Summer;
 	public MyAddingSubjectDialog() {
 		super(MainFrame.getInstance(),"Dodavanje predmeta",true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -39,6 +37,7 @@ public class MyAddingSubjectDialog extends JDialog{
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
+		JButton btnOk=new JButton("Potvrdi");
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -58,7 +57,7 @@ public class MyAddingSubjectDialog extends JDialog{
         pCode.add(Box.createHorizontalStrut(konst));
         pCode.add(lCode);
         pCode.add(fCode);
-        
+        focusListener.lostFocus(pCode, btnOk);
         
         /*Panel for name subject*/
         JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
@@ -72,7 +71,7 @@ public class MyAddingSubjectDialog extends JDialog{
         pName.add(Box.createHorizontalStrut(konst));
         pName.add(lName);
         pName.add(fName);
-        
+        focusListener.lostFocus(pName, btnOk);
         
         /*Panel for  year*/
         JPanel pYear = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -147,7 +146,7 @@ public class MyAddingSubjectDialog extends JDialog{
         pESPB.add(Box.createHorizontalStrut(konst));
         pESPB.add(lESPB);
         pESPB.add(fESPB);
-        
+        focusListener.lostFocus(pESPB, btnOk);
         
         
         /*Panel for profesor*/
@@ -155,6 +154,7 @@ public class MyAddingSubjectDialog extends JDialog{
         JLabel lProfesor = new JLabel("Profesor*");
         lProfesor.setPreferredSize(dim);
         JTextField fProfesor = new JTextField();
+        fProfesor.setFocusable(false);
         fProfesor.setToolTipText("Unesite predmetnog profesora.");
         fProfesor.setName("profesor");
         //fProfesor.addFocusListener(focusListener);
@@ -170,8 +170,7 @@ public class MyAddingSubjectDialog extends JDialog{
         pProfesor.add(fProfesor);
         pProfesor.add(button1);
         pProfesor.add(button2);
-        
-        
+        focusListener.lostFocus(pProfesor, btnOk);
         
         
         panCenter.add(Box.createVerticalStrut(25));
@@ -179,6 +178,7 @@ public class MyAddingSubjectDialog extends JDialog{
         panCenter.add(pCode);
         panCenter.add(pName);
         panCenter.add(pSemestar);
+
         panCenter.add(pESPB);
         panCenter.add(pProfesor);
         panCenter.add(Box.createVerticalStrut(25));  
@@ -190,7 +190,7 @@ public class MyAddingSubjectDialog extends JDialog{
 		BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
 		
-		JButton btnOk=new JButton("Potvrdi");
+		
 		btnOk.setPreferredSize(new Dimension(90,30));
 		btnOk.setEnabled(false);
 		

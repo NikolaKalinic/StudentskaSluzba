@@ -42,6 +42,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
+		JButton btnOk=new JButton("Potvrdi");
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -63,7 +64,7 @@ public class MyEditingSubjectDialog extends JDialog{
         pCode.add(Box.createHorizontalStrut(konst));
         pCode.add(lCode);
         pCode.add(fCode);
-        
+        focusListener.lostFocus(pCode, btnOk);
         
         /*Panel for name subject*/
         JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
@@ -78,7 +79,7 @@ public class MyEditingSubjectDialog extends JDialog{
         pName.add(Box.createHorizontalStrut(konst));
         pName.add(lName);
         pName.add(fName);
-        
+        focusListener.lostFocus(pName, btnOk);
         
         /*Panel for  year*/
         JPanel pYear = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -153,7 +154,7 @@ public class MyEditingSubjectDialog extends JDialog{
         pESPB.add(Box.createHorizontalStrut(konst));
         pESPB.add(lESPB);
         pESPB.add(fESPB);
-        
+        focusListener.lostFocus(pESPB, btnOk);
         
         
         /*Panel for profesor*/
@@ -177,7 +178,7 @@ public class MyEditingSubjectDialog extends JDialog{
         pProfesor.add(fProfesor);
         pProfesor.add(button1);
         pProfesor.add(button2);
-        
+        focusListener.lostFocus(pProfesor, btnOk);
         
         
         
@@ -197,7 +198,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
 		
-		JButton btnOk=new JButton("Potvrdi");
+		
 		btnOk.setPreferredSize(new Dimension(90,30));
 		
 		if(s.getIdSubject()==focusListener.getIdSubject())
