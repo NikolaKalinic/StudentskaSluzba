@@ -13,7 +13,7 @@ public class ProfessorEditDialog extends JDialog {
 	/*
 	 * Nema vise MyProfessorTable.rowIndex, sada koristis MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(), staticke su postale fabrika gresaka
 	 * Ne mogu da pozovem dispose() nad panel pa zato koristim ono brdo getParenta()
-	 * 
+	 * Nema vise set-ova, sada se koriste liste
 	 */
 	public ProfessorEditDialog() {
 		super(MainFrame.getInstance(),"Izmena profesora",true);

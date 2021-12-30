@@ -1,7 +1,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 public class Professor {
 	
@@ -16,10 +16,10 @@ public class Professor {
 	private String calling;
 	private String title;
 	private int experience;
-	private Set<Subject> courseList; 
+	private List<Subject> courseList; 
 
 	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience, Set<Subject> courseList) {
+			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience, List<Subject> courseList) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -58,13 +58,13 @@ public class Professor {
 
 
 
-	public Set<Subject> getCourseList() {
+	public List<Subject> getCourseList() {
 		return courseList;
 	}
 
 
 
-	public void setCourseList(Set<Subject> courseList) {
+	public void setCourseList(List<Subject> courseList) {
 		this.courseList = courseList;
 	}
 

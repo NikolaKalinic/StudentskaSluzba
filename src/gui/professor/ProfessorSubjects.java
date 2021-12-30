@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.nio.ByteOrder;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 
 
 
@@ -21,6 +23,7 @@ private static ProfessorSubjects instance = null;
 		}
 		return instance;
 	}
+	private JTable subjectsTable;
 	private ProfessorSubjects() {
 		setLayout(new BorderLayout());
 		JPanel panTop = new JPanel();
@@ -51,5 +54,21 @@ private static ProfessorSubjects instance = null;
 		panBottom.setBackground(Color.white);
 		panBottom.setPreferredSize(new Dimension(1,100));
 		add(panBottom,BorderLayout.SOUTH);
+		subjectsTableView();
 	}
+	public JTable getSubjectsTable() {
+		return subjectsTable;
+	}
+	public void updateView() {
+		AbstractTableModelProfessorSubjects model = (AbstractTableModelProfessorSubjects) subjectsTable.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
+	private void subjectsTableView() {
+		subjectsTable = new MyProfessorSubjectsTabel();
+		JScrollPane scrollPane = new JScrollPane(subjectsTable);
+		add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	
 }

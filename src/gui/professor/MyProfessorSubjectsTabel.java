@@ -1,4 +1,4 @@
-package gui.student;
+package gui.professor;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -7,15 +7,15 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-import gui.professor.AbstractTableModelProfessorSubjects;
 
-public class MyPassedExamsTable extends JTable{
-
-	public MyPassedExamsTable() {
+public class MyProfessorSubjectsTabel extends JTable {
+	
+	
+	public MyProfessorSubjectsTabel() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTablePassedExams());
+		this.setModel(new AbstractTableModelProfessorSubjects());
 	}
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -30,4 +30,5 @@ public class MyPassedExamsTable extends JTable{
 			}
 		return c;
 	}
+
 }
