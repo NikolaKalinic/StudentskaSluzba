@@ -4,11 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import controller.ProfessorController;
+import controller.StudentController;
+import gui.MainFrame;
+import gui.student.MyStudentPanel;
+import model.StudentDB;
 
 
 
@@ -37,6 +46,31 @@ private static ProfessorSubjects instance = null;
 		button2.setForeground(Color.white);
 		panTop.add(button1);
 		panTop.add(button2);
+		
+		button1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MyAddSubjectDialog masd = new MyAddSubjectDialog();
+				
+			}
+		});
+		
+		button2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow() >= 0) {
+					int answer=JOptionPane.showConfirmDialog(ProfessorSubjects.getInstance(), 
+							"Da li ste sigurni da zelite da obrisete predmet?", "Brisanje predmeta", 
+					        JOptionPane.YES_NO_OPTION);
+					if(answer==JOptionPane.YES_OPTION) {
+						ProfessorController.getInstance().removeSubject();
+					}
+				
+				}
+			}
+		});
 		
 		add(panTop,BorderLayout.NORTH);
 		

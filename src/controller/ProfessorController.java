@@ -1,12 +1,11 @@
 package controller;
 
 import gui.professor.MyProfessorPanel;
-import gui.professor.MyProfessorTable;
+import gui.professor.ProfessorSubjects;
 import model.Adress;
 import model.Professor;
 import model.ProfessorDB;
-import model.Student;
-import model.StudentDB;
+import model.Subject;
 
 public class ProfessorController {
 	
@@ -48,5 +47,25 @@ public class ProfessorController {
 		Professor professor = ProfessorDB.getInstance().getRow(rowSelectedIndex);
 		return professor;
 	}
+	
+	
+	
+	/*method for remove and add subject*/
+	public void removeSubject() {
+		if(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow()<0)
+			return;
+		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		Subject sub = p.getCourseList().get(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow());
+		ProfessorDB.getInstance().removeSubject(p,sub.getIdSubject());
+		ProfessorSubjects.getInstance().updateView();
+	}
+	public void addSubject(Subject s) {
+		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		ProfessorDB.getInstance().addSubject(p,s);
+		ProfessorSubjects.getInstance().updateView();
+	}
+	
+	
+	/*----------------------------------------*/
 
 }
