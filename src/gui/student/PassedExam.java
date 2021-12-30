@@ -4,19 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Calendar;
-
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.Timer;
 
 import model.StudentDB;
 
@@ -33,7 +26,7 @@ public class PassedExam extends JPanel{
 	public JLabel label1;
 	public JLabel label2;
 	private JTable passedExamsTable;
-	PassedExam(){
+	private PassedExam(){
 		setLayout(new BorderLayout());
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		

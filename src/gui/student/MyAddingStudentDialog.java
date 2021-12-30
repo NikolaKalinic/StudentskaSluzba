@@ -248,7 +248,7 @@ public class MyAddingStudentDialog extends JDialog{
 			}
 			
 		}).start();
-		
+		btnOk.setFocusPainted(false);
 		btnOk.setPreferredSize(new Dimension(90,30));
         btnOk.addActionListener(new ActionListener() {
 			

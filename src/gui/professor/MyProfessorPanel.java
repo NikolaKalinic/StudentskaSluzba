@@ -56,4 +56,9 @@ public class MyProfessorPanel extends JPanel {
 		model.fireTableDataChanged();
 		validate();
 	}
+	public JTable getProfessorTable() {
+		return professorTable;
+	}
+
+	
 }

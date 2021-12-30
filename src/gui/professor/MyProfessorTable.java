@@ -11,7 +11,6 @@ public class MyProfessorTable extends JTable {
 
 	private static final long serialVersionUID = 8900651367165240112L;
 	
-	public static int rowIndex = -1;
 	
 	public MyProfessorTable() {
 		this.setRowSelectionAllowed(true);
@@ -24,7 +23,6 @@ public class MyProfessorTable extends JTable {
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
 		if (isRowSelected(row)) {
-			rowIndex = row;
 			c.setBackground(new Color(153, 204, 255));
 		} else
 			if (row % 2 == 0) {

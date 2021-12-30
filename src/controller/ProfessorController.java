@@ -41,7 +41,6 @@ public class ProfessorController {
 		}
 		
 		ProfessorDB.getInstance().editProfessor(surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, title, experience);
-		MyProfessorTable.rowIndex = -1;
 		MyProfessorPanel.getInstance().updateView();
 	}
 

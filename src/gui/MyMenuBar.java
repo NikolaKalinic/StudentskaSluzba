@@ -20,6 +20,7 @@ import javax.swing.border.Border;
 
 import controller.ProfessorController;
 import controller.StudentController;
+import gui.professor.MyProfessorPanel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
@@ -218,9 +219,8 @@ public class MyMenuBar extends JMenuBar {
 					}
 				}
 				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
-					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
-						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
-						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+					if((MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() >= 0)) {
+						ProfessorEditDialog ped = new ProfessorEditDialog();
 						}
 			}
 		});
@@ -259,13 +259,12 @@ public class MyMenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex() == 1)
-					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)) {
+					if((MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() >= 0)) {
 						int answer = JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
 								"Da li ste sigurni da zelite da obrisete profesora", "Brisanje profesora", 
 						        JOptionPane.YES_NO_OPTION);
 						if(answer == JOptionPane.YES_OPTION) {
-							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
-							MyProfessorTable.rowIndex = -1;
+							ProfessorController.getInstance().removeProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
 						}
 					}
 				
