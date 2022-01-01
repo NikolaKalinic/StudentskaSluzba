@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.StudentController;
 import gui.student.MyStudentPanel;
 
 public class StudentDB {
@@ -126,7 +127,7 @@ public class StudentDB {
 	}
 	
 	public String getPassedExamsValueAt(int row, int column) {
-		Grades grades = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getGrades().get(row);
+		Grades grades = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getGrades().get(row);
 		switch (column) {
 		case 0:
 			return grades.getSubject().getIdSubject();

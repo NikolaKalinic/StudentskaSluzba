@@ -244,7 +244,7 @@ public class MyMenuBar extends JMenuBar {
 								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
 						        JOptionPane.YES_NO_OPTION);
 						if(answer==JOptionPane.YES_OPTION) {
-							StudentController.getInstance().deleteStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow());
+							StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
 						}
 					}
 				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)

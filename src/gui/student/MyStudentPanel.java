@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class MyStudentPanel extends JPanel {
 
@@ -54,6 +56,12 @@ public class MyStudentPanel extends JPanel {
 	}
 	public JTable getStudentTable() {
 		return studentTable;
+	}
+	public void search(String str) {
+//		AbstractTableModelStudent model = (AbstractTableModelStudent) studentTable.getModel();
+//		TableRowSorter<AbstractTableModelStudent> trs = new TableRowSorter<>(model);
+//		studentTable.setRowSorter(trs);
+//		trs.setRowFilter(RowFilter.regexFilter(str));
 	}
 	
 }

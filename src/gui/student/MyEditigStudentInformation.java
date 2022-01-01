@@ -31,7 +31,7 @@ public class MyEditigStudentInformation extends JPanel {
 	public int currYear=1;
 	public Status stat=Status.B;
 	public MyEditigStudentInformation() {
-		Student s=StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow());
+		Student s=StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		
 		
@@ -313,7 +313,7 @@ public class MyEditigStudentInformation extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b11111111) {
-					StudentController.getInstance().editStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow(),focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), combo.getSelectedIndex()+1, stat);
+					StudentController.getInstance().editStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())),focusListener.getSurname(), focusListener.getName(), focusListener.getDate(), focusListener.getAdress(), focusListener.getNumber(), focusListener.getEmail(), focusListener.getIndex(), focusListener.getYearOfEntrollment(), combo.getSelectedIndex()+1, stat);
 					btnOk.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().setVisible(false);
 				}
 				

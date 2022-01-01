@@ -6,15 +6,19 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import model.StudentDB;
 
 public class MyStudentTable extends JTable {
+	public static TableRowSorter trs;
 	public MyStudentTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudent());
+		trs = new TableRowSorter(new AbstractTableModelStudent());
+		this.setRowSorter(trs);
 	}
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {

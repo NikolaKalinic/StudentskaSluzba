@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableRowSorter;
 
 import controller.ProfessorController;
 import controller.StudentController;
@@ -21,9 +22,11 @@ import gui.professor.MyProfessorPanel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
+import gui.student.AbstractTableModelStudent;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentPanel;
+import gui.student.MyStudentRowFilter;
 import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
@@ -137,7 +140,7 @@ public class MyToolBar extends JToolBar {
 									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
-								StudentController.getInstance().deleteStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow());
+								StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
 							}
 						}
 			}
@@ -158,6 +161,34 @@ public class MyToolBar extends JToolBar {
 	
 		JButton loupe = new JButton();
 		loupe.setToolTipText("Search");
+		loupe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+//					TableRowSorter trs = new TableRowSorter(new AbstractTableModelStudent());
+					MyStudentTable.trs.setRowFilter(new MyStudentRowFilter(searchField.getText()));
+				}
+				
+//				 if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+//					 String[] split = searchField.getText().split(",");
+//					 if(split.length==1 && split[0].length()!=0)
+//						 MyStudentPanel.getInstance().search(split[0].substring(0, 1).toUpperCase()+split[0].substring(1).toLowerCase());
+//					 else {
+//						 MyStudentPanel.getInstance().search("");
+//					 }if(split.length==2) {
+//						 
+//					 }else {
+//						 
+//					 }if(split.length==3 && split[0].length()!=0) {
+//						 MyStudentPanel.getInstance().search(split[0].toUpperCase());
+//					 }else {
+//						 MyStudentPanel.getInstance().search("");
+//					 }
+//				 }
+				
+			}
+		});
 		Image searchImg = kit.getImage("images/loupe.png");
 		Image resizedSearchImg = searchImg.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
 		loupe.setIcon(new ImageIcon(resizedSearchImg));

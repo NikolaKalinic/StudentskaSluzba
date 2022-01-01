@@ -10,7 +10,7 @@ public class AbstractTablePassedExams extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getGrades().size();
+		return StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getGrades().size();
 	}
 
 	@Override
