@@ -135,17 +135,21 @@ public class ProfessorDB {
 		}
 	}
 	
-	public void removeSubject(Professor p,String id) {
-		for(int i =0; i<p.getCourseList().size();i++) {
-			if(p.getCourseList().get(i).getIdSubject().equals(id)) {
-				p.getCourseList().remove(i);
-				break;
+	public void removeSubject(Professor p,List<String> id) {
+		for(int j = 0; j<id.size();j++) {
+			for(int i =0; i<p.getCourseList().size();i++) {
+				if(p.getCourseList().get(i).getIdSubject().equals(id.get(j))) {
+					p.getCourseList().remove(i);
+					break;
+				}
 			}
 		}
 	}
 	
-	public void addSubject(Professor p ,Subject s) {
-		p.getCourseList().add(s);
+	public void addSubject(Professor p ,List<Subject> s) {
+		for(int i =0 ;i<s.size();i++) {
+			p.getCourseList().add(s.get(i));
+		}
 	}
 	/*----------------------------------------------*/
 	

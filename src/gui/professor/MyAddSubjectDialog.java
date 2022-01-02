@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import controller.ProfessorController;
 import gui.MainFrame;
@@ -93,8 +96,10 @@ public class MyAddSubjectDialog extends JDialog {
 		
 		
 		JList<Subject> listBox = new JList<Subject>(subjects);
+		listBox.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
-		centerPanel.add(listBox);
+		JScrollPane scrollPane = new JScrollPane(listBox);
+		centerPanel.add(scrollPane,BorderLayout.CENTER);
 		listBox.setSelectedIndex(0);
 		add(centerPanel,BorderLayout.CENTER);
 		
@@ -104,8 +109,9 @@ public class MyAddSubjectDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(listBox.getSelectedIndex()>-1) {
-					Subject s = listBox.getSelectedValue();
-					ProfessorController.getInstance().addSubject(s);
+					List<Subject> selectedSubjects = listBox.getSelectedValuesList();
+					//Subject s = listBox.getSelectedValue();
+					ProfessorController.getInstance().addSubject(selectedSubjects);
 					dispose();
 				}
 				

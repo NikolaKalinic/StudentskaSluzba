@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gui.professor.MyProfessorPanel;
 import gui.professor.ProfessorSubjects;
 import model.Adress;
@@ -55,11 +58,15 @@ public class ProfessorController {
 		if(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow()<0)
 			return;
 		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
-		Subject sub = p.getCourseList().get(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow());
-		ProfessorDB.getInstance().removeSubject(p,sub.getIdSubject());
+		List<String> subs  = new ArrayList<String>();
+		int[] index = ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRows();
+		for (int i = 0 ;i< index.length;i++) {
+			subs.add(p.getCourseList().get(index[i]).getIdSubject());
+		}
+		ProfessorDB.getInstance().removeSubject(p,subs);
 		ProfessorSubjects.getInstance().updateView();
 	}
-	public void addSubject(Subject s) {
+	public void addSubject(List<Subject> s) {
 		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
 		ProfessorDB.getInstance().addSubject(p,s);
 		ProfessorSubjects.getInstance().updateView();

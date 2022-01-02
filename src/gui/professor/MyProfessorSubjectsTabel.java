@@ -14,7 +14,7 @@ public class MyProfessorSubjectsTabel extends JTable {
 	public MyProfessorSubjectsTabel() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
-		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		this.setModel(new AbstractTableModelProfessorSubjects());
 	}
 	@Override
