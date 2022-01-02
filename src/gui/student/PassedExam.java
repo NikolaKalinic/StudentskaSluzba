@@ -63,8 +63,8 @@ public class PassedExam extends JPanel{
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setBackground(Color.white);
 		panBottom.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/10));
-		label1 = new JLabel("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getAvgMark());
-		label2 = new JLabel("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getTotalESPB());
+		label1 = new JLabel("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
+		label2 = new JLabel("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
 		
 		JPanel panLabel = new JPanel();
 		panLabel.setBackground(Color.white);
@@ -92,8 +92,8 @@ public class PassedExam extends JPanel{
 		add(scrollPane, BorderLayout.CENTER);
 	}
 	public void updateLabel() {
-	     label1.setText("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getAvgMark());
-	     label2.setText("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getTotalESPB());
+	     label1.setText("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
+	     label2.setText("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
 	     validate();
 	}
 	public void updateView() {
