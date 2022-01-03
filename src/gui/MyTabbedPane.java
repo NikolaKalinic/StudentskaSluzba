@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import gui.chair.MyChairPanel;
 import gui.professor.MyProfessorPanel;
 import gui.student.MyStudentPanel;
 import gui.subject.MySubjectPanel;
@@ -22,5 +23,6 @@ public class MyTabbedPane extends JTabbedPane{
 		addTab("Studenti",MyStudentPanel.getInstance());
 		addTab("Profesori",MyProfessorPanel.getInstance());
 		addTab("Predmeti",MySubjectPanel.getInstance());
+		addTab("Katedre",MyChairPanel.getInstance());
 	}
 }

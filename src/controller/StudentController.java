@@ -12,7 +12,7 @@ import model.StudentDB;
 
 public class StudentController {
 
-private static StudentController instance = null;
+	private static StudentController instance = null;
 	/*singltone*/
 	public static StudentController getInstance() {
 		if (instance == null) {

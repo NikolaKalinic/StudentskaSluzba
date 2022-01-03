@@ -18,8 +18,10 @@ import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
+import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
+import gui.chair.MyChairPanel;
 import gui.professor.MyProfessorPanel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
@@ -32,6 +34,7 @@ import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
 import gui.subject.MySubjectTable;
+import model.ChairDB;
 import model.Professor;
 import model.ProfessorDB;
 import model.StudentDB;
@@ -247,10 +250,15 @@ public class MyMenuBar extends JMenuBar {
 							StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
 						}
 					}
-				//else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
-					//TODO for profesor
-				//else
-					//TODO for subject
+				if(MyTabbedPane.getInstance().getSelectedIndex()==3)
+					if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
+						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+								"Da li ste sigurni da zelite da obrisete katedru?", "Brisanje katedre", 
+						        JOptionPane.YES_NO_OPTION);
+						if(answer==JOptionPane.YES_OPTION) {
+							ChairController.getInstance().deleteChair((MyChairPanel.getInstance().getChairTable().getSelectedRow()));
+						}
+					}
 			}
 		});
 		

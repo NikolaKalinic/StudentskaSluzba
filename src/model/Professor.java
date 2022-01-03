@@ -181,6 +181,11 @@ public class Professor {
 		String ret = name + " " + surname;
 		return ret;
 	}
+	@Override
+	public String toString() {
+		return  surname + " " + name + " -- " + calling + " -- "
+				+ experience;
+	}
 	
 
 }

@@ -1,22 +1,32 @@
 package model;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chair {
 	/*Fields*/
 	private String idChair;
 	private String nameOfChair;
-	private String headOfChair; 		
-	private Set<Professor> professors;
+	private Professor headOfChair; 		
+	private List<Professor> professors;
 	
 	/*Construcor*/
-	public Chair(String idChair, String nameOfChair, String headOfChair, Set<Professor> professors) {
+	public Chair(String idChair, String nameOfChair, List<Professor> professors) {
 		super();
 		this.idChair = idChair;
 		this.nameOfChair = nameOfChair;
-		this.headOfChair = headOfChair;
+		this.headOfChair=new Professor("Strahinjic", "Vera", "svera@uns.ac.rs", LocalDate.parse("25-10-1949", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Filipova", "2", "Sremska Mitrovica", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "063234123", "22321", "Profesor", "Doktor", 15);
 		this.professors = professors;
 	}
+	public Chair(String idChair, String nameOfChair) {
+		super();
+		this.idChair = idChair;
+		this.nameOfChair = nameOfChair;
+		this.professors= new ArrayList<Professor>();
+	}
+	
 
 	/*Getter and setter*/
 	public String getIdChair() {
@@ -35,19 +45,19 @@ public class Chair {
 		this.nameOfChair = nameOfChair;
 	}
 
-	public String getHeadOfChair() {
+	public Professor getHeadOfChair() {
 		return headOfChair;
 	}
 
-	public void setHeadOfChair(String headOfChair) {
+	public void setHeadOfChair(Professor headOfChair) {
 		this.headOfChair = headOfChair;
 	}
 
-	public Set<Professor> getProfessors() {
+	public List<Professor> getProfessors() {
 		return professors;
 	}
 
-	public void setProfessors(Set<Professor> professors) {
+	public void setProfessors(List<Professor> professors) {
 		this.professors = professors;
 	}
 	

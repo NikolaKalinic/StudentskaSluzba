@@ -12,17 +12,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.table.TableRowSorter;
 
+import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
-import model.Professor;
-import model.ProfessorDB;
+import gui.chair.MyChairPanel;
+import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
-import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
-import gui.student.AbstractTableModelStudent;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentPanel;
@@ -31,8 +29,8 @@ import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
-import gui.subject.MySubjectTable;
-import model.Student;
+import model.ChairDB;
+import model.ProfessorDB;
 import model.StudentDB;
 import model.SubjectDB;
 
@@ -105,6 +103,11 @@ public class MyToolBar extends JToolBar {
 						ProfessorEditDialog ped = new ProfessorEditDialog();
 					}
 				}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 3) {
+					if((MyChairPanel.getInstance().getChairTable().getSelectedRow() < (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow()>= 0)){
+						SetChiefDialog ped = new SetChiefDialog();
+					}
+				}
 			}
 		});
 		
@@ -137,10 +140,19 @@ public class MyToolBar extends JToolBar {
 				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
 						if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+									"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje studenta", 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
 								StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
+							}
+						}
+				 if(MyTabbedPane.getInstance().getSelectedIndex()==3)
+						if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									"Da li ste sigurni da zelite da obrisete katedru?", "Brisanje katedre", 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								ChairController.getInstance().deleteChair((MyChairPanel.getInstance().getChairTable().getSelectedRow()));
 							}
 						}
 			}
@@ -166,26 +178,8 @@ public class MyToolBar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
-//					TableRowSorter trs = new TableRowSorter(new AbstractTableModelStudent());
 					MyStudentTable.trs.setRowFilter(new MyStudentRowFilter(searchField.getText()));
 				}
-				
-//				 if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
-//					 String[] split = searchField.getText().split(",");
-//					 if(split.length==1 && split[0].length()!=0)
-//						 MyStudentPanel.getInstance().search(split[0].substring(0, 1).toUpperCase()+split[0].substring(1).toLowerCase());
-//					 else {
-//						 MyStudentPanel.getInstance().search("");
-//					 }if(split.length==2) {
-//						 
-//					 }else {
-//						 
-//					 }if(split.length==3 && split[0].length()!=0) {
-//						 MyStudentPanel.getInstance().search(split[0].toUpperCase());
-//					 }else {
-//						 MyStudentPanel.getInstance().search("");
-//					 }
-//				 }
 				
 			}
 		});

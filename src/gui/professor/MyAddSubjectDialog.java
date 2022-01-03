@@ -31,8 +31,8 @@ public class MyAddSubjectDialog extends JDialog {
 	public MyAddSubjectDialog() {
 		super(MainFrame.getInstance(),"Dodaj predmet",true);
 		setResizable(false);
-		setLocationRelativeTo(ProfessorSubjects.getInstance());
 		setSize(500,400);
+		setLocationRelativeTo(ProfessorSubjects.getInstance());
 		setLayout(new BorderLayout());
 		/*panel for top*/
 		JPanel northPanel = new JPanel();
