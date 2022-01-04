@@ -22,6 +22,7 @@ import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
 import gui.chair.MyChairPanel;
+import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
@@ -225,6 +226,11 @@ public class MyMenuBar extends JMenuBar {
 					if((MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() >= 0)) {
 						ProfessorEditDialog ped = new ProfessorEditDialog();
 						}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 3) {
+					if((MyChairPanel.getInstance().getChairTable().getSelectedRow() < (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow()>= 0)){
+						SetChiefDialog ped = new SetChiefDialog();
+					}
+				}
 			}
 		});
 				

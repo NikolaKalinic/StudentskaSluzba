@@ -36,8 +36,10 @@ public class MyStatusBar {
 					statusLabel.setText("Studentska Služba-Studenti");
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
 					statusLabel.setText("Studentska Služba-Profesori");
-				else
-				statusLabel.setText("Studentska Služba-Predmeti");
+				else if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					statusLabel.setText("Studentska Služba-Predmeti");
+				else 
+					statusLabel.setText("Studentska Služba-Katedre");
 			}
 		}).start();
 		

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import controller.ChairController;
 import controller.ProfessorController;
@@ -56,6 +57,17 @@ public class MyToolBar extends JToolBar {
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
 		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
+		new Timer(100,new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==3)
+					create.setEnabled(false);
+				else
+					create.setEnabled(true);
+				
+			}
+		}).start();
         create.addActionListener(new ActionListener() {
 			
 			@Override
