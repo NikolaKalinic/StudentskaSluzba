@@ -10,6 +10,6 @@ public class MyEditingStudentTabbedPane extends JTabbedPane {
 	public MyEditingStudentTabbedPane() {
 		addTab("Informacije",new MyEditigStudentInformation());
 		addTab("Položeni",PassedExam.getInstance());
-		addTab("Nepoloženi",new JPanel());
+		addTab("Nepoloženi",NotPassedExam.getInstance());
 	}
 }
