@@ -14,12 +14,11 @@ public class Professor {
 	private String phoneNumber;
 	private String id;
 	private String calling;
-	private String title;
 	private int experience;
 	private List<Subject> courseList; 
 
 	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience, List<Subject> courseList) {
+			Adress workAdress, String phoneNumber, String id, String calling, int experience, List<Subject> courseList) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -30,7 +29,6 @@ public class Professor {
 		this.phoneNumber = phoneNumber;
 		this.id = id;
 		this.calling = calling;
-		this.title = title;
 		this.experience = experience;
 		this.courseList = courseList;
 	}
@@ -41,7 +39,7 @@ public class Professor {
 	
 	
 	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
+			Adress workAdress, String phoneNumber, String id, String calling, int experience) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -52,7 +50,6 @@ public class Professor {
 		this.phoneNumber = phoneNumber;
 		this.id = id;
 		this.calling = calling;
-		this.title = title;
 		this.experience = experience;
 	}
 
@@ -138,17 +135,6 @@ public class Professor {
 
 	public void setCalling(String calling) {
 		this.calling = calling;
-	}
-
-
-
-	public String getTitle() {
-		return title;
-	}
-
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 

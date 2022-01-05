@@ -17,7 +17,9 @@ public class FocusListenerForEditProfessor implements FocusListener {
 
 	@Override
 	public void focusLost(FocusEvent e) {
+		
 		MyEditingProfessorInformation.checkValidity();
+		
 	}
 	
 }

@@ -28,8 +28,8 @@ public class ChairDB {
 	private void initChair() {
 		this.chairs=new ArrayList<Chair>();
 		List<Professor> professors = new ArrayList<Professor>();
-		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent", "Doktor", 1));
-		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Profesor", "Master", 21));
+		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent",  1));
+		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Profesor",  21));
 		chairs.add(new Chair("EA14","Automatika"));
 		chairs.add(new Chair("EI12","Informatika",professors));
 		chairs.add(new Chair("EG14","Gradjevinja"));

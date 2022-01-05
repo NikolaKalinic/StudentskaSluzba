@@ -23,8 +23,23 @@ public class ProfessorController {
 	
 	private ProfessorController() {}
 	
-	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
-		ProfessorDB.getInstance().addProfessor(surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, title, experience);
+	public boolean alreadyExists(String id) {
+		return ProfessorDB.getInstance().alreadyExists(id);
+	}
+	
+	public boolean alreadyExists(String id, int selectedRowIndex) {
+		if(selectedRowIndex < 0) {
+			return true;
+		}
+		Professor p = ProfessorDB.getInstance().getRow(selectedRowIndex);
+		if(p.getId().equals(id)) {
+			return false;
+		}
+		return ProfessorDB.getInstance().alreadyExists(id);
+	}
+	
+	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
+		ProfessorDB.getInstance().addProfessor(surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, experience);
 		MyProfessorPanel.getInstance().updateView();
 	}
 	
@@ -37,12 +52,12 @@ public class ProfessorController {
 		MyProfessorPanel.getInstance().updateView();
 	}
 	
-	public void editProfessor(int selectedRowIndex, String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
+	public void editProfessor(int selectedRowIndex, String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
 		if(selectedRowIndex < 0) {
 			return;
 		}
 		
-		ProfessorDB.getInstance().editProfessor(surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, title, experience);
+		ProfessorDB.getInstance().editProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(), surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, experience);
 		MyProfessorPanel.getInstance().updateView();
 	}
 

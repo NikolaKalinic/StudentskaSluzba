@@ -30,7 +30,7 @@ public class ProfessorDB {
 		this.cols.add("Ime");
 		this.cols.add("Prezime");
 		this.cols.add("Zvanje");
-		this.cols.add("Titula");
+		this.cols.add("Email");
 		
 		
 		this.subjects = new ArrayList<String>();
@@ -65,10 +65,10 @@ public class ProfessorDB {
 		
 		
 		this.professors = new ArrayList<Professor>();
-		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent", "Doktor", 1,courseList));
-		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Docent", "Master", 21,courseList1));
-		professors.add(new Professor("Strahinjic", "Vera", "svera@uns.ac.rs", LocalDate.parse("25-10-1949", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Filipova", "2", "Sremska Mitrovica", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "063234123", "22321", "Profesor", "Doktor", 15,courseList2));
-		professors.add(new Professor("Milenovic", "Dragutin", "mdragutin@uns.ac.rs", LocalDate.parse("02-03-1989", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Suzanina", "3", "Beograd", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069452231", "25521", "Vanredni profesor", "Doktor", 22,courseList3));
+		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent", 1,courseList));
+		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Docent", 21,courseList1));
+		professors.add(new Professor("Strahinjic", "Vera", "svera@uns.ac.rs", LocalDate.parse("25-10-1949", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Filipova", "2", "Sremska Mitrovica", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "063234123", "22321", "Profesor", 15,courseList2));
+		professors.add(new Professor("Milenovic", "Dragutin", "mdragutin@uns.ac.rs", LocalDate.parse("02-03-1989", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Suzanina", "3", "Beograd", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069452231", "25521", "Vanredni profesor", 22,courseList3));
 		}
 	
 	/*getters/setter*/
@@ -103,7 +103,7 @@ public class ProfessorDB {
 		case 2:
 			return professor.getCalling();
 		case 3:
-			return professor.getTitle();
+			return professor.getEmail();
 		default:
 			return null;	
 		}
@@ -155,11 +155,18 @@ public class ProfessorDB {
 	
 	
 	
+	public boolean alreadyExists(String id) {
+		for (Professor p : professors) {
+			if(p.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
-	
-	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
-		this.professors.add(new Professor(surname, name, email, LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")), homeAdress, workAdress, phoneNumber, id, calling, title, experience,new ArrayList<Subject>()));
+	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
+		this.professors.add(new Professor(surname, name, email, LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")), homeAdress, workAdress, phoneNumber, id, calling, experience,new ArrayList<Subject>()));
 	}
 	
 	public void deleteProfessor(String id) {
@@ -171,22 +178,18 @@ public class ProfessorDB {
 		}
 	}
 	
-	public void editProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
-		for(Professor p : professors) {
-			if(p.getId().equals(id)) {
-				p.setSurname(surname);
-				p.setName(name);
-				p.setEmail(email);
-				p.setBirthDate(LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-				p.setHomeAdress(homeAdress);
-				p.setWorkAdress(workAdress);
-				p.setPhoneNumber(phoneNumber);
-				p.setId(id);
-				p.setCalling(calling);
-				p.setTitle(title);
-				p.setExperience(experience);
-			}
-		}
+	public void editProfessor(int selectedRowIndex, String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
+		Professor p = ProfessorDB.getInstance().getRow(selectedRowIndex);
+		p.setSurname(surname);
+		p.setName(name);
+		p.setEmail(email);
+		p.setBirthDate(LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		p.setHomeAdress(homeAdress);
+		p.setWorkAdress(workAdress);
+		p.setPhoneNumber(phoneNumber);
+		p.setId(id);
+		p.setCalling(calling);
+		p.setExperience(experience);
 	}
 	
 	

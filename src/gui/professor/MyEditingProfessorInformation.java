@@ -1,6 +1,7 @@
 package gui.professor;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -38,7 +39,6 @@ public class MyEditingProfessorInformation extends JPanel {
 		private static JTextField tfNumberW;
 		private static JTextField tfCityW;
 		private static JTextField tfCountryW;
-		private static JComboBox<String> comboTitle;
 		private static JComboBox<String> comboCalling;
 		private static JTextField tfPhoneNumber;
 		private static JTextField tfId;
@@ -339,32 +339,15 @@ public class MyEditingProfessorInformation extends JPanel {
 			comboCalling.setSelectedItem(professor.getCalling());
 			GridBagConstraints cCalling =  new GridBagConstraints();
 			cCalling.gridx = 0;
-			cCalling.gridy = 18;
+			cCalling.gridy = 17;
 			cCalling.fill = GridBagConstraints.HORIZONTAL;
 			cCalling.insets = new Insets(10, 0, 0, 0);
 			panel.add(calling, cCalling);
 			GridBagConstraints cComboCalling = new GridBagConstraints();
 			cComboCalling.gridx = 1;
-			cComboCalling.gridy = 18;
+			cComboCalling.gridy = 17;
 			cComboCalling.insets = new Insets(10, 5, 0, 10);
 			panel.add(comboCalling, cComboCalling);
-			
-			
-			JLabel title = new JLabel("Titula*");
-			GridBagConstraints cTitle =  new GridBagConstraints();
-			String [] titles = {"-", "Master", "Doktor"};
-			comboTitle = new JComboBox<String>(titles);
-			comboTitle.setSelectedItem(professor.getTitle());
-			cTitle.gridx = 0;
-			cTitle.gridy = 17;
-			cTitle.fill = GridBagConstraints.HORIZONTAL;
-			cTitle.insets = new Insets(10, 0, 0, 0);
-			panel.add(title, cTitle);
-			GridBagConstraints cComboTitle = new GridBagConstraints();
-			cComboTitle.gridx = 1;
-			cComboTitle.gridy = 17;
-			cComboTitle.insets = new Insets(10, 10, 0, 10);
-			panel.add(comboTitle, cComboTitle);
 			
 			JLabel exp = new JLabel("Godine iskustva*");
 			tfExp = new JTextField(Integer.toString(professor.getExperience()));
@@ -454,10 +437,6 @@ public class MyEditingProfessorInformation extends JPanel {
 						return;
 					}
 					
-					if(comboTitle.getSelectedItem().toString().equals("-")) {
-						JOptionPane.showMessageDialog(null, "Izabrati titulu!", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
-						return;
-					}
 					
 					try {
 						 int a = Integer.parseInt(tfExp.getText());
@@ -475,7 +454,7 @@ public class MyEditingProfessorInformation extends JPanel {
 					
 					Adress home = new Adress(tfStreet.getText(), tfNumber.getText(), tfCity.getText(), tfCountry.getText());
 					Adress work = new Adress(tfStreetW.getText(), tfNumberW.getText(), tfCityW.getText(), tfCountryW.getText());
-					ProfessorController.getInstance().editProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(),tfSurname.getText(), tfName.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), comboTitle.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
+					ProfessorController.getInstance().editProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(),tfSurname.getText(), tfName.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
 					
 					
 					
@@ -496,13 +475,21 @@ public class MyEditingProfessorInformation extends JPanel {
 		}
 		
 		public static void checkValidity() {
-			
-			if(tfSurname.getText().isEmpty() || tfName.getText().isEmpty() || tfEmail.getText().isEmpty() || tfBirthDate.getText().isEmpty() || tfStreet.getText().isEmpty() || tfNumber.getText().isEmpty() || tfCity.getText().isEmpty() || tfCountry.getText().isEmpty() || tfStreetW.getText().isEmpty() || tfNumberW.getText().isEmpty() || tfCityW.getText().isEmpty() || tfCountryW.getText().isEmpty() || tfPhoneNumber.getText().isEmpty() || tfId.getText().isEmpty() ||  tfExp.getText().isEmpty()){
-				disableOk();
-			} else {
-				enableOk();
+			int temp = MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow();
+			if (temp == -1) {
+				return;
 			}
-			
+			if(tfSurname.getText().isBlank() || tfName.getText().isBlank() || tfEmail.getText().isBlank() || tfBirthDate.getText().isBlank() || tfStreet.getText().isBlank() || tfNumber.getText().isBlank() || tfCity.getText().isBlank() || tfCountry.getText().isBlank() || tfStreetW.getText().isBlank() || tfNumberW.getText().isBlank() || tfCityW.getText().isBlank() || tfCountryW.getText().isBlank() || tfPhoneNumber.getText().isEmpty() || tfId.getText().isEmpty() ||  tfExp.getText().isBlank()){
+				disableOk();
+			} else if(ProfessorController.getInstance().alreadyExists(tfId.getText(), temp)) {
+				disableOk();
+				tfId.selectAll();
+				tfId.setSelectedTextColor(Color.red);
+				tfId.setToolTipText("Profesor sa ovim brojem licne karte vec postoji");
+			} else {
+				tfId.setToolTipText("Unesite broj licne karte");
+				enableOk();
+			}	
 		}
 		
 		public static void enableOk() {
