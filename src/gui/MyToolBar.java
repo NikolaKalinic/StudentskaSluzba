@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import controller.ChairController;
 import controller.ProfessorController;
@@ -57,17 +59,19 @@ public class MyToolBar extends JToolBar {
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
 		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
-		new Timer(100,new ActionListener() {
+		
+		
+		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void stateChanged(ChangeEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==3)
 					create.setEnabled(false);
 				else
 					create.setEnabled(true);
 				
 			}
-		}).start();
+		});
         create.addActionListener(new ActionListener() {
 			
 			@Override
@@ -101,21 +105,22 @@ public class MyToolBar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
 					}
-				if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+				}
+				else if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
 					if(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< SubjectDB.getInstance().getSubjects().size() && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()>=0) {
 						MyEditingSubjectDialog ms = new MyEditingSubjectDialog();
 					}
 				}
-				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+				else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					if((MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()>= 0)){
 						ProfessorEditDialog ped = new ProfessorEditDialog();
 					}
 				}
-				if(MyTabbedPane.getInstance().getSelectedIndex() == 3) {
+				else if(MyTabbedPane.getInstance().getSelectedIndex() == 3) {
 					if((MyChairPanel.getInstance().getChairTable().getSelectedRow() < (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow()>= 0)){
 						SetChiefDialog ped = new SetChiefDialog();
 					}
@@ -149,7 +154,7 @@ public class MyToolBar extends JToolBar {
 						}
 					}
 				 }
-				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 						if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
 									"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje studenta", 
@@ -158,7 +163,8 @@ public class MyToolBar extends JToolBar {
 								StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
 							}
 						}
-				 if(MyTabbedPane.getInstance().getSelectedIndex()==3)
+				 }
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==3) {
 						if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
 									"Da li ste sigurni da zelite da obrisete katedru?", "Brisanje katedre", 
@@ -167,6 +173,7 @@ public class MyToolBar extends JToolBar {
 								ChairController.getInstance().deleteChair((MyChairPanel.getInstance().getChairTable().getSelectedRow()));
 							}
 						}
+				 }
 			}
 		});
 			

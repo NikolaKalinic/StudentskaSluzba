@@ -235,7 +235,7 @@ public class MyAddingStudentDialog extends JDialog{
 		
 		btnOk.setEnabled(false);
 		
-		new Timer(100,new ActionListener() {
+		new Timer(200,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

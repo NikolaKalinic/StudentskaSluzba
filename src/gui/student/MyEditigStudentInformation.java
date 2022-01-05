@@ -292,8 +292,7 @@ public class MyEditigStudentInformation extends JPanel {
         JPanel panBottom=new JPanel();
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setPreferredSize(new Dimension(1,30));
-		btnOk.setEnabled(false);
-		new Timer(100,new ActionListener() {
+		new Timer(200,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -194,7 +194,7 @@ public class MyAddingSubjectDialog extends JDialog{
 		btnOk.setPreferredSize(new Dimension(90,30));
 		btnOk.setEnabled(false);
 		
-		new Timer(100,new ActionListener() {
+		new Timer(200,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

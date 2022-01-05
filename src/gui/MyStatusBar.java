@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 public class MyStatusBar {
@@ -27,11 +29,10 @@ public class MyStatusBar {
 		BoxLayout box = new BoxLayout(statusPanel, BoxLayout.X_AXIS);
 		statusPanel.setLayout(box);
 		JLabel statusLabel = new JLabel("Studentska Slu�ba-Studenti");
-		new Timer(100,new ActionListener() {
-			
+		
+		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			public void stateChanged(ChangeEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
 					statusLabel.setText("Studentska Služba-Studenti");
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
@@ -41,9 +42,7 @@ public class MyStatusBar {
 				else 
 					statusLabel.setText("Studentska Služba-Katedre");
 			}
-		}).start();
-		
-		
+		});
 		statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		statusPanel.add(statusLabel);
 		statusPanel.add(Box.createGlue());
