@@ -31,13 +31,13 @@ public class MyAddingSubjectDialog extends JDialog{
 	public int year;
 	public Semestar smestar=Semestar.Summer;
 	public MyAddingSubjectDialog() {
-		super(MainFrame.getInstance(),"Dodavanje predmeta",true);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("addSubject"),true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
-		JButton btnOk=new JButton("Potvrdi");
+		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -47,10 +47,10 @@ public class MyAddingSubjectDialog extends JDialog{
 		
 		/*Panel for code subject*/
 		JPanel pCode=new JPanel(new FlowLayout(FlowLayout.LEFT));	
-        JLabel lCode=new JLabel("Šifra*");
+        JLabel lCode=new JLabel(MainFrame.getInstance().getResourceBundle().getString("subjectId"));
         lCode.setPreferredSize(dim);
         JTextField fCode=new JTextField();
-        fCode.setToolTipText("Unesite šifru predmeta.");
+        fCode.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("subjectIdTooltip"));
         fCode.setName("code");
         fCode.setPreferredSize(fdim);
         fCode.addFocusListener(focusListener);
@@ -61,10 +61,10 @@ public class MyAddingSubjectDialog extends JDialog{
         
         /*Panel for name subject*/
         JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
-        JLabel lName=new JLabel("Naziv*");
+        JLabel lName=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentName"));
         lName.setPreferredSize(dim);
         JTextField fName=new JTextField();
-        fName.setToolTipText("Unesite naziv predmeta.");
+        fName.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("studentNameTooltip"));
         fName.setName("name");
         fName.setPreferredSize(fdim);
         fName.addFocusListener(focusListener);
@@ -75,12 +75,12 @@ public class MyAddingSubjectDialog extends JDialog{
         
         /*Panel for  year*/
         JPanel pYear = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lYear = new JLabel("Godina*");
+        JLabel lYear = new JLabel(MainFrame.getInstance().getResourceBundle().getString("subjectYear"));
         lYear.setPreferredSize(dim);
-        String[] CurrYear = { "I (Prva)", "II (Druga)", "III (Treca)", "IV (Cetvrata)", "Master studije", "Doktorske studije",};
+        String[] CurrYear = {MainFrame.getInstance().getResourceBundle().getString("studentFirst"), MainFrame.getInstance().getResourceBundle().getString("studentSecond"), MainFrame.getInstance().getResourceBundle().getString("studentThird"), MainFrame.getInstance().getResourceBundle().getString("studentFourth"), MainFrame.getInstance().getResourceBundle().getString("studentMaster"), MainFrame.getInstance().getResourceBundle().getString("studentDoctor"),};
         JComboBox<String> combo = new JComboBox<String>(CurrYear);
         combo.setName("currYear");
-        combo.setToolTipText("Izaberite godinu studija na kojoj se predmet izvodi.");
+        combo.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("subjectYearTooltip"));
         combo.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -106,9 +106,9 @@ public class MyAddingSubjectDialog extends JDialog{
         JPanel pSemestar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lSemestar = new JLabel("Semestar*");
         lSemestar.setPreferredSize(dim);
-        String[] status = { "Letnji", "Zimski"};
+        String[] status = { MainFrame.getInstance().getResourceBundle().getString("summer"), MainFrame.getInstance().getResourceBundle().getString("winter")};
         JComboBox<String> combo1 = new JComboBox<String>(status);
-        combo1.setToolTipText("Izaberite semestar u kom se predmet izvodi.");
+        combo1.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("subjectSemestarTooltip"));
         combo1.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -139,7 +139,7 @@ public class MyAddingSubjectDialog extends JDialog{
         JLabel lESPB = new JLabel("ESPB*");
         lESPB.setPreferredSize(dim);
         JTextField fESPB = new JTextField();
-        fESPB.setToolTipText("Unesite broj espb bodova.");
+        fESPB.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("subjectEspbTooltip"));
         fESPB.setName("espb");
         fESPB.setPreferredSize(fdim);
         fESPB.addFocusListener(focusListener);
@@ -150,27 +150,27 @@ public class MyAddingSubjectDialog extends JDialog{
         
         
         /*Panel for profesor*/
-        JPanel pProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lProfesor = new JLabel("Profesor*");
-        lProfesor.setPreferredSize(dim);
-        JTextField fProfesor = new JTextField();
-        fProfesor.setFocusable(false);
-        fProfesor.setToolTipText("Unesite predmetnog profesora.");
-        fProfesor.setName("profesor");
-        //fProfesor.addFocusListener(focusListener);
-        JToggleButton button1 = new JToggleButton("+");
-        JToggleButton button2 = new JToggleButton("-");
-        button2.setEnabled(false);
-        button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
-        button2.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
-        
-        fProfesor.setPreferredSize(dim);
-        pProfesor.add(Box.createHorizontalStrut(konst));
-        pProfesor.add(lProfesor);
-        pProfesor.add(fProfesor);
-        pProfesor.add(button1);
-        pProfesor.add(button2);
-        focusListener.lostFocus(pProfesor, btnOk);
+//        JPanel pProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//        JLabel lProfesor = new JLabel("Profesor*");
+//        lProfesor.setPreferredSize(dim);
+//        JTextField fProfesor = new JTextField();
+//        fProfesor.setFocusable(false);
+//        fProfesor.setToolTipText("Unesite predmetnog profesora.");
+//        fProfesor.setName("profesor");
+//        //fProfesor.addFocusListener(focusListener);
+//        JToggleButton button1 = new JToggleButton("+");
+//        JToggleButton button2 = new JToggleButton("-");
+//        button2.setEnabled(false);
+//        button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
+//        button2.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
+//        
+//        fProfesor.setPreferredSize(dim);
+//        pProfesor.add(Box.createHorizontalStrut(konst));
+//        pProfesor.add(lProfesor);
+//        pProfesor.add(fProfesor);
+//        pProfesor.add(button1);
+//        pProfesor.add(button2);
+//        focusListener.lostFocus(pProfesor, btnOk);
         
         
         panCenter.add(Box.createVerticalStrut(25));
@@ -180,7 +180,7 @@ public class MyAddingSubjectDialog extends JDialog{
         panCenter.add(pSemestar);
 
         panCenter.add(pESPB);
-        panCenter.add(pProfesor);
+      //  panCenter.add(pProfesor);
         panCenter.add(Box.createVerticalStrut(25));  
         add(panCenter,BorderLayout.CENTER);
 		
@@ -191,7 +191,6 @@ public class MyAddingSubjectDialog extends JDialog{
 		panBottom.setLayout(box);
 		
 		
-		btnOk.setPreferredSize(new Dimension(90,30));
 		btnOk.setEnabled(false);
 		
 		new Timer(200,new ActionListener() {
@@ -215,20 +214,18 @@ public class MyAddingSubjectDialog extends JDialog{
 				if(focusListener.getKey()==0b0111) {
 					SubjectController.getInstance().addSubject(focusListener.getIdSubject(), focusListener.getName(), smestar, year, focusListener.getProfessor(), focusListener.getEspb());
 					dispose();
-				}else
-					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
+				}
 				
 			}
 		});
 		
 		
-		JButton btnCancel=new JButton("Odustani");
-		btnCancel.setPreferredSize(new Dimension(90,30));
+		JButton btnCancel=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da odustanete ?", "Potvrda odustajanja", JOptionPane.YES_NO_OPTION);
+				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("studentExitDialog"), MainFrame.getInstance().getResourceBundle().getString("studentExitDialogTitle"), JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
 					dispose();
 				}	

@@ -34,7 +34,7 @@ public class MyEditingSubjectDialog extends JDialog{
 	public int year=1;
 	public Semestar smestar=Semestar.Summer;
 	public MyEditingSubjectDialog() {
-		super(MainFrame.getInstance(),"Izmena predmeta",true);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("editSubject"),true);
 		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
 		smestar=s.getSemestar();
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -42,7 +42,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
-		JButton btnOk=new JButton("Potvrdi");
+		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -52,7 +52,7 @@ public class MyEditingSubjectDialog extends JDialog{
 		
 		/*Panel for code subject*/
 		JPanel pCode=new JPanel(new FlowLayout(FlowLayout.LEFT));	
-        JLabel lCode=new JLabel("Šifra*");
+        JLabel lCode=new JLabel(MainFrame.getInstance().getResourceBundle().getString("subjectId"));
         lCode.setPreferredSize(dim);
         JTextField fCode=new JTextField();
         fCode.setText(s.getIdSubject());
@@ -68,7 +68,7 @@ public class MyEditingSubjectDialog extends JDialog{
         
         /*Panel for name subject*/
         JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
-        JLabel lName=new JLabel("Naziv*");
+        JLabel lName=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentName"));
         lName.setPreferredSize(dim);
         JTextField fName=new JTextField();
         fName.setText(s.getName());
@@ -83,9 +83,9 @@ public class MyEditingSubjectDialog extends JDialog{
         
         /*Panel for  year*/
         JPanel pYear = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lYear = new JLabel("Godina*");
+        JLabel lYear = new JLabel(MainFrame.getInstance().getResourceBundle().getString("subjectYear"));
         lYear.setPreferredSize(dim);
-        String[] CurrYear = { "I (Prva)", "II (Druga)", "III (Treca)", "IV (Cetvrata)", "Master studije", "Doktorske studije",};
+        String[] CurrYear = { MainFrame.getInstance().getResourceBundle().getString("studentFirst"), MainFrame.getInstance().getResourceBundle().getString("studentSecond"), MainFrame.getInstance().getResourceBundle().getString("studentThird"), MainFrame.getInstance().getResourceBundle().getString("studentFourth"), MainFrame.getInstance().getResourceBundle().getString("studentMaster"), MainFrame.getInstance().getResourceBundle().getString("studentDoctor"),};
         JComboBox<String> combo = new JComboBox<String>(CurrYear);
         combo.setName("currYear");
         combo.setSelectedIndex(s.getYearOfStudySub()-1);
@@ -114,7 +114,7 @@ public class MyEditingSubjectDialog extends JDialog{
         JPanel pSemestar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lSemestar = new JLabel("Semestar*");
         lSemestar.setPreferredSize(dim);
-        String[] status = { "Letnji", "Zimski"};
+        String[] status = { MainFrame.getInstance().getResourceBundle().getString("summer"), MainFrame.getInstance().getResourceBundle().getString("winter")};
         JComboBox<String> combo1 = new JComboBox<String>(status);
         combo1.setSelectedIndex(s.getSemestar()==Semestar.Summer?0:1);
         combo1.addFocusListener(new FocusListener() {
@@ -159,7 +159,7 @@ public class MyEditingSubjectDialog extends JDialog{
         
         /*Panel for profesor*/
         JPanel pProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lProfesor = new JLabel("Profesor*");
+        JLabel lProfesor = new JLabel("Professor*");
         lProfesor.setPreferredSize(dim);
         JTextField fProfesor = new JTextField();
         fProfesor.setFocusable(false);
@@ -234,20 +234,19 @@ public class MyEditingSubjectDialog extends JDialog{
 				if(focusListener.getKey()==0b0111) {
 					SubjectController.getInstance().editStudent(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, new Professor("Novi","Prof"), focusListener.getEspb());
 					dispose();
-				}else
-					JOptionPane.showMessageDialog(null, "Niste uneli sve podatke ! ");
+				}
 				
 			}
 		});
 		
 		
-		JButton btnCancel=new JButton("Odustani");
+		JButton btnCancel=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.setPreferredSize(new Dimension(90,30));
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da odustanete ?", "Potvrda odustajanja", JOptionPane.YES_NO_OPTION);
+				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("studentExitDialog"), MainFrame.getInstance().getResourceBundle().getString("studentExitDialogTitle"), JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
 					dispose();
 				}	

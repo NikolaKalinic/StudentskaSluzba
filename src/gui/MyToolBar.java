@@ -43,15 +43,19 @@ public class MyToolBar extends JToolBar {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	private JButton create;
+	private JButton edit;
+	private JButton delete;
+	private JTextField searchField;
+	private JButton loupe;
 	public MyToolBar() {
 		
 		super(SwingConstants.HORIZONTAL);
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		
-		JButton create = new JButton();
-		create.setToolTipText("Create entity");
+		 create = new JButton();
+		create.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipNew"));
 		Image createImg = kit.getImage("images/create4.png");
 		//Image resizedCreateImg = createImg.getScaledInstance(25, 24, java.awt.Image.SCALE_SMOOTH);
 		create.setIcon(new ImageIcon(createImg));
@@ -93,8 +97,8 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JButton edit = new JButton();
-		edit.setToolTipText("Edit entity");
+		 edit = new JButton();
+		edit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipEdit"));
 		Image editImg = kit.getImage("images/edit4.png");
 		//Image resizedEditImg = editImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		edit.setIcon(new ImageIcon(editImg));
@@ -132,8 +136,8 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JButton delete = new JButton();
-		delete.setToolTipText("Delete entity");
+		 delete = new JButton();
+		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
 		Image deleteImg = kit.getImage("images/delete4.png");
 		//Image resizedDeleteImg = deleteImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		delete.setIcon(new ImageIcon(deleteImg));
@@ -157,7 +161,7 @@ public class MyToolBar extends JToolBar {
 				 else if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 						if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-									"Da li ste sigurni da zelite da obrisete studenta?", "Brisanje studenta", 
+									MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), MainFrame.getInstance().getResourceBundle().getString("deleteStudent1"), 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
 								StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
@@ -184,14 +188,15 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JTextField searchField = new JTextField(10);
+		 searchField = new JTextField(10);
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.setToolTipText("Type here");
+		searchField.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipField"));
 		
 		add(searchField);
 	
-		JButton loupe = new JButton();
-		loupe.setToolTipText("Search");
+		 loupe = new JButton();
+		loupe.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipSearch"));
 		loupe.addActionListener(new ActionListener() {
 			
 			@Override
@@ -213,6 +218,14 @@ public class MyToolBar extends JToolBar {
 
 		setFloatable(false);
 		setBackground(new Color(255, 255, 255));
+	}
+	
+	public void initComponents() {
+		create.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipNew"));
+		edit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipEdit"));
+		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
+		searchField.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipField"));
+		loupe.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipSearch"));
 	}
 
 }

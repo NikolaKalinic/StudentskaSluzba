@@ -6,10 +6,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,36 +27,53 @@ import controller.StudentController;
 import gui.chair.MyChairPanel;
 import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
-import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
 import gui.student.MyStudentPanel;
-import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
-import gui.subject.MySubjectTable;
 import model.ChairDB;
-import model.Professor;
 import model.ProfessorDB;
 import model.StudentDB;
 import model.SubjectDB;
 
 public class MyMenuBar extends JMenuBar {
+	private JMenu file;
+	private JMenuItem fileNew;
+	private JMenuItem fileSave;
+	private JMenu fileOpen;
+	private JMenuItem student;
+	private JMenuItem subject;
+	private JMenuItem professor;
+	private JMenuItem chair;
+	private JMenuItem fileClose;
+	private JMenu edit;
+	private JMenuItem editEdit;
+	private JMenuItem editDelete;
+	private JMenu help;
+	private JMenuItem helpHelp;
+	private JMenuItem helpAbout;
+	private JMenu language;
+	private JCheckBoxMenuItem lSrb;
+	private JCheckBoxMenuItem lEng;
 	
 	public MyMenuBar() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Border border = BorderFactory.createBevelBorder(BevelBorder.RAISED);
 		setBorder(border);
 		
-		JMenu file = new JMenu("File");
-		file.setMnemonic('f');
+		file = new JMenu(MainFrame.getInstance().getResourceBundle().getString("mFile"));
+		char c  = MainFrame.getInstance().getResourceBundle().getString("mFile").charAt(0);
+		file.setMnemonic((int)c);
+		//file.setMnemonic('f');
 		file.setCursor(new Cursor(12));
-		JMenuItem fileNew = new JMenuItem("New");
+		fileNew = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miNew"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miNew").charAt(0);
+		fileNew.setMnemonic((int)c);
 		fileNew.setCursor(new Cursor(12));
-		fileNew.setMnemonic('n');
 		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		Image img = kit.getImage("images/newplus.png");
 		Image iconNew = img.getScaledInstance(20,20, 4);
@@ -73,9 +93,9 @@ public class MyMenuBar extends JMenuBar {
 				}
 			}
 		});
-	
-		JMenuItem fileSave = new JMenuItem("Save");
-		fileSave.setMnemonic('s');
+		fileSave = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miSave"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miSave").charAt(0);
+		fileSave.setMnemonic((int)c);
 		fileSave.setCursor(new Cursor(12));
 		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		Image img1 = kit.getImage("images/save.png");
@@ -84,26 +104,30 @@ public class MyMenuBar extends JMenuBar {
 		fileSave.setIcon(fileIconSave);
 		
 		
-		JMenu fileOpen = new JMenu("Open");
+		fileOpen = new JMenu(MainFrame.getInstance().getResourceBundle().getString("miOpen"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miOpen").charAt(0);
+		fileOpen.setMnemonic((int)c);
 		fileOpen.setCursor(new Cursor(12));
-		fileOpen.setMnemonic('o');
 		Image img2 = kit.getImage("images/open.png");
 		Image iconOpen = img2.getScaledInstance(15, 15, 4);
 		Icon fileIconOpen = new ImageIcon(iconOpen);
 		fileOpen.setIcon(fileIconOpen);
-		JMenuItem student = new JMenuItem("Studenti");
+		
+		student = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miStudent"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miStudent").charAt(0);
+		student.setMnemonic((int)c);
 		student.setCursor(new Cursor(12));
-		student.setMnemonic('s');
-		student.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK));
+		student.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
 		Image imgStud = kit.getImage("images/student.png");
 		imgStud = imgStud.getScaledInstance(20, 20, 4);
 		Icon iconStud = new ImageIcon(imgStud);
 		student.setIcon(iconStud);
 		
 		
-		JMenuItem subject = new JMenuItem("Predmeti");
-		subject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
-		subject.setMnemonic('p');
+		subject = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miSubject"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miSubject").charAt(0);
+		subject.setMnemonic((int)c);
+		subject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
 		Image imgSubj = kit.getImage("images/subject.png");
 		imgSubj = imgSubj.getScaledInstance(20, 20, 4);
 		Icon iconSubj = new ImageIcon(imgSubj);
@@ -111,18 +135,20 @@ public class MyMenuBar extends JMenuBar {
 		subject.setCursor(new Cursor(12));
 		
 		
-		JMenuItem professor = new JMenuItem("Profesori");
-		professor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK));
-		professor.setMnemonic('f');
+		professor = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miProfessor"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miProfessor").charAt(0);
+		professor.setMnemonic((int)c);
+		professor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
 		Image imgProf = kit.getImage("images/professor.png");
 		imgProf = imgProf.getScaledInstance(20, 20, 4);
 		Icon iconProf = new ImageIcon(imgProf);
 		professor.setIcon(iconProf);
 		professor.setCursor(new Cursor(12));
 		
-		JMenuItem chair = new JMenuItem("Katedre");
-		chair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, ActionEvent.SHIFT_MASK));
-		chair.setMnemonic('k');
+		chair = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miChair"));
+		c=MainFrame.getInstance().getResourceBundle().getString("miChair").charAt(0);
+		chair.setMnemonic((int)c);
+		chair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
 		Image imgChair = kit.getImage("images/department.png");
 		imgChair = imgChair.getScaledInstance(20, 20, 4);
 		Icon iconChair = new ImageIcon(imgChair);
@@ -136,7 +162,7 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MyTabbedPane.getInstance().setSelectedIndex(0);;
+				MyTabbedPane.getInstance().setSelectedIndex(0);
 				
 			}
 		});
@@ -144,7 +170,7 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MyTabbedPane.getInstance().setSelectedIndex(1);;
+				MyTabbedPane.getInstance().setSelectedIndex(1);
 				
 			}
 		});
@@ -152,7 +178,7 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MyTabbedPane.getInstance().setSelectedIndex(2);;
+				MyTabbedPane.getInstance().setSelectedIndex(2);
 				
 			}
 		});
@@ -160,7 +186,7 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				MyTabbedPane.getInstance().setSelectedIndex(3);
 				
 			}
 		});
@@ -171,10 +197,11 @@ public class MyMenuBar extends JMenuBar {
 		fileOpen.add(professor);
 		fileOpen.add(chair);
 		
-		JMenuItem fileClose = new JMenuItem("Close");
+		 fileClose = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miClose"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("miClose").charAt(0);
+		 fileClose.setMnemonic((int)c);
 		fileClose.setCursor(new Cursor(12));
 		fileClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		fileClose.setMnemonic('c');
 		Image img3 = kit.getImage("images/close.png");
 		Image iconClose = img3.getScaledInstance(15, 15, 4);
 		Icon fileIconClose = new ImageIcon(iconClose);
@@ -198,12 +225,14 @@ public class MyMenuBar extends JMenuBar {
 		file.add(fileClose);
 		
 		
-		JMenu edit = new JMenu("Edit");
+		 edit = new JMenu(MainFrame.getInstance().getResourceBundle().getString("miEdit"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("miEdit").charAt(0);
+		 edit.setMnemonic((int)c);
 		edit.setCursor(new Cursor(12));
-		edit.setMnemonic('e');
-		JMenuItem editEdit = new JMenuItem("Edit");
+		 editEdit = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miEdit"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("miEdit").charAt(0);
+		 editEdit.setMnemonic((int)c);
 		editEdit.setCursor(new Cursor(12));
-		editEdit.setMnemonic('e');
 		editEdit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		Image img4 = kit.getImage("images/edit.png");
 		Image iconEdit = img4.getScaledInstance(15, 15, 4);
@@ -234,9 +263,10 @@ public class MyMenuBar extends JMenuBar {
 			}
 		});
 				
-		JMenuItem editDelete = new JMenuItem("Delete");
+		 editDelete = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miDelete"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("miDelete").charAt(0);
+		 editDelete.setMnemonic((int)c);
 		editDelete.setCursor(new Cursor(12));
-		editDelete.setMnemonic('d');
 		editDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 		Image img5 = kit.getImage("images/delete.png");
 		Image iconDelete = img5.getScaledInstance(15, 15, 4);
@@ -250,7 +280,7 @@ public class MyMenuBar extends JMenuBar {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
 					if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow() < (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 						int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-								"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+								MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), MainFrame.getInstance().getResourceBundle().getString("deleteStudent1"), 
 						        JOptionPane.YES_NO_OPTION);
 						if(answer==JOptionPane.YES_OPTION) {
 							StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
@@ -293,10 +323,12 @@ public class MyMenuBar extends JMenuBar {
 		edit.addSeparator();
 		edit.add(editDelete);
 		
-		JMenu help = new JMenu("Help");
+		 help = new JMenu(MainFrame.getInstance().getResourceBundle().getString("mHelp"));
+		 
+		 c=MainFrame.getInstance().getResourceBundle().getString("mHelp").charAt(0);
+		 help.setMnemonic((int)c);
 		help.setCursor(new Cursor(12));
-		help.setMnemonic('h');
-		JMenuItem helpHelp = new JMenuItem("Help");
+		 helpHelp = new JMenuItem("Help");
 		helpHelp.setCursor(new Cursor(12));
 		helpHelp.setMnemonic('h');
 		helpHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
@@ -305,9 +337,10 @@ public class MyMenuBar extends JMenuBar {
 		Icon helpIconHelp = new ImageIcon(iconHelp);
 		helpHelp.setIcon(helpIconHelp);
 		
-		JMenuItem helpAbout = new JMenuItem("About");
+		 helpAbout = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miAbout"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("miAbout").charAt(0);
+		 helpAbout.setMnemonic((int)c);
 		helpAbout.setCursor(new Cursor(12));
-		helpAbout.setMnemonic('a');
 		helpAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		Image img7 = kit.getImage("images/about.png");
 		Image iconAbout = img7.getScaledInstance(15, 15, 4);
@@ -319,9 +352,107 @@ public class MyMenuBar extends JMenuBar {
 		help.add(helpAbout);
 		
 		
+		 language = new JMenu(MainFrame.getInstance().getResourceBundle().getString("mLanguage"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("mLanguage").charAt(0);
+		 language.setMnemonic((int)c);
+		language.setCursor(new Cursor(12));
+		 lSrb = new JCheckBoxMenuItem(MainFrame.getInstance().getResourceBundle().getString("Serbian"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("Serbian").charAt(0);
+		 lSrb.setMnemonic((int)c);
+		lSrb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Locale.setDefault(new Locale("sr", "RS"));
+				MainFrame.getInstance().changeLanguage();
+				
+			}
+		});
+		lSrb.setSelected(true);
+		lSrb.setCursor(new Cursor(12));
+		 lEng = new JCheckBoxMenuItem(MainFrame.getInstance().getResourceBundle().getString("English"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("English").charAt(0);
+		 lEng.setMnemonic((int)c);
+		lEng.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Locale.setDefault(new Locale("en", "US"));
+				MainFrame.getInstance().changeLanguage();
+				
+			}
+		});
+		lEng.setCursor(new Cursor(12));
+		language.add(lSrb);
+		language.addSeparator();
+		language.add(lEng);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(lSrb);
+		bg.add(lEng);
+		
 		add(file);
 		add(edit);
 		add(help);
+		add(language);
+	}
+	
+	
+	public void initComponents() {
+		lEng.setText(MainFrame.getInstance().getResourceBundle().getString("English"));
+		lSrb.setText(MainFrame.getInstance().getResourceBundle().getString("Serbian"));
+		file.setText(MainFrame.getInstance().getResourceBundle().getString("mFile"));
+		fileNew.setText(MainFrame.getInstance().getResourceBundle().getString("miNew"));
+		fileSave.setText(MainFrame.getInstance().getResourceBundle().getString("miSave"));
+		fileOpen.setText(MainFrame.getInstance().getResourceBundle().getString("miOpen"));
+		student.setText(MainFrame.getInstance().getResourceBundle().getString("miStudent"));
+		subject.setText(MainFrame.getInstance().getResourceBundle().getString("miSubject"));
+		professor.setText(MainFrame.getInstance().getResourceBundle().getString("miProfessor"));
+		chair.setText(MainFrame.getInstance().getResourceBundle().getString("miChair"));
+		fileClose.setText(MainFrame.getInstance().getResourceBundle().getString("miClose"));
+		edit.setText(MainFrame.getInstance().getResourceBundle().getString("miEdit"));
+		editEdit.setText(MainFrame.getInstance().getResourceBundle().getString("miEdit"));
+		editDelete.setText(MainFrame.getInstance().getResourceBundle().getString("miDelete"));
+		help.setText(MainFrame.getInstance().getResourceBundle().getString("mHelp"));
+		helpHelp.setText(MainFrame.getInstance().getResourceBundle().getString("mHelp"));
+		helpAbout.setText(MainFrame.getInstance().getResourceBundle().getString("miAbout"));
+		language.setText(MainFrame.getInstance().getResourceBundle().getString("mLanguage"));
+		
+		
+		char c  = MainFrame.getInstance().getResourceBundle().getString("mFile").charAt(0);
+		file.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miNew").charAt(0);
+		fileNew.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miSave").charAt(0);
+		fileSave.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miStudent").charAt(0);
+		student.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miStudent").charAt(0);
+		subject.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miProfessor").charAt(0);
+		professor.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miChair").charAt(0);
+		chair.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miClose").charAt(0);
+		fileClose.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miEdit").charAt(0);
+		 editEdit.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miEdit").charAt(0);
+		 edit.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miDelete").charAt(0);
+		 editDelete.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miOpen").charAt(0);
+		fileOpen.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("mHelp").charAt(0);
+		help.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("miAbout").charAt(0);
+		 helpAbout.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("Serbian").charAt(0);
+		lSrb.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("English").charAt(0);
+		lEng.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("mLanguage").charAt(0);
+		language.setMnemonic((int)c);
 	}
 	
 }

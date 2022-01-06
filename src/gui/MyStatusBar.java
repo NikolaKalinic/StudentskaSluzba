@@ -20,6 +20,12 @@ import javax.swing.event.ChangeListener;
 
 
 public class MyStatusBar {
+	private String s1;
+	private String s2;
+	private String s3;
+	private String s4;
+	JLabel statusLabel;
+	
 	public MyStatusBar(MainFrame mf) {
 		
 		JPanel statusPanel = new JPanel();
@@ -28,19 +34,19 @@ public class MyStatusBar {
 		statusPanel.setPreferredSize(new Dimension(mf.getWidth(), 20));
 		BoxLayout box = new BoxLayout(statusPanel, BoxLayout.X_AXIS);
 		statusPanel.setLayout(box);
-		JLabel statusLabel = new JLabel("Studentska Slu�ba-Studenti");
+		 statusLabel = new JLabel(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
 		
 		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					statusLabel.setText("Studentska Služba-Studenti");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
-					statusLabel.setText("Studentska Služba-Profesori");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusProfessor"));
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==2)
-					statusLabel.setText("Studentska Služba-Predmeti");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusSubject"));
 				else 
-					statusLabel.setText("Studentska Služba-Katedre");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
 			}
 		});
 		statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -63,6 +69,18 @@ public class MyStatusBar {
 		
 	   	 statusPanel.add(statusTime);
 	   	 statusPanel.add(Box.createHorizontalStrut(20));
+	}
+	public void initComponents() {
+		{
+			if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
+			else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusProfessor"));
+			else if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusSubject"));
+			else 
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
+		}
 	}
 	
 	

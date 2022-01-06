@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class MyTabPane extends JPanel{
 
 	
+	
 	public MyTabPane() {
 		setLayout(new BorderLayout());
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -35,5 +36,9 @@ public class MyTabPane extends JPanel{
 		
 		MyTabbedPane tp = MyTabbedPane.getInstance();
 		add(tp,BorderLayout.CENTER);
+	}
+	
+	public void initComponents() {
+		MyTabbedPane.getInstance().initComponents();
 	}
 }

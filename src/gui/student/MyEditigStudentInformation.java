@@ -42,7 +42,7 @@ public class MyEditigStudentInformation extends JPanel {
 		
 		
 		JPanel panCenter=new JPanel();
-		JButton btnOk=new JButton("Potvrdi");
+		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		panCenter.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2-kit.getScreenSize().height/10));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);		
@@ -55,7 +55,7 @@ public class MyEditigStudentInformation extends JPanel {
 	
 		
 		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
-        JLabel lName=new JLabel("Ime*");
+        JLabel lName=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentName"));
         lName.setPreferredSize(dim);
         JTextField fName=new JTextField();
         fName.setText(s.getName());
@@ -71,7 +71,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for surname*/
         JPanel pSurname=new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lSurname=new JLabel("Prezime*");
+        JLabel lSurname=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentSurname"));
         lSurname.setPreferredSize(dim);
         JTextField fSurname=new JTextField();
         fSurname.setText(s.getSurname());
@@ -87,7 +87,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for birth date*/
         JPanel pBirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lBirthDate = new JLabel("Datum rodjenja*");
+        JLabel lBirthDate = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentDate"));
         lBirthDate.setPreferredSize(dim);
         JTextField fBirthDate = new JTextField();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
@@ -104,7 +104,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for adress*/
         JPanel pAdress = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lAdress = new JLabel("Adresa stanovanja*");
+        JLabel lAdress = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentAdress"));
         lAdress.setPreferredSize(dim);
         JTextField fAdress = new JTextField();
         fAdress.setText(s.getAdress().toString());
@@ -120,7 +120,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for phone number*/
         JPanel pNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lNumber = new JLabel("Broj telefona*");
+        JLabel lNumber = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentPhone"));
         lNumber.setPreferredSize(dim);
         JTextField fNumber = new JTextField();
         fNumber.setText(s.getContactPhone());
@@ -136,7 +136,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for email*/
         JPanel pEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lEmail = new JLabel("E-mail adresa*");
+        JLabel lEmail = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentEmail"));
         lEmail.setPreferredSize(dim);
         JTextField fEmail = new JTextField();
         fEmail.setText(s.getEmail());
@@ -152,7 +152,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for index*/
         JPanel pId = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lId = new JLabel("Broj indeksa*");
+        JLabel lId = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentId"));
         lId.setPreferredSize(dim);
         JTextField fId = new JTextField();
         fId.setText(s.getIndex());
@@ -168,7 +168,7 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for year of entrollment*/
         JPanel pYearOfEntrollment = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lYearOfEntrollment = new JLabel("Godina upisa*");
+        JLabel lYearOfEntrollment = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentYearEn"));
         lYearOfEntrollment.setPreferredSize(dim);
         JTextField fYearOfEntrollment = new JTextField();
         fYearOfEntrollment.setText(Integer.toString(s.getYearOfEnrollment()));
@@ -184,9 +184,9 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for current year of study*/
         JPanel pCurrYearOfStudy = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lCurrYearOfStudy = new JLabel("Trenutna godina studija*");
+        JLabel lCurrYearOfStudy = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentYearCur"));
         lCurrYearOfStudy.setPreferredSize(dim);
-        String[] CurrYear = { "I (Prva)", "II (Druga)", "III (Treca)", "IV (Cetvrata)", "Master studije", "Doktorske studije",};
+        String[] CurrYear = { MainFrame.getInstance().getResourceBundle().getString("studentFirst"), MainFrame.getInstance().getResourceBundle().getString("studentSecond"), MainFrame.getInstance().getResourceBundle().getString("studentThird"), MainFrame.getInstance().getResourceBundle().getString("studentFourth"), MainFrame.getInstance().getResourceBundle().getString("studentMaster"), MainFrame.getInstance().getResourceBundle().getString("studentDoctor"),};
         JComboBox<String> combo = new JComboBox<String>(CurrYear);
         combo.setName("currYear");
         combo.setSelectedIndex(s.getCurrYearOfStudy()-1);
@@ -214,9 +214,9 @@ public class MyEditigStudentInformation extends JPanel {
         
         /*Panel for status student*/
         JPanel pStatus = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lStatus = new JLabel("Nacin finansiranja*");
+        JLabel lStatus = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentStatus"));
         lStatus.setPreferredSize(dim);
-        String[] status = { "Budzet", "Samofinansiranje"};
+        String[] status = { MainFrame.getInstance().getResourceBundle().getString("studentBudget") , MainFrame.getInstance().getResourceBundle().getString("studentSelf")};
         JComboBox<String> combo1 = new JComboBox<String>(status);
         combo1.setSelectedIndex(s.getStatus()==Status.B?0:1);
         stat=s.getStatus();
@@ -306,7 +306,7 @@ public class MyEditigStudentInformation extends JPanel {
 			
 		}).start();
 		btnOk.setFocusPainted(false);
-		btnOk.setPreferredSize(new Dimension(90,30));
+		
         btnOk.addActionListener(new ActionListener() {
 			
 			@Override
@@ -320,13 +320,13 @@ public class MyEditigStudentInformation extends JPanel {
 		});
 		
 		
-		JButton btnCancel=new JButton("Odustani");
-		btnCancel.setPreferredSize(new Dimension(90,30));
+		JButton btnCancel=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
+		
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da odustanete ?", "Potvrda odustajanja", JOptionPane.YES_NO_OPTION);
+				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("studentExitDialog"), MainFrame.getInstance().getResourceBundle().getString("studentExitDialogTitle"), JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
 					btnCancel.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().setVisible(false);
 				}

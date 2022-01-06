@@ -16,7 +16,7 @@ public class MyEditingStudentDialog extends JDialog{
 
 	
 	public MyEditingStudentDialog(){
-		super(MainFrame.getInstance(),"Izmena studenta",true);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("editStudent"),true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2+60));
 		setResizable(false);
