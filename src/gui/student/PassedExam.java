@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import gui.MainFrame;
 import model.StudentDB;
 
 public class PassedExam extends JPanel{
@@ -37,7 +38,8 @@ public class PassedExam extends JPanel{
 		panTop.setLayout(new FlowLayout(FlowLayout.LEFT,width,height));
 		panTop.setBackground(Color.white);
 		panTop.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/15));
-		JButton button = new JButton("Poništi ocenu");
+		JButton button = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		button.setFocusPainted(false);
 		button.setBackground(new Color(14,98,190));
 		button.setForeground(Color.white);
 		panTop.add(button,FlowLayout.LEFT);
@@ -63,8 +65,8 @@ public class PassedExam extends JPanel{
 		panBottom.setLayout(new BorderLayout());
 		panBottom.setBackground(Color.white);
 		panBottom.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/10));
-		label1 = new JLabel("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
-		label2 = new JLabel("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
+		label1 = new JLabel(MainFrame.getInstance().getResourceBundle().getString("labelAvg")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
+		label2 = new JLabel(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
 		
 		JPanel panLabel = new JPanel();
 		panLabel.setBackground(Color.white);
@@ -92,8 +94,8 @@ public class PassedExam extends JPanel{
 		add(scrollPane, BorderLayout.CENTER);
 	}
 	public void updateLabel() {
-	     label1.setText("Prosečna ocena: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
-	     label2.setText("Ukupno ESPB: "+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
+	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
+	     label2.setText(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
 	     validate();
 	}
 	public void updateView() {

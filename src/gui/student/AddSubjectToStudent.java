@@ -15,17 +15,19 @@ import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import controller.StudentController;
 import gui.MainFrame;
+import model.Student;
 import model.Subject;
 import model.SubjectDB;
 
 public class AddSubjectToStudent extends JDialog{
 	
 	public AddSubjectToStudent() {
-		super(MainFrame.getInstance(),"Dodavanje predmeta",false);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("addSubject"),true);
 		setResizable(false);
-		setLocationRelativeTo(MainFrame.getInstance());
 		setSize(new Dimension(500,400));
+		setLocationRelativeTo(MainFrame.getInstance());
 		
 		
 		setLayout(new BorderLayout());
@@ -44,8 +46,8 @@ public class AddSubjectToStudent extends JDialog{
 		add(eastPanel,BorderLayout.EAST);
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER,30,30));
-		JButton btnOk = new JButton("Potvrdi");
-		JButton btnCancel = new JButton("Odustani");
+		JButton btnOk = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
+		JButton btnCancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -66,12 +68,26 @@ public class AddSubjectToStudent extends JDialog{
 		centerPanel.setLayout(new BorderLayout());
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		Vector<Subject> subjects = new Vector<Subject>();
-		
+		boolean tmp = true;
 		for (int i =0 ; i<SubjectDB.getInstance().getSubjects().size();i++) {
+			tmp=true;
 			/*Prvi uslov je da se ne nalaze ni u listi položenih, kao ni u listi nepoloženih predmeta označenog studenta. 
+			 * 
 			 * Drugi uslov je da je označeni student na odgovarajućoj godini studija (ista ili viša godina studija u odnosu na godinu na kojoj se predmet izvodi).
 			 */
-			subjects.add(SubjectDB.getInstance().getSubjects().get(i));
+			Student s = StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+			for(int j = 0; j<s.getGrades().size();j++) {
+				if(SubjectDB.getInstance().getSubjects().get(i).getIdSubject().equals(s.getGrades().get(j).getSubject().getIdSubject()))
+					tmp=false;
+			}
+			for(int j = 0; j<s.getFailedExams().size();j++) {
+				if(SubjectDB.getInstance().getSubjects().get(i).getIdSubject().equals(s.getFailedExams().get(j).getIdSubject()))
+						tmp=false;
+			}
+			if(SubjectDB.getInstance().getSubjects().get(i).getYearOfStudySub()>=s.getCurrYearOfStudy())
+				tmp=false;
+			if(tmp)
+				subjects.add(SubjectDB.getInstance().getSubjects().get(i));
 		}
 		JList<Subject> listBox = new JList<Subject>(subjects);
 		

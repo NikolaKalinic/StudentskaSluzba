@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import gui.MainFrame;
 import gui.MyTabbedPane;
 import gui.professor.ProfessorDialog;
 import gui.subject.MyAddingSubjectDialog;
@@ -43,7 +44,7 @@ public class NotPassedExam extends JPanel{
 		
 		JLabel label = new JLabel();
 		label.setPreferredSize(new Dimension(width - 20, height));
-		JButton button = new JButton("Dodaj");
+		JButton button = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
 		button.addActionListener(new ActionListener() {
 			
 			@Override
@@ -52,8 +53,8 @@ public class NotPassedExam extends JPanel{
 			}
 			
 		});
-		JButton button1 = new JButton("Obrisi");
-		JButton button2= new JButton("Polaganje");
+		JButton button1 = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		JButton button2= new JButton(MainFrame.getInstance().getResourceBundle().getString("take"));
 		
 		button.setBackground(new Color(14,98,190));
 		button.setForeground(Color.white);
