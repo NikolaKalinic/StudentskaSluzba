@@ -11,6 +11,6 @@ public class MyEditingStudentTabbedPane extends JTabbedPane {
 	public MyEditingStudentTabbedPane() {
 		addTab(MainFrame.getInstance().getResourceBundle().getString("studentInformation"),new MyEditigStudentInformation());
 		addTab(MainFrame.getInstance().getResourceBundle().getString("studentPassed"),PassedExam.getInstance());
-		addTab(MainFrame.getInstance().getResourceBundle().getString("studentFailed"),new JPanel());
+		addTab(MainFrame.getInstance().getResourceBundle().getString("studentFailed"),NotPassedExam.getInstance());
 	}
 }

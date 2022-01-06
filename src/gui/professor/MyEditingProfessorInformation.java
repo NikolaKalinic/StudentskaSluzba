@@ -1,5 +1,6 @@
 package gui.professor;
 
+import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class MyEditingProfessorInformation extends JPanel {
 		private static JTextField tfPhoneNumber;
 		private static JTextField tfId;
 		private static JTextField tfExp;
+		private static JLabel idInfo;
 		private static JButton ok;
 		
 
@@ -333,19 +335,28 @@ public class MyEditingProfessorInformation extends JPanel {
 			cIdTf.insets = new Insets(10, 5, 0, 10);
 			panel.add(tfId, cIdTf);
 			
+			idInfo = new JLabel("                                    ");
+			GridBagConstraints cIdInfo = new GridBagConstraints();
+			cIdInfo.gridwidth = 2;
+			cIdInfo.gridx = 0;
+			cIdInfo.gridy = 16;
+			cIdInfo.insets = new Insets(10, 0, 0, 0);
+			idInfo.setForeground(Color.black);
+			panel.add(idInfo, cIdInfo);
+			
 			JLabel calling = new JLabel("Zvanje");
 			String[] callings = {"-", "Asistent", "Docent", "Vanredni profesor", "Profesor"};
 			comboCalling = new JComboBox<String>(callings);
 			comboCalling.setSelectedItem(professor.getCalling());
 			GridBagConstraints cCalling =  new GridBagConstraints();
 			cCalling.gridx = 0;
-			cCalling.gridy = 17;
+			cCalling.gridy = 18;
 			cCalling.fill = GridBagConstraints.HORIZONTAL;
 			cCalling.insets = new Insets(10, 0, 0, 0);
 			panel.add(calling, cCalling);
 			GridBagConstraints cComboCalling = new GridBagConstraints();
 			cComboCalling.gridx = 1;
-			cComboCalling.gridy = 17;
+			cComboCalling.gridy = 18;
 			cComboCalling.insets = new Insets(10, 5, 0, 10);
 			panel.add(comboCalling, cComboCalling);
 			
@@ -356,13 +367,13 @@ public class MyEditingProfessorInformation extends JPanel {
 			tfExp.setToolTipText("Unesite godine iskustva [int]");
 			GridBagConstraints cExp =  new GridBagConstraints();
 			cExp.gridx = 0;
-			cExp.gridy = 16;
+			cExp.gridy = 17;
 			cExp.fill = GridBagConstraints.HORIZONTAL;
 			cExp.insets = new Insets(10, 0, 0, 30);
 			panel.add(exp, cExp);
 			GridBagConstraints cExpTf =  new GridBagConstraints();
 			cExpTf.gridx = 1;
-			cExpTf.gridy = 16;
+			cExpTf.gridy = 17;
 			cExpTf.fill = GridBagConstraints.HORIZONTAL;
 			cExpTf.insets = new Insets(10, 10, 0, 30);
 			panel.add(tfExp, cExpTf);
@@ -484,10 +495,13 @@ public class MyEditingProfessorInformation extends JPanel {
 			} else if(ProfessorController.getInstance().alreadyExists(tfId.getText(), temp)) {
 				disableOk();
 				tfId.selectAll();
-				tfId.setSelectedTextColor(Color.red);
+				idInfo.setForeground(Color.red);
+				idInfo.setText("Uneti broj licne karte vec postoji!");
 				tfId.setToolTipText("Profesor sa ovim brojem licne karte vec postoji");
 			} else {
-				tfId.setToolTipText("Unesite broj licne karte");
+				tfId.setToolTipText("Unesite broj licne");
+				idInfo.setForeground(Color.black);
+				idInfo.setText("                                      ");
 				enableOk();
 			}	
 		}

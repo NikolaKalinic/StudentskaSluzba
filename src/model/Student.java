@@ -40,6 +40,26 @@ public class Student {
 		this.avgMark = initAvg(grades);
 		this.totalESPB=initEspb(grades);
 	}
+	
+	public Student(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			String index, int yearOfEnrollment, int currYearOfStudy, Status status,List<Grades> grades, List<Subject> failedExams) {
+		super();
+		this.surname = surname;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.index = index;
+		this.yearOfEnrollment = yearOfEnrollment;
+		this.currYearOfStudy = currYearOfStudy;
+		this.status = status;
+		this.grades=grades;
+		this.avgMark = initAvg(grades);
+		this.totalESPB=initEspb(grades);
+		this.failedExams = failedExams;
+	}
+	
 	public Student (String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
 		super();

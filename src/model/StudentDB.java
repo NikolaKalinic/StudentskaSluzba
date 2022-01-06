@@ -22,8 +22,10 @@ public class StudentDB {
 	
 	/*Field*/
 	private List<Student> students;
+	private List<Subject> notPassedSubjects;
 	private List<String> colums;
 	private List<String> passedComumns;
+	private List<String> notPassedColumns;
 	
 	
 	/*Consturctor*/
@@ -45,6 +47,13 @@ public class StudentDB {
 		this.passedComumns.add("ESPB");
 		this.passedComumns.add("Ocena");
 		this.passedComumns.add("Datum");
+		
+		this.notPassedColumns = new ArrayList<String>();
+		this.notPassedColumns.add("Šifra predmeta");
+		this.notPassedColumns.add("Naziv predmeta");
+		this.notPassedColumns.add("ESPB");
+		this.notPassedColumns.add("Godina studija");
+		this.notPassedColumns.add("Semestar");
 	}
 	
 	private void initStudent() {
@@ -57,19 +66,24 @@ public class StudentDB {
 		Grades g2 = new Grades(s1,new Subject("ES232", "Algebra", 9, 1, Semestar.Winter),8,LocalDate.of(2021, 1, 12));
 		Grades g3 = new Grades(s1,new Subject("ES233", "Baze podataka 1", 8, 3, Semestar.Winter),10,LocalDate.of(2021, 6, 26));
 		Grades g4 = new Grades(s1,new Subject("ES234", "Fizika", 9, 1, Semestar.Summer),9,LocalDate.of(2021, 6, 26));
+		
+		
 		grades.add(g1);
 		grades1.add(g2);
 		grades1.add(g3);
 		grades2.add(g4);
 		grades2.add(g2);
 		
+		this.notPassedSubjects = new ArrayList<Subject>();
+		notPassedSubjects.add(new Subject("ES235", "Metode optimizacije", 8, 3, Semestar.Winter));
+		notPassedSubjects.add(new Subject("ES231", "OISISI", 6, 3, Semestar.Winter));
 		
 		
 		
 		
 		
 		
-		students.add(new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B,grades1));
+		students.add(new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B,grades1, notPassedSubjects));
 		students.add(new Student( "Ivanovic","Ivan", LocalDate.of(2002,11,8),new Adress("Ivanova","2","Novi Sad","Srbija"), "06636666","ivan@gmail.com","RA-2-2019",2019,3,Status.S,grades));
 		students.add(new Student( "Markovic","Marko", LocalDate.of(2001,2,1),new Adress("Markova","3","Novi Sad","Srbija"), "06666266","marko@gmail.com","RA-3-2019",2019,3,Status.B,grades2));
 		students.add(new Student( "Aleksic","Aleksa", LocalDate.of(2005,12,7),new Adress("Aleksina","4","Novi Sad","Srbija"), "062366666","Aleksa@gmail.com","SW-1-2019",2019,3,Status.B,grades));
@@ -145,6 +159,33 @@ public class StudentDB {
 		}
 	}
 	
+	
+	/*Methods for not passed exams*/
+	
+	public String getNotPassedExamsColumnName(int index) {
+		return this.notPassedColumns.get(index);
+	}
+	
+	public String getNotPassedExamsValueAt(int row, int column) {
+		Subject subject = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getFailedExams().get(row);
+		switch (column) {
+		case 0:
+			return subject.getIdSubject();
+		case 1:
+			return subject.getName();
+		case 2:
+			return Integer.toString(subject.getEspb());
+		case 3:
+			return Integer.toString(subject.getYearOfStudySub());
+		case 4:
+			if(subject.getSemestar().equals(Semestar.Summer))
+				return "Letnji";
+			else
+				return "Zimski";
+		default:
+			return null;
+		}
+	}
 	
 	
 	
