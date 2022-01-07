@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.StudentController;
 import gui.student.MyStudentPanel;
 
 public class StudentDB {
@@ -187,19 +186,13 @@ public class StudentDB {
 			return null;
 		}
 	}
-	public Subject getRowFailed(int rowIndex) {
-		return this.notPassedSubjects.get(rowIndex);
-	}
 	public void deleteFailedExam(Student s,String id) {
 		for(int i =0 ; i<s.getFailedExams().size();i++) {
-			if(s.getFailedExams().get(i).getIdSubject().equals(id)) {
-				notPassedSubjects.remove(s.getFailedExams().get(i));
+			if(s.getFailedExams().get(i).getIdSubject().equals(id)){
+				s.getFailedExams().remove(s.getFailedExams().get(i));
 				break;
 			}
 		}
-	}
-	public List<Subject> getFailedExams(){
-		return notPassedSubjects;
 	}
 	public void addSubjectToFailed(Student student,Subject s) {
 		student.getFailedExams().add(s);

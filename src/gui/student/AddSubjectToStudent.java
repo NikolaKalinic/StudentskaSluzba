@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -23,6 +24,7 @@ import model.SubjectDB;
 
 public class AddSubjectToStudent extends JDialog{
 	
+	private JLabel label;
 	public AddSubjectToStudent() {
 		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("addSubject"),true);
 		setResizable(false);
@@ -32,10 +34,7 @@ public class AddSubjectToStudent extends JDialog{
 		
 		setLayout(new BorderLayout());
 		
-		JPanel northPanel = new JPanel();
-		northPanel.setBackground(Color.white);
-		northPanel.setPreferredSize(new Dimension(1,50));
-		add(northPanel,BorderLayout.NORTH);
+		
 		JPanel westPanel = new JPanel();
 		westPanel.setBackground(Color.white);
 		westPanel.setPreferredSize(new Dimension(50,1));
@@ -91,6 +90,17 @@ public class AddSubjectToStudent extends JDialog{
 				subjects.add(SubjectDB.getInstance().getSubjects().get(i));
 		}
 		JList<Subject> listBox = new JList<Subject>(subjects);
+		
+		
+		JPanel northPanel = new JPanel();
+		northPanel.setBackground(Color.white);
+		northPanel.setPreferredSize(new Dimension(1,50));
+		if(subjects.size()<=0) {
+			label= new JLabel(MainFrame.getInstance().getResourceBundle().getString("subLab"));
+			northPanel.add(label);
+		}
+		add(northPanel,BorderLayout.NORTH);
+		
 		
 		btnOk.addActionListener(new ActionListener() {
 			

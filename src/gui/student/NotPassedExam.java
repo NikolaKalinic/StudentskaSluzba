@@ -64,7 +64,7 @@ public class NotPassedExam extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if((NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()< (StudentDB.getInstance().getFailedExams().size()) && NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow() >= 0)) {
+				if((NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()< (StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getFailedExams().size()) && NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow() >= 0)) {
 					int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
 							MainFrame.getInstance().getResourceBundle().getString("deleteSubject"), MainFrame.getInstance().getResourceBundle().getString("deleteSubject1"), 
 					        JOptionPane.YES_NO_OPTION);

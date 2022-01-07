@@ -79,7 +79,7 @@ public class StudentController {
 			return;
 		}
 		Student s = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
-		Subject sub = StudentDB.getInstance().getRowFailed(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow());
+		Subject sub = s.getFailedExams().get((NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()));
 		StudentDB.getInstance().deleteFailedExam(s, sub.getIdSubject());
 		NotPassedExam.getInstance().updateView();	
 	}

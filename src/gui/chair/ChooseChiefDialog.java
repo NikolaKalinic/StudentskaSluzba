@@ -34,8 +34,8 @@ public class ChooseChiefDialog extends JDialog {
 		JPanel top = new JPanel();
 		top.setPreferredSize(new Dimension(1,25));
 		top.setBackground(Color.white);
-		JLabel lab= new JLabel("Izaberite šefa:");
-		top.add(lab);
+//		JLabel lab= new JLabel("Izaberite šefa:");
+//		top.add(lab);
 		add(top,BorderLayout.NORTH);
 		JPanel bot = new JPanel();
 		bot.setPreferredSize(new Dimension(1,50));
@@ -55,6 +55,13 @@ public class ChooseChiefDialog extends JDialog {
 				tmp=false;
 			if(tmp)
 				p.add(c.getProfessors().get(i));
+		}
+		if(p.size()<=0) {
+			JLabel lab= new JLabel("Ni jedan profesor ne ispunjava uslov da bude šef.");
+			top.add(lab);
+		}else {
+			JLabel lab= new JLabel("Izaberite šefa:");
+			top.add(lab);
 		}
 		JList<Professor> listBox = new JList<Professor>(p);
 		JScrollPane jsp = new JScrollPane(listBox);

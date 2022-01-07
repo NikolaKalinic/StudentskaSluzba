@@ -34,6 +34,7 @@ public class SetChiefDialog extends JDialog {
 		setLocationRelativeTo(MainFrame.getInstance());
 		setLayout(new BorderLayout());
 		
+		
 		/*Top panel for information about chair*/
 		JPanel panTop = new JPanel();
 		panTop.setLayout(new FlowLayout(FlowLayout.CENTER,20,15));
@@ -46,6 +47,7 @@ public class SetChiefDialog extends JDialog {
 		panTop.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
 		panTop.setBackground(Color.white);
 		add(panTop,BorderLayout.NORTH);
+		
 		
 		/*center panel*/
 		JPanel panCen = new JPanel();
@@ -95,6 +97,9 @@ public class SetChiefDialog extends JDialog {
 			}
 		});
 		button2.setFocusPainted(false);
+		
+		
+		
 		JPanel cenNorth = new JPanel();
 		cenNorth.setLayout(new FlowLayout(FlowLayout.LEFT,20,25));
 		cenNorth.setPreferredSize(new Dimension(1,50));
@@ -123,8 +128,6 @@ public class SetChiefDialog extends JDialog {
 		panBot.setPreferredSize(new Dimension(1,250));
 		panBot.setBackground(Color.white);
 		panBot.setLayout(new BorderLayout());
-		JLabel lab = new JLabel("      Trenutni profesori na katedri: ");
-		panBot.add(lab,BorderLayout.NORTH);
 		JPanel botSouth = new JPanel();
 		botSouth.setPreferredSize(new Dimension(1,20));
 		botSouth.setBackground(Color.white);
@@ -146,6 +149,13 @@ public class SetChiefDialog extends JDialog {
 		for(int i =0 ; i<c.getProfessors().size();i++) {
 			p.add(j+". "+c.getProfessors().get(i).getProfNameAndSurname());
 			++j;
+		}
+		if(p.size()<=0) {
+			JLabel lab = new JLabel("      Trenutno nema profesora na ovoj katedri. ");
+			panBot.add(lab,BorderLayout.NORTH);
+		}else {
+			JLabel lab = new JLabel("      Trenutni profesori na katedri: ");
+			panBot.add(lab,BorderLayout.NORTH);
 		}
 		JList<String> listBox = new JList<String>(p);
 		listBox.setBackground(color);

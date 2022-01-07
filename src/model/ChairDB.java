@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class ChairDB {
 	/*Field*/
 	private List<Chair> chairs;
 	private List<String> columns;
-	
 	private ChairDB() {
 		initChair();
 		this.columns = new ArrayList<String>();
@@ -28,9 +25,12 @@ public class ChairDB {
 	private void initChair() {
 		this.chairs=new ArrayList<Chair>();
 		List<Professor> professors = new ArrayList<Professor>();
-		professors.add(new Professor("Milutinovic", "Milutin", "mmilutin@uns.ac.rs", LocalDate.parse("01-01-1960", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Lazina", "1", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "069123324", "20021", "Asistent",  1));
-		professors.add(new Professor("Manjevic", "Mila", "mmila@uns.ac.rs", LocalDate.parse("12-05-1962", DateTimeFormatter.ofPattern("dd-MM-yyyy")), new Adress("Minjina", "15", "Novi Sad", "Srbija"), new Adress("Mikina", "1", "Novi Sad", "Srbija"), "062222222", "24521", "Profesor",  21));
-		chairs.add(new Chair("EA14","Automatika"));
+		professors.add(ProfessorDB.getInstance().getRow(0));
+		professors.add(ProfessorDB.getInstance().getRow(2));
+		List<Professor> professors1 = new ArrayList<Professor>();
+		professors1.add(ProfessorDB.getInstance().getRow(1));
+		professors1.add(ProfessorDB.getInstance().getRow(3));
+		chairs.add(new Chair("EA14","Automatika",professors1));
 		chairs.add(new Chair("EI12","Informatika",professors));
 		chairs.add(new Chair("EG14","Gradjevinja"));
 		chairs.add(new Chair("ES21","Saobracaj"));
