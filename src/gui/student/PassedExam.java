@@ -27,6 +27,7 @@ public class PassedExam extends JPanel{
 	public JLabel label1;
 	public JLabel label2;
 	private JTable passedExamsTable;
+	private JButton button;
 	private PassedExam(){
 		setLayout(new BorderLayout());
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -38,7 +39,7 @@ public class PassedExam extends JPanel{
 		panTop.setLayout(new FlowLayout(FlowLayout.LEFT,width,height));
 		panTop.setBackground(Color.white);
 		panTop.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/15));
-		JButton button = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
+		 button = new JButton(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
 		button.setFocusPainted(false);
 		button.setBackground(new Color(14,98,190));
 		button.setForeground(Color.white);
@@ -96,6 +97,7 @@ public class PassedExam extends JPanel{
 	public void updateLabel() {
 	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
 	     label2.setText(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
+	     button.setText(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
 	     validate();
 	}
 	public void updateView() {

@@ -2,13 +2,14 @@ package controller;
 
 import java.time.LocalDate;
 
-import gui.MyTabbedPane;
 import gui.student.MyStudentPanel;
-import gui.student.MyStudentTable;
+import gui.student.NotPassedExam;
 import model.Adress;
 import model.Status;
 import model.Student;
 import model.StudentDB;
+import model.Subject;
+import model.SubjectDB;
 
 public class StudentController {
 
@@ -63,11 +64,29 @@ public class StudentController {
 		 if(StudentDB.getInstance().existsStudent(id)) {
 			 return true;
 		 }else {
-			 if (getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()).getIndex().equals(id.toUpperCase())) {
+			 if (getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getIndex().equals(id.toUpperCase())) {
 				 return true;
 			 }else
 				 return false;
 		 }
 	}
 	
+	public void deleteFailedExam() {
+		if(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())<0) {
+			return;
+		}
+		if(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()<0) {
+			return;
+		}
+		Student s = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+		Subject sub = StudentDB.getInstance().getRowFailed(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow());
+		StudentDB.getInstance().deleteFailedExam(s, sub.getIdSubject());
+		NotPassedExam.getInstance().updateView();	
+	}
+	
+	public void addSubjectToFailed(Subject s) {
+		Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+		StudentDB.getInstance().addSubjectToFailed(student,s);
+		NotPassedExam.getInstance().updateView();
+	}
 }

@@ -47,6 +47,7 @@ public class AddSubjectToStudent extends JDialog{
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER,30,30));
 		JButton btnOk = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
+	
 		JButton btnCancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
@@ -69,13 +70,13 @@ public class AddSubjectToStudent extends JDialog{
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		Vector<Subject> subjects = new Vector<Subject>();
 		boolean tmp = true;
+		Student s = StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
 		for (int i =0 ; i<SubjectDB.getInstance().getSubjects().size();i++) {
 			tmp=true;
 			/*Prvi uslov je da se ne nalaze ni u listi položenih, kao ni u listi nepoloženih predmeta označenog studenta. 
 			 * 
 			 * Drugi uslov je da je označeni student na odgovarajućoj godini studija (ista ili viša godina studija u odnosu na godinu na kojoj se predmet izvodi).
 			 */
-			Student s = StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
 			for(int j = 0; j<s.getGrades().size();j++) {
 				if(SubjectDB.getInstance().getSubjects().get(i).getIdSubject().equals(s.getGrades().get(j).getSubject().getIdSubject()))
 					tmp=false;
@@ -84,14 +85,22 @@ public class AddSubjectToStudent extends JDialog{
 				if(SubjectDB.getInstance().getSubjects().get(i).getIdSubject().equals(s.getFailedExams().get(j).getIdSubject()))
 						tmp=false;
 			}
-			if(SubjectDB.getInstance().getSubjects().get(i).getYearOfStudySub()>=s.getCurrYearOfStudy())
+			if(SubjectDB.getInstance().getSubjects().get(i).getYearOfStudySub()<s.getCurrYearOfStudy())
 				tmp=false;
 			if(tmp)
 				subjects.add(SubjectDB.getInstance().getSubjects().get(i));
 		}
 		JList<Subject> listBox = new JList<Subject>(subjects);
 		
-		
+		btnOk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StudentController.getInstance().addSubjectToFailed(listBox.getSelectedValue());
+				dispose();
+				
+			}
+		});
 
 		centerPanel.add(listBox);
 

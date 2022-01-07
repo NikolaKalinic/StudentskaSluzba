@@ -32,7 +32,7 @@ public class SubjectDB {
 	
 	private void initSubjects() {
 		this.subjects = new ArrayList<Subject>();
-		subjects.add(new Subject("ES231", "Matematicka analiza 1", 9, 1, Semestar.Winter));
+		subjects.add(new Subject("ES231", "Matematicka analiza 1", 9, 2, Semestar.Winter));
 		subjects.add(new Subject("ES232", "Algebra", 9, 1, Semestar.Winter));
 		subjects.add(new Subject("ES233", "Baze podataka 1", 8, 3, Semestar.Winter));
 		subjects.add(new Subject("ES234", "Fizika", 9, 1, Semestar.Summer));

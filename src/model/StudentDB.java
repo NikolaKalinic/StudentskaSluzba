@@ -76,7 +76,8 @@ public class StudentDB {
 		
 		this.notPassedSubjects = new ArrayList<Subject>();
 		notPassedSubjects.add(new Subject("ES235", "Metode optimizacije", 8, 3, Semestar.Winter));
-		notPassedSubjects.add(new Subject("ES231", "OISISI", 6, 3, Semestar.Winter));
+		notPassedSubjects.add(new Subject("ES236", "OISISI", 6, 3, Semestar.Winter));
+		notPassedSubjects.add(new Subject("ES234", "Fizika", 9, 1, Semestar.Summer));
 		
 		
 		
@@ -86,7 +87,7 @@ public class StudentDB {
 		students.add(new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B,grades1, notPassedSubjects));
 		students.add(new Student( "Ivanovic","Ivan", LocalDate.of(2002,11,8),new Adress("Ivanova","2","Novi Sad","Srbija"), "06636666","ivan@gmail.com","RA-2-2019",2019,3,Status.S,grades,new ArrayList<Subject>()));
 		students.add(new Student( "Markovic","Marko", LocalDate.of(2001,2,1),new Adress("Markova","3","Novi Sad","Srbija"), "06666266","marko@gmail.com","RA-3-2019",2019,3,Status.B,grades2,new ArrayList<Subject>()));
-		students.add(new Student( "Aleksic","Aleksa", LocalDate.of(2005,12,7),new Adress("Aleksina","4","Novi Sad","Srbija"), "062366666","Aleksa@gmail.com","SW-1-2019",2019,3,Status.B,grades,new ArrayList<Subject>()));
+		students.add(new Student( "Aleksic","Aleksa", LocalDate.of(2005,12,7),new Adress("Aleksina","4","Novi Sad","Srbija"), "062366666","Aleksa@gmail.com","SW-1-2019",2019,3,Status.B,new ArrayList<Grades>(),new ArrayList<Subject>()));
 	}
 	
 	
@@ -186,8 +187,23 @@ public class StudentDB {
 			return null;
 		}
 	}
-	
-	
+	public Subject getRowFailed(int rowIndex) {
+		return this.notPassedSubjects.get(rowIndex);
+	}
+	public void deleteFailedExam(Student s,String id) {
+		for(int i =0 ; i<s.getFailedExams().size();i++) {
+			if(s.getFailedExams().get(i).getIdSubject().equals(id)) {
+				notPassedSubjects.remove(s.getFailedExams().get(i));
+				break;
+			}
+		}
+	}
+	public List<Subject> getFailedExams(){
+		return notPassedSubjects;
+	}
+	public void addSubjectToFailed(Student student,Subject s) {
+		student.getFailedExams().add(s);
+	}
 	
 	
 	
