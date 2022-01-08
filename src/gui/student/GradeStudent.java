@@ -43,7 +43,7 @@ public class GradeStudent extends JDialog{
 		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("addGrade"),true);
 		setResizable(false);
 		setSize(new Dimension(300,350));
-		setLocationRelativeTo(MainFrame.getInstance());
+		setLocationRelativeTo(NotPassedExam.getInstance());
 		
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
