@@ -199,6 +199,25 @@ public class StudentDB {
 	}
 	
 	
+	public void addGrade(Student student, Grades grade) {
+		for(int i = 0 ; i<student.getFailedExams().size();i++) {
+			if(student.getFailedExams().get(i).getIdSubject().equals(grade.getSubject().getIdSubject())){
+				student.getFailedExams().remove(student.getFailedExams().get(i));
+				break;
+			}
+		}
+		student.getGrades().add(grade);
+	}
+	
+	public void cancelGrade(Student student, Grades grade) {
+		for(int i = 0 ; i < student.getGrades().size(); i++) {
+			if(student.getGrades().get(i).getSubject().getIdSubject().equals(grade.getSubject().getIdSubject())){
+				student.getGrades().remove(student.getGrades().get(i));
+				break;
+			}
+		}
+		student.getFailedExams().add(grade.getSubject());
+	}
 	
 	
 	

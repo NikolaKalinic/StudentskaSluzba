@@ -5,13 +5,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controller.StudentController;
 import gui.MainFrame;
+import model.Student;
 import model.StudentDB;
 
 public class PassedExam extends JPanel{
@@ -44,6 +50,20 @@ public class PassedExam extends JPanel{
 		button.setBackground(new Color(14,98,190));
 		button.setForeground(Color.white);
 		panTop.add(button,FlowLayout.LEFT);
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if((PassedExam.getInstance().getPassedExamsTable().getSelectedRow() < (StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getGrades().size()) && PassedExam.getInstance().getPassedExamsTable().getSelectedRow() >= 0)) {
+					int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+							MainFrame.getInstance().getResourceBundle().getString("cancelGrade"), MainFrame.getInstance().getResourceBundle().getString("cancelGrade1"), 
+					        JOptionPane.YES_NO_OPTION);
+					if(answer==JOptionPane.YES_OPTION)
+						StudentController.getInstance().cancelGrade();
+				}
+				
+			}
+		});
 		add(panTop,BorderLayout.NORTH);
 		
 		
@@ -95,8 +115,9 @@ public class PassedExam extends JPanel{
 		add(scrollPane, BorderLayout.CENTER);
 	}
 	public void updateLabel() {
-	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getAvgMark());
-	     label2.setText(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb")+StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())).getTotalESPB());
+		 Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg") + student.getAverageMark(student.getGrades()));
+	     label2.setText(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb") + student.getTotalESPB(student.getGrades()));
 	     button.setText(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
 	     validate();
 	}

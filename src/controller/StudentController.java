@@ -4,7 +4,9 @@ import java.time.LocalDate;
 
 import gui.student.MyStudentPanel;
 import gui.student.NotPassedExam;
+import gui.student.PassedExam;
 import model.Adress;
+import model.Grades;
 import model.Status;
 import model.Student;
 import model.StudentDB;
@@ -88,5 +90,39 @@ public class StudentController {
 		Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
 		StudentDB.getInstance().addSubjectToFailed(student,s);
 		NotPassedExam.getInstance().updateView();
+	}
+	
+	public void addGrade(Grades grade) {
+		if(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())<0) {
+			return;
+		}
+		if(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()<0) {
+			return;
+		}
+		Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+		Subject subject = student.getFailedExams().get((NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()));
+		StudentDB.getInstance().deleteFailedExam(student, subject.getIdSubject());
+		StudentDB.getInstance().addGrade(student, grade);
+		
+		NotPassedExam.getInstance().updateView();
+		PassedExam.getInstance().updateView();
+		PassedExam.getInstance().updateLabel();
+	}
+	
+	public void cancelGrade() {
+		if(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())<0) {
+			return;
+		}
+		if(PassedExam.getInstance().getPassedExamsTable().getSelectedRow()<0) {
+			return;
+		}
+		Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+		Grades grade = student.getGrades().get((PassedExam.getInstance().getPassedExamsTable().getSelectedRow()));
+		StudentDB.getInstance().cancelGrade(student, grade);
+		
+		PassedExam.getInstance().updateLabel();
+		PassedExam.getInstance().updateView();
+		NotPassedExam.getInstance().updateView();	
+		
 	}
 }

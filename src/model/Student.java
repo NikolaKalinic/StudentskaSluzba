@@ -94,12 +94,30 @@ public class Student {
 		return sum;
 	}
 	
+	public double getAverageMark(List<Grades> l) {
+		if(l.isEmpty()){
+			return 0;
+		} 
+		double sum = 0;
+		for(Grades g : l) {
+			sum += g.getGrades();
+		}
+		return sum/(l.size());
+	}
 	
 	
+	public int getTotalESPB(List<Grades> l) {
+		int sum = 0;
+		for(Grades g : l) {
+			sum += g.getSubject().getEspb();
+		}
+		return sum;
+	}
 	
 	public int getTotalESPB() {
 		return totalESPB;
 	}
+	
 	public void setTotalESPB(int totalESPB) {
 		this.totalESPB = totalESPB;
 	}

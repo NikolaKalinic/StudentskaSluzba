@@ -51,6 +51,7 @@ public class NotPassedExam extends JPanel{
 		JLabel label = new JLabel();
 		label.setPreferredSize(new Dimension(width - 20, height));
 		 button = new JButton(MainFrame.getInstance().getResourceBundle().getString("add"));
+		 button.setFocusable(false);
 		button.addActionListener(new ActionListener() {
 			
 			@Override
@@ -60,6 +61,7 @@ public class NotPassedExam extends JPanel{
 			
 		});
 		 button1 = new JButton(MainFrame.getInstance().getResourceBundle().getString("delete"));
+		 button1.setFocusable(false);
 		button1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -75,6 +77,14 @@ public class NotPassedExam extends JPanel{
 			}
 		});
 		 button2= new JButton(MainFrame.getInstance().getResourceBundle().getString("take"));
+		 button2.setFocusable(false);
+		 button2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GradeStudent gs = new GradeStudent();
+				}
+			});
 		
 		button.setBackground(new Color(14,98,190));
 		button.setForeground(Color.white);
