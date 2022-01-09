@@ -1,8 +1,15 @@
 package controller;
 
+import java.util.List;
+
+import gui.professor.MyEditingProfessorInformation;
+import gui.professor.MyProfessorPanel;
+import gui.professor.ProfessorSubjects;
 import gui.student.MyStudentTable;
+import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
 import model.Professor;
+import model.ProfessorDB;
 import model.Semestar;
 import model.StudentDB;
 import model.Subject;
@@ -53,6 +60,17 @@ public class SubjectController {
 			 }else
 				 return false;
 		 }
+	}
+	
+	public void addProfessor(Professor professor) {
+		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		subject.setProfesor(professor);
+		MyEditingSubjectDialog.updateProfessor();
+	}
+	
+	public void removeProfessor() {
+		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		subject.removeProfessor();
 	}
 
 }

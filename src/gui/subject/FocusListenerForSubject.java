@@ -175,6 +175,12 @@ public class FocusListenerForSubject implements FocusListener{
 			}
 		}
 		
+		if (txt.getName().equals("profesor")) {
+			if (txt.getText().trim().equals("")) {
+				key = key & 0b0111;
+				}
+		}
+		
 		/*Nije potrebna*/
 //		/*Vadilidation for espb*/
 //		if (txt.getName().equals("profesor")) {

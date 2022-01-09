@@ -90,6 +90,10 @@ public class Subject {
 	public void setProfesor(Professor profesor) {
 		this.professor = profesor;
 	}
+	
+	public void removeProfessor() {
+		this.professor = null;
+	}
 
 	public int getEspb() {
 		return espb;

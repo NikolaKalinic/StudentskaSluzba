@@ -1,8 +1,10 @@
 package gui.subject;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,31 +20,40 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.Timer;
 
 import controller.SubjectController;
 import gui.MainFrame;
+import gui.professor.MyAddSubjectDialog;
 import model.Professor;
 import model.Semestar;
-import model.Status;
 import model.Subject;
+import model.SubjectDB;
 
 public class MyEditingSubjectDialog extends JDialog{
 
 	
 	public int year=1;
 	public Semestar smestar=Semestar.Summer;
+	private static JButton button1;
+	private static JButton button2;
+	private static JButton btnOk;
+	private static JTextField fProfesor;
+	private static Professor primaryProfessor;
+	private static boolean okEnabled;
+	
 	public MyEditingSubjectDialog() {
 		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("editSubject"),true);
 		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
 		smestar=s.getSemestar();
+		okEnabled = false;
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
-		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
+		btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
+		btnOk.setFocusable(false);
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
 		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
@@ -161,21 +172,56 @@ public class MyEditingSubjectDialog extends JDialog{
         JPanel pProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lProfesor = new JLabel("Professor*");
         lProfesor.setPreferredSize(dim);
-        JTextField fProfesor = new JTextField();
+        fProfesor = new JTextField();
+        if(s.getProfesor() == null) {
+        	fProfesor.setText("");
+        	primaryProfessor = null;
+        } else {
+        	fProfesor.setText(s.getProfesor().getProfNameAndSurname());
+        	primaryProfessor = s.getProfesor();
+        }
         fProfesor.setFocusable(false);
         fProfesor.setName("profesor");
-        //fProfesor.addFocusListener(focusListener);
+        fProfesor.addFocusListener(focusListener);
         //fProfesor.setText(s.getProfesor().getProfNameAndSurname());
         //focusListener.setProfessor(s.getProfesor());
-        JToggleButton button1 = new JToggleButton("+");
-        JToggleButton button2 = new JToggleButton("-");
-        button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
-        button2.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
+        
+        button1 = new JButton("+");
+        button2 = new JButton("-");
+        //change font size of JButton;
+        button1.setFont(new Font("Arial", Font.BOLD, 8));
+        button2.setFont(new Font("Arial", Font.BOLD, 8));
+        button1.setFocusable(true);
+        button2.setFocusable(true);
+        button1.setFocusPainted(false);
+        button2.setFocusPainted(false);
+        button1.setBackground(Color.white);
+        button2.setBackground(Color.white);
+        
+        button1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddingProfessorToSubject apts = new AddingProfessorToSubject();
+				
+			}
+		});
+        
+        button2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SubjectController.getInstance().removeProfessor();
+				fProfesor.setText("");
+			}
+        	
+        });
         
         fProfesor.setPreferredSize(dim);
         pProfesor.add(Box.createHorizontalStrut(konst));
         pProfesor.add(lProfesor);
         pProfesor.add(fProfesor);
+        pProfesor.add(Box.createHorizontalStrut(10));
         pProfesor.add(button1);
         pProfesor.add(button2);
         focusListener.lostFocus(pProfesor, btnOk);
@@ -209,9 +255,9 @@ public class MyEditingSubjectDialog extends JDialog{
 		if(s.getEspb()==focusListener.getEspb()) {
 			focusListener.setKey(focusListener.getKey() | 0b0100);
 		}
-//		if(s.getProfesor().equals(focusListener.getProfessor())) {
-//			focusListener.setKey(focusListener.getKey() | 0b1000);
-//		}
+		if(fProfesor.getText().equals(focusListener.getProfessor())) {
+			focusListener.setKey(focusListener.getKey() | 0b1000);
+		}
 		
 		
 		new Timer(200,new ActionListener() {
@@ -219,7 +265,8 @@ public class MyEditingSubjectDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(focusListener.getKey()==0b0111) {
+				checkProfessor();
+				if(focusListener.getKey()==0b0111 && okEnabled) {
 					btnOk.setEnabled(true);
 				}else { 
 					btnOk.setEnabled(false);
@@ -232,7 +279,7 @@ public class MyEditingSubjectDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b0111) {
-					SubjectController.getInstance().editStudent(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, new Professor("Novi","Prof"), focusListener.getEspb());
+					SubjectController.getInstance().editStudent(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()).getProfesor(), focusListener.getEspb());
 					dispose();
 				}
 				
@@ -242,12 +289,15 @@ public class MyEditingSubjectDialog extends JDialog{
 		
 		JButton btnCancel=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.setPreferredSize(new Dimension(90,30));
+		btnCancel.setFocusable(false);
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("studentExitDialog"), MainFrame.getInstance().getResourceBundle().getString("studentExitDialogTitle"), JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
+					Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+					s.setProfesor(primaryProfessor);
 					dispose();
 				}	
 			}
@@ -261,5 +311,25 @@ public class MyEditingSubjectDialog extends JDialog{
         
 		setVisible(true);
 		pack();
+	}
+	
+	public static void updateProfessor() {
+		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		fProfesor.setText(s.getProfesor().getProfNameAndSurname());
+	}
+	
+	public static void checkProfessor() {
+		if(fProfesor.getText().isBlank()) {
+			button1.setEnabled(true);
+			button2.setEnabled(false);
+			okEnabled = false;
+		} else {
+			if(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow() != -1 && SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()).getProfesor() != null ) {
+				fProfesor.setText(SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()).getProfesor().getProfNameAndSurname());
+			}
+			okEnabled = true;
+			button1.setEnabled(false);
+			button2.setEnabled(true);
+		}
 	}
 }
