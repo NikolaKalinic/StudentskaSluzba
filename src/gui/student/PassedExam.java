@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,8 +18,10 @@ import javax.swing.JTable;
 
 import controller.StudentController;
 import gui.MainFrame;
+import model.Grades;
 import model.Student;
 import model.StudentDB;
+import model.Subject;
 
 public class PassedExam extends JPanel{
 	

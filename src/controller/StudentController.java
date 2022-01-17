@@ -123,6 +123,7 @@ public class StudentController {
 		PassedExam.getInstance().updateLabel();
 		PassedExam.getInstance().updateView();
 		NotPassedExam.getInstance().updateView();	
+		MyStudentPanel.getInstance().getStudentTable().repaint();
 		
 	}
 }

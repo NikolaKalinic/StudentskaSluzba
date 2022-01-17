@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Chair {
 	/*Fields*/
+	private int key;
 	private String idChair;
 	private String nameOfChair;
 	private Professor headOfChair; 		
@@ -27,11 +28,26 @@ public class Chair {
 	}
 	
 
+	public Chair(int key, String idChair, String nameOfChair, Professor headOfChair,List<Professor> professors) {
+		super();
+		this.key = key;
+		this.idChair = idChair;
+		this.nameOfChair = nameOfChair;
+		this.headOfChair = headOfChair;
+		this.professors = professors;
+	}
 	/*Getter and setter*/
 	public String getIdChair() {
 		return idChair;
 	}
-
+	
+	
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
 	public void setIdChair(String idChair) {
 		this.idChair = idChair;
 	}

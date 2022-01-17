@@ -97,6 +97,7 @@ public class AddSubjectToStudent extends JDialog{
 		northPanel.setPreferredSize(new Dimension(1,50));
 		if(subjects.size()<=0) {
 			label= new JLabel(MainFrame.getInstance().getResourceBundle().getString("subLab"));
+			btnOk.setEnabled(false);
 			northPanel.add(label);
 		}
 		add(northPanel,BorderLayout.NORTH);

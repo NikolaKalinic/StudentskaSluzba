@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Student {
 	/*Fields*/
+	private int key;
 	private String surname;
 	private String name;
 	private LocalDate dateOfBirth;
@@ -74,6 +75,42 @@ public class Student {
 		this.currYearOfStudy = currYearOfStudy;
 		this.status = status;
 	}
+	
+	public Student (int key,String index,String name, String surname, int currYearOfStudy,LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			 Status status,int yearOfEnrollment) {
+		super();
+		this.key=key;
+		this.surname = surname;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.index = index;
+		this.yearOfEnrollment = yearOfEnrollment;
+		this.currYearOfStudy = currYearOfStudy;
+		this.status = status;
+	}
+	
+	public Student (int key,String index,String name, String surname, int currYearOfStudy,LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			 Status status,int yearOfEnrollment,List<Grades> grades, List<Subject> failedExams) {
+		super();
+		this.key=key;
+		this.surname = surname;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.index = index;
+		this.yearOfEnrollment = yearOfEnrollment;
+		this.currYearOfStudy = currYearOfStudy;
+		this.status = status;
+		this.grades=grades;
+		this.avgMark = initAvg(grades);
+		this.totalESPB=initEspb(grades);
+		this.failedExams = failedExams;
+	}
 	/*Seters and geters*/
 	
 	private double initAvg(List<Grades> l) {
@@ -106,6 +143,14 @@ public class Student {
 	}
 	
 	
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
 	public int getTotalESPB(List<Grades> l) {
 		int sum = 0;
 		for(Grades g : l) {

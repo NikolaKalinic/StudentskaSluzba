@@ -17,10 +17,13 @@ public class MyStudentRowFilter extends RowFilter {
 				 return true;
 		 }
 		 if(split.length==1) {
+			 split[0]=split[0].trim();
 			 boolean b2= entry.getStringValue(2).indexOf(split[0].substring(0, 1).toUpperCase()+split[0].substring(1).toLowerCase()) >=0;
 			 boolean b1=entry.getStringValue(2).indexOf(split[0].trim().toLowerCase()) >=0;
 			 return b1 | b2;
 		 }else if(split.length==2) {
+			 split[0]=split[0].trim();
+			 split[1]=split[1].trim();
 			 int first = entry.getStringValue(2).indexOf(split[0].trim().toLowerCase());
 			 boolean b2= entry.getStringValue(2).indexOf(split[0].substring(0, 1).toUpperCase()+split[0].substring(1).toLowerCase()) >=0;
 			 
@@ -29,6 +32,9 @@ public class MyStudentRowFilter extends RowFilter {
 			 
 			 return ((first>=0)|b2) & ((second>=0)|b3);
 		 }else if(split.length==3) {
+			 split[0]=split[0].trim();
+			 split[1]=split[1].trim();
+			 split[2]=split[2].trim();
 			 int first = entry.getStringValue(0).indexOf(split[0].toUpperCase().trim());
 			 
 			 int second = entry.getStringValue(1).indexOf(split[1].trim().toLowerCase());

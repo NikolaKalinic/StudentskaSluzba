@@ -42,11 +42,11 @@ public class MyStudentTable extends JTable {
 			String o2=oo2.toString();
 			
 			
-			int intCompare1 = o1.split("-")[0].compareTo((o2.split("-")[0]));
+			int intCompare1 = o1.split(" ")[0].compareTo((o2.split(" ")[0]));
 			if (intCompare1 == 0) {
-				int intCompare2 = Integer.valueOf(o1.split("-")[2]).compareTo(Integer.valueOf(o2.split("-")[2]));
+				int intCompare2 = Integer.valueOf(o1.split("/")[1]).compareTo(Integer.valueOf(o2.split("/")[1]));
 				if (intCompare2 == 0) {
-					int intCompare3 = Integer.valueOf(o1.split("-")[1]).compareTo(Integer.valueOf(o2.split("-")[1]));
+					int intCompare3 = Integer.valueOf(o1.split(" ")[1].split("/")[0]).compareTo(Integer.valueOf(o2.split(" ")[1].split("/")[0]));
 					if (intCompare3 == 0) {
 						return o1.compareToIgnoreCase(o2);
 					}else

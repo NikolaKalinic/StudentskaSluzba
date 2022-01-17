@@ -23,6 +23,8 @@ import model.Professor;
 
 public class ChooseChiefDialog extends JDialog {
 
+	private JButton btnOk;
+	private JButton btnCancel;
 	public ChooseChiefDialog(Chair c,JTextField f) {
 		super(MainFrame.getInstance(),"Postavi šefa",true);
 		getContentPane().setBackground(Color.white);
@@ -45,19 +47,21 @@ public class ChooseChiefDialog extends JDialog {
 		JPanel center = new JPanel();
 		center.setLayout(new BorderLayout());
 		center.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		btnOk = new JButton("Postavi");
 		Vector<Professor> p = new Vector<Professor>();
 		boolean tmp ;
 		for(int i =0 ; i<c.getProfessors().size();i++) {
 			tmp=true;
 			if(c.getProfessors().get(i).getExperience()<5)
 				tmp=false;
-			if(c.getProfessors().get(i).getCalling()!="Profesor" && c.getProfessors().get(i).getCalling()!="Vanredni profesor")
+			if(c.getProfessors().get(i).getCalling()!="REDOVNI_PROFESOR" && c.getProfessors().get(i).getCalling()!="VANREDNI_PROFESOR")
 				tmp=false;
 			if(tmp)
 				p.add(c.getProfessors().get(i));
 		}
 		if(p.size()<=0) {
 			JLabel lab= new JLabel("Ni jedan profesor ne ispunjava uslov da bude šef.");
+			btnOk.setEnabled(false);
 			top.add(lab);
 		}else {
 			JLabel lab= new JLabel("Izaberite šefa:");
@@ -71,7 +75,6 @@ public class ChooseChiefDialog extends JDialog {
 		
 		
 		
-		JButton btnOk = new JButton("Postavi");
 		btnOk.addActionListener(new ActionListener() {
 			
 			@Override
@@ -83,7 +86,7 @@ public class ChooseChiefDialog extends JDialog {
 				}
 			}
 		});
-		JButton btnCancel = new JButton("Odustani");
+		btnCancel = new JButton("Odustani");
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override

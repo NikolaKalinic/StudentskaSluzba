@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import controller.StudentController;
@@ -90,7 +91,7 @@ public class MyEditigStudentInformation extends JPanel {
         JLabel lBirthDate = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentDate"));
         lBirthDate.setPreferredSize(dim);
         JTextField fBirthDate = new JTextField();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY.");
         fBirthDate.setText(formatter.format(s.getDaateOfBirth()));
         focusListener.setDate(s.getDaateOfBirth());
         fBirthDate.setName("date");
@@ -107,8 +108,16 @@ public class MyEditigStudentInformation extends JPanel {
         JLabel lAdress = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentAdress"));
         lAdress.setPreferredSize(dim);
         JTextField fAdress = new JTextField();
+        try {
         fAdress.setText(s.getAdress().toString());
         focusListener.setAdress(s.getAdress());
+        }catch(Exception e) {
+        	 SwingUtilities.invokeLater(new Runnable() {
+        	      public void run() {
+        	    	  fAdress.requestFocus();
+        	      }
+        	    });
+        }
         fAdress.setName("adress");
         fAdress.addFocusListener(focusListener);
         fAdress.setPreferredSize(dim);

@@ -57,11 +57,6 @@ public class MyStudentPanel extends JPanel {
 	public JTable getStudentTable() {
 		return studentTable;
 	}
-	public void search(String str) {
-//		AbstractTableModelStudent model = (AbstractTableModelStudent) studentTable.getModel();
-//		TableRowSorter<AbstractTableModelStudent> trs = new TableRowSorter<>(model);
-//		studentTable.setRowSorter(trs);
-//		trs.setRowFilter(RowFilter.regexFilter(str));
-	}
+
 	
 }

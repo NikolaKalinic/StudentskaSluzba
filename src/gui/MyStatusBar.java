@@ -5,8 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,11 +23,10 @@ import javax.swing.event.ChangeListener;
 
 
 public class MyStatusBar {
-	private String s1;
-	private String s2;
-	private String s3;
-	private String s4;
+
 	JLabel statusLabel;
+	private DateFormat format;
+	private  DateTimeFormatter dateFormat;
 	
 	public MyStatusBar(MainFrame mf) {
 		
@@ -54,16 +56,23 @@ public class MyStatusBar {
 		statusPanel.add(Box.createGlue());
 
             
-		 DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy.");
-		 Calendar cal = Calendar.getInstance();
-		 JLabel statusTime = new JLabel(dateFormat.format(cal.getTime()));
+//		 DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy.");
+//		 Calendar cal = Calendar.getInstance();
+//		 JLabel statusTime = new JLabel(dateFormat.format(cal.getTime()));
+		
+		dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+		
+		
+		format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
+		Calendar cal = Calendar.getInstance();
+		 JLabel statusTime = new JLabel(format.format(cal.getTime())+ " "+LocalDate.now().format(dateFormat));
 		
 		 /*taken from stackoverflow*/
 		new Timer(1000, new ActionListener() {						
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            Calendar cal = Calendar.getInstance();
-	           statusTime.setText(dateFormat.format(cal.getTime()));
+	           statusTime.setText(format.format(cal.getTime()) + " "+LocalDate.now().format(dateFormat));
 	        }
 	    }).start();
 		
@@ -80,6 +89,8 @@ public class MyStatusBar {
 				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusSubject"));
 			else 
 				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
+			dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+			format = DateFormat.getTimeInstance(DateFormat.DEFAULT, Locale.getDefault());
 		}
 	}
 	

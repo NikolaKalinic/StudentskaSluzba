@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import model.StudentDB;
+
 public class MainFrame extends JFrame{
 	
 	private static MainFrame instance = null;
@@ -72,7 +74,7 @@ public class MainFrame extends JFrame{
 		tb.initComponents();
 		MyTabbedPane.getInstance().initComponents();
 		sb.initComponents();
-
+		
 		UIManager.put("OptionPane.yesButtonText", resourceBundle.getObject("yesOption"));
 		UIManager.put("OptionPane.noButtonText", resourceBundle.getObject("noOption"));
 		UIManager.put("OptionPane.okButtonText", resourceBundle.getObject("okOption"));

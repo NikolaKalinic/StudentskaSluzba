@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Subject {
 	/*Fields*/
+	private int key;
 	private String idSubject;
 	private String name;
 	private Semestar semestar;
@@ -48,6 +49,15 @@ public class Subject {
 		this.yearOfStudySub = yearOfStudySub;
 		this.semestar = semestar;
 		
+	}
+	public Subject(int key,String idSbuject,String name,int yearOfStudySub,int espb,Professor p,Semestar semestar) {
+		this.key=key;
+		this.idSubject = idSbuject;
+		this.name = name;
+		this.espb = espb;
+		this.yearOfStudySub = yearOfStudySub;
+		this.semestar = semestar;
+		this.professor=p;
 	}
 
 	/* Seters and geters*/
@@ -102,7 +112,15 @@ public class Subject {
 	public void setEspb(int espb) {
 		this.espb = espb;
 	}
+	
+	public int getKey() {
+		return key;
+	}
 
+	public void setKey(int id) {
+		this.key = id;
+	}
+	
 	public Set<Student> getStudentsPassed() {
 		return studentsPassed;
 	}

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Professor {
-	
+	private int key;
 	private String surname;
 	private String name;
 	private String email;
@@ -53,14 +53,36 @@ public class Professor {
 		this.experience = experience;
 	}
 
+	
 
-
+	public Professor(int key, String id, String name, String surname, LocalDate birthDate, Adress homeAdress, String phoneNumber, String email,
+			Adress workAdress, int experience, String calling,List<Subject> courseList) {
+		super();
+		this.key = key;
+		this.surname = surname;
+		this.name = name;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.homeAdress = homeAdress;
+		this.workAdress = workAdress;
+		this.phoneNumber = phoneNumber;
+		this.id = id;
+		this.calling = calling;
+		this.experience = experience;
+		this.courseList = courseList;
+	}
 	public List<Subject> getCourseList() {
 		return courseList;
 	}
 
+	
 
-
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
 	public void setCourseList(List<Subject> courseList) {
 		this.courseList = courseList;
 	}
