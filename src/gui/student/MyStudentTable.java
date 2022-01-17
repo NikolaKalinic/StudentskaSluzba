@@ -9,9 +9,23 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
+import gui.MainFrame;
+import model.StudentDB;
+
 public class MyStudentTable extends JTable {
+	
+	private static MyStudentTable instance = null;
+	public static MyStudentTable getInstance() {
+		if(instance==null) {
+			instance=new MyStudentTable();
+		}
+		return instance;	
+	}
+	
+	
+	
 	public static TableRowSorter trs;
-	public MyStudentTable() {
+	private MyStudentTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -58,4 +72,12 @@ public class MyStudentTable extends JTable {
 		}
 		
 	};
+	
+	public void initComponents() {
+		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("index"));
+		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("name"));
+		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("surname"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudy"));
+		getColumnModel().getColumn(5).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("avgMark"));
+	}
 }

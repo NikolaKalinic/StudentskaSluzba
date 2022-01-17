@@ -45,7 +45,7 @@ public class MyStudentPanel extends JPanel {
 		studentTableView();
 	}
 	private void studentTableView() {
-		studentTable = new MyStudentTable();
+		studentTable = MyStudentTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(studentTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

@@ -43,7 +43,7 @@ public class MySubjectPanel extends JPanel {
 		subjectTableView();
 	}
 	private void subjectTableView() {
-		subjectTable = new MySubjectTable();
+		subjectTable = MySubjectTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(subjectTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

@@ -131,7 +131,7 @@ public class NotPassedExam extends JPanel{
 		NotPassedExamsTableView();
 	}
 	private void NotPassedExamsTableView() {
-		NotPassedExamsTable = new MyNotPassedExamsTable();
+		NotPassedExamsTable = MyNotPassedExamsTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(NotPassedExamsTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

@@ -26,12 +26,15 @@ import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
+import gui.student.MyNotPassedExamsTable;
+import gui.student.MyPassedExamsTable;
 import gui.student.MyStudentPanel;
 import gui.student.MyStudentRowFilter;
 import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
+import gui.subject.MySubjectTable;
 import model.ChairDB;
 import model.ProfessorDB;
 import model.StudentDB;
@@ -226,6 +229,12 @@ public class MyToolBar extends JToolBar {
 		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
 		searchField.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipField"));
 		loupe.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipSearch"));
+		MyStudentTable.getInstance().initComponents();
+		MyPassedExamsTable.getInstance().initComponents();
+		MyNotPassedExamsTable.getInstance().initComponents();
+		MySubjectTable.getInstance().initComponents();
+		MyStudentTable.getInstance().repaint();
+		MySubjectTable.getInstance().repaint();
 	}
 
 }

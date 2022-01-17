@@ -70,6 +70,7 @@ public class SubjectController {
 	
 	public void removeProfessor() {
 		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
 		subject.removeProfessor();
 	}
 

@@ -7,10 +7,20 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
+import gui.MainFrame;
+import model.StudentDB;
+
 
 public class MyNotPassedExamsTable extends JTable{
 
-	public MyNotPassedExamsTable() {
+	private static MyNotPassedExamsTable instance = null;
+	public static MyNotPassedExamsTable getInstance() {
+		if(instance==null) {
+			instance=new MyNotPassedExamsTable();
+		}
+		return instance;	
+	}
+	private MyNotPassedExamsTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -28,5 +38,10 @@ public class MyNotPassedExamsTable extends JTable{
 				c.setBackground(Color.WHITE);
 			}
 		return c;
+	}
+	public void initComponents() {
+		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("idSubject"));
+		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nameSubject"));
+		getColumnModel().getColumn(3).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("yearOfStudy"));
 	}
 }

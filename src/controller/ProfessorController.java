@@ -10,6 +10,7 @@ import model.ChairDB;
 import model.Professor;
 import model.ProfessorDB;
 import model.Subject;
+import model.SubjectDB;
 
 public class ProfessorController {
 	
@@ -96,6 +97,7 @@ public class ProfessorController {
 		List<String> subs  = new ArrayList<String>();
 		int[] index = ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRows();
 		for (int i = 0 ;i< index.length;i++) {
+			p.getCourseList().get(index[i]).removeProfessor();
 			subs.add(p.getCourseList().get(index[i]).getIdSubject());
 		}
 		ProfessorDB.getInstance().removeSubject(p,subs);
@@ -103,11 +105,22 @@ public class ProfessorController {
 	}
 	public void addSubject(List<Subject> s) {
 		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		for(int i = 0 ; i<s.size();i++) {
+			s.get(i).setProfesor(p);
+		}
 		ProfessorDB.getInstance().addSubject(p,s);
 		ProfessorSubjects.getInstance().updateView();
 	}
 	
-	
+	public void removeSubjectFromProfessor(int subKey,int profKey) {
+		for(int i =0; i<ProfessorDB.getInstance().getProfWithKey(profKey).getCourseList().size();i++) {
+			if(ProfessorDB.getInstance().getProfWithKey(profKey).getCourseList().get(i).getKey()==subKey)
+				ProfessorDB.getInstance().getProfWithKey(profKey).getCourseList().remove(i);
+		}
+	}
+	public void addSubject(int subKey,int profKey) {
+		ProfessorDB.getInstance().getProfWithKey(profKey).getCourseList().add(SubjectDB.getInstance().getSubjectWithKey(subKey));
+	}
 	/*----------------------------------------*/
 
 }

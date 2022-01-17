@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import controller.ProfessorController;
 import controller.SubjectController;
 import gui.MainFrame;
 import gui.professor.MyAddSubjectDialog;
@@ -315,6 +316,7 @@ public class MyEditingSubjectDialog extends JDialog{
 	
 	public static void updateProfessor() {
 		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		ProfessorController.getInstance().addSubject(s.getKey(), s.getProfesor().getKey());
 		fProfesor.setText(s.getProfesor().getProfNameAndSurname());
 	}
 	

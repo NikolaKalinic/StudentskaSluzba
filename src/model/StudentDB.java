@@ -2,9 +2,11 @@
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import gui.student.MyStudentPanel;
 
 public class StudentDB {
@@ -21,7 +23,6 @@ public class StudentDB {
 	
 	/*Field*/
 	private List<Student> students;
-	private List<Subject> notPassedSubjects;
 	private List<String> colums;
 	private List<String> passedComumns;
 	private List<String> notPassedColumns;
@@ -41,46 +42,22 @@ public class StudentDB {
 		
 		
 		this.passedComumns = new ArrayList<String>();
-		this.passedComumns.add("Šifra predmeta");
-		this.passedComumns.add("Naziv predmeta");
+		this.passedComumns.add(MainFrame.getInstance().getResourceBundle().getString("idSubject"));
+		this.passedComumns.add(MainFrame.getInstance().getResourceBundle().getString("nameSubject"));
 		this.passedComumns.add("ESPB");
-		this.passedComumns.add("Ocena");
-		this.passedComumns.add("Datum");
+		this.passedComumns.add(MainFrame.getInstance().getResourceBundle().getString("grade"));
+		this.passedComumns.add(MainFrame.getInstance().getResourceBundle().getString("date"));
 		
 		this.notPassedColumns = new ArrayList<String>();
-		this.notPassedColumns.add("Šifra predmeta");
-		this.notPassedColumns.add("Naziv predmeta");
+		this.notPassedColumns.add(MainFrame.getInstance().getResourceBundle().getString("idSubject"));
+		this.notPassedColumns.add(MainFrame.getInstance().getResourceBundle().getString("nameSubject"));
 		this.notPassedColumns.add("ESPB");
-		this.notPassedColumns.add("Godina studija");
+		this.notPassedColumns.add(MainFrame.getInstance().getResourceBundle().getString("yearOfStudy"));
 		this.notPassedColumns.add("Semestar");
 	}
 	
 	private void initStudent() {
-		Student s1 = new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B);
 		this.students=new ArrayList<Student>();
-		List<Grades> grades = new ArrayList<Grades>();
-		List<Grades> grades1 = new ArrayList<Grades>();
-		List<Grades> grades2 = new ArrayList<Grades>();
-		Grades g1 = new Grades(s1,new Subject("ES231", "Matematicka analiza 1", 9, 1, Semestar.Winter),7,LocalDate.of(2021, 6, 26));
-		Grades g2 = new Grades(s1,new Subject("ES232", "Algebra", 9, 1, Semestar.Winter),8,LocalDate.of(2021, 1, 12));
-		Grades g3 = new Grades(s1,new Subject("ES233", "Baze podataka 1", 8, 3, Semestar.Winter),10,LocalDate.of(2021, 6, 26));
-		Grades g4 = new Grades(s1,new Subject("ES234", "Fizika", 9, 1, Semestar.Summer),9,LocalDate.of(2021, 6, 26));
-		
-		
-		grades.add(g1);
-		grades1.add(g2);
-		grades1.add(g3);
-		grades2.add(g4);
-		grades2.add(g2);
-		
-		this.notPassedSubjects = new ArrayList<Subject>();
-		notPassedSubjects.add(new Subject("ES235", "Metode optimizacije", 8, 3, Semestar.Winter));
-		notPassedSubjects.add(new Subject("ES236", "OISISI", 6, 3, Semestar.Winter));
-		notPassedSubjects.add(new Subject("ES234", "Fizika", 9, 1, Semestar.Summer));
-		
-		
-		
-		
 		
 		/* TESTIIIIIIIIIIIIIIIIIIIING */
 		Adress l1 = new Adress("Šafarikova","2","Novi Sad","Srbija");
@@ -165,10 +142,6 @@ public class StudentDB {
 		studGrades16.add(new Grades(getStudWithKey(16),SubjectDB.getInstance().getSubjectWithKey(16),9,LocalDate.parse("04.02.2019.",formatter)));
 		getStudWithKey(16).setGrades(studGrades16);
 		/*---------------------------------------------------*/
-//		students.add(new Student( "Perovic","Petar", LocalDate.of(2000,12,7),new Adress("Perina","1","Novi Sad","Srbija"), "06666666","petar@gmail.com","RA-1-2019",2019,3,Status.B,grades1, notPassedSubjects));
-//		students.add(new Student( "Ivanovic","Ivan", LocalDate.of(2002,11,8),new Adress("Ivanova","2","Novi Sad","Srbija"), "06636666","ivan@gmail.com","RA-2-2019",2019,3,Status.S,grades,new ArrayList<Subject>()));
-//		students.add(new Student( "Markovic","Marko", LocalDate.of(2001,2,1),new Adress("Markova","3","Novi Sad","Srbija"), "06666266","marko@gmail.com","RA-3-2019",2019,3,Status.B,grades2,new ArrayList<Subject>()));
-//		students.add(new Student( "Aleksic","Aleksa", LocalDate.of(2005,12,7),new Adress("Aleksina","4","Novi Sad","Srbija"), "062366666","Aleksa@gmail.com","SW-1-2019",2019,3,Status.B,new ArrayList<Grades>(),new ArrayList<Subject>()));
 	}
 	
 	
@@ -209,9 +182,9 @@ public class StudentDB {
 			return Integer.toString(student.getCurrYearOfStudy());
 		case 4:
 			if(student.getStatus().equals(Status.B))
-				return "Budzet";
+				return MainFrame.getInstance().getResourceBundle().getString("studentBudget");
 			else
-				return "Samofinansiranje";
+				return MainFrame.getInstance().getResourceBundle().getString("studentSelf");
 		case 5: 
 			//return Double.toString(student.getAverageMark(student.getGrades()));
 			return String.format("%.2f",student.getAverageMark(student.getGrades()));
@@ -243,7 +216,7 @@ public class StudentDB {
 		case 3:
 			return Integer.toString(grades.getGrades());
 		case 4:
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			DateTimeFormatter formatter =  DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 			return grades.getDateExam().format(formatter);	
 		default:
 			return null;
@@ -270,9 +243,9 @@ public class StudentDB {
 			return Integer.toString(subject.getYearOfStudySub());
 		case 4:
 			if(subject.getSemestar().equals(Semestar.Summer))
-				return "Letnji";
+				return  MainFrame.getInstance().getResourceBundle().getString("summer");
 			else
-				return "Zimski";
+				return MainFrame.getInstance().getResourceBundle().getString("winter");
 		default:
 			return null;
 		}

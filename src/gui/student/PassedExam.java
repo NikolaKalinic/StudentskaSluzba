@@ -113,7 +113,7 @@ public class PassedExam extends JPanel{
 		updateLabel();
 	}
 	private void passedExamsTableView() {
-		passedExamsTable = new MyPassedExamsTable();
+		passedExamsTable =MyPassedExamsTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(passedExamsTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

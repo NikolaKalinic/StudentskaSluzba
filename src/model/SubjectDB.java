@@ -4,6 +4,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
+
 public class SubjectDB {
 	
 	private static SubjectDB instance = null;
@@ -32,12 +34,7 @@ public class SubjectDB {
 	
 	private void initSubjects() {
 		this.subjects = new ArrayList<Subject>();
-//		subjects.add(new Subject("ES231", "Matematicka analiza 1", 9, 2, Semestar.Winter));
-//		subjects.add(new Subject("ES232", "Algebra", 9, 1, Semestar.Winter));
-//		subjects.add(new Subject("ES233", "Baze podataka 1", 8, 3, Semestar.Winter));
-//		subjects.add(new Subject("ES234", "Fizika", 9, 1, Semestar.Summer));
-		
-		///
+
 		subjects.add(new Subject(1	,   "p1"    ,"osnove programiranja"	    	    ,1,	7	,ProfessorDB.getInstance().getProfWithKey(2),Semestar.Winter));
 		subjects.add(new Subject(2	,   "p2"    ,"statistika"		        	    ,3,	8	,ProfessorDB.getInstance().getProfWithKey(2)	    ,Semestar.Summer));
 		subjects.add(new Subject(3	,   "p3"    ,"algoritmi i strukture podataka"	,2,	9	,ProfessorDB.getInstance().getProfWithKey(2)	    ,Semestar.Summer));
@@ -68,6 +65,25 @@ public class SubjectDB {
 		subjects.add(new Subject(28,	"p28"	,"Projektovanje softvera"		    ,3,	5	,ProfessorDB.getInstance().getProfWithKey(18)	    ,Semestar.Winter));
 		subjects.add(new Subject(29,	"p29"	,"Informacioni sistemi"		        ,4,	6	,ProfessorDB.getInstance().getProfWithKey(17)	    ,Semestar.Winter));
 		subjects.add(new Subject(30,	"p30"	,"Masinsko ucenje"			        ,4,	7	,null	,Semestar.Summer));
+		
+		ProfessorDB.getInstance().getProfessors().get(1).getCourseList().add(subjects.get(0));
+		ProfessorDB.getInstance().getProfessors().get(1).getCourseList().add(subjects.get(1));
+		ProfessorDB.getInstance().getProfessors().get(1).getCourseList().add(subjects.get(2));
+		ProfessorDB.getInstance().getProfessors().get(1).getCourseList().add(subjects.get(3));
+		ProfessorDB.getInstance().getProfessors().get(4).getCourseList().add(subjects.get(7));
+		ProfessorDB.getInstance().getProfessors().get(4).getCourseList().add(subjects.get(8));
+		ProfessorDB.getInstance().getProfessors().get(4).getCourseList().add(subjects.get(9));
+		ProfessorDB.getInstance().getProfessors().get(5).getCourseList().add(subjects.get(12));
+		ProfessorDB.getInstance().getProfessors().get(5).getCourseList().add(subjects.get(13));
+		ProfessorDB.getInstance().getProfessors().get(5).getCourseList().add(subjects.get(11));
+		ProfessorDB.getInstance().getProfessors().get(6).getCourseList().add(subjects.get(14));
+		ProfessorDB.getInstance().getProfessors().get(6).getCourseList().add(subjects.get(15));
+		ProfessorDB.getInstance().getProfessors().get(16).getCourseList().add(subjects.get(24));
+		ProfessorDB.getInstance().getProfessors().get(16).getCourseList().add(subjects.get(28));
+		ProfessorDB.getInstance().getProfessors().get(17).getCourseList().add(subjects.get(25));
+		ProfessorDB.getInstance().getProfessors().get(17).getCourseList().add(subjects.get(27));
+		ProfessorDB.getInstance().getProfessors().get(18).getCourseList().add(subjects.get(26));
+		
 		}
 	
 	/*getters/setter*/
@@ -112,9 +128,9 @@ public class SubjectDB {
 			return String.valueOf(subject.getYearOfStudySub());
 		case 4:
 			if(subject.getSemestar().equals(Semestar.Summer))
-				return "Letnji";
+				return MainFrame.getInstance().getResourceBundle().getString("summer");
 			else
-				return "Zimski";
+				return MainFrame.getInstance().getResourceBundle().getString("winter");
 		default:
 			return null;	
 		}
