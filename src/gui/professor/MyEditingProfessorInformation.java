@@ -345,7 +345,7 @@ public class MyEditingProfessorInformation extends JPanel {
 			panel.add(idInfo, cIdInfo);
 			
 			JLabel calling = new JLabel("Zvanje");
-			String[] callings = {"-", "Asistent", "Docent", "Vanredni profesor", "Profesor"};
+			String[] callings = {"-", "Asistent", "DOCENT", "VANREDNI_PROFESOR", "REDOVNI_PROFESOR"};
 			comboCalling = new JComboBox<String>(callings);
 			comboCalling.setSelectedItem(professor.getCalling());
 			GridBagConstraints cCalling =  new GridBagConstraints();

@@ -213,7 +213,8 @@ public class StudentDB {
 			else
 				return "Samofinansiranje";
 		case 5: 
-			return Double.toString(student.getAverageMark(student.getGrades()));
+			//return Double.toString(student.getAverageMark(student.getGrades()));
+			return String.format("%.2f",student.getAverageMark(student.getGrades()));
 			
 		default:
 			return null;

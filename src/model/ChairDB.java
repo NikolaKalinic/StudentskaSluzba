@@ -113,6 +113,33 @@ public class ChairDB {
 			}
 		}
 	}
+	public void removeProfessorFromChair(int i,int key) {
+		for(int j=0;j<chairs.get(i).getProfessors().size();j++) {
+			if(chairs.get(i).getProfessors().get(j).getKey()==key) {
+				chairs.get(i).getProfessors().remove(j);
+			}
+		}
+		if(chairs.get(i).getHeadOfChair().getKey()==key) {
+			chairs.get(i).setHeadOfChair(null);
+		}
+	}
+	public void editProfessorFromChair(int i,Professor p,int key ) {
+		for(int j=0;j<chairs.get(i).getProfessors().size();j++) {
+			if(chairs.get(i).getProfessors().get(j).getKey()==key) {
+				chairs.get(i).getProfessors().get(j).setBirthDate(p.getBirthDate());
+				chairs.get(i).getProfessors().get(j).setCalling(p.getCalling());
+				chairs.get(i).getProfessors().get(j).setCourseList(p.getCourseList());
+				chairs.get(i).getProfessors().get(j).setEmail(p.getEmail());
+				chairs.get(i).getProfessors().get(j).setExperience(p.getExperience());
+				chairs.get(i).getProfessors().get(j).setHomeAdress(p.getHomeAdress());
+				chairs.get(i).getProfessors().get(j).setId(p.getId());
+				chairs.get(i).getProfessors().get(j).setName(p.getName());
+				chairs.get(i).getProfessors().get(j).setPhoneNumber(p.getPhoneNumber());
+				chairs.get(i).getProfessors().get(j).setSurname(p.getSurname());
+				chairs.get(i).getProfessors().get(j).setWorkAdress(p.getWorkAdress());
+			}
+		}
+	}
 	public void editChair(Chair s,String id, String name,Professor p) {
 		if(existsChair(id)) {
 			s.setIdChair(id);

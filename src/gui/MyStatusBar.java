@@ -90,7 +90,7 @@ public class MyStatusBar {
 			else 
 				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
 			dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-			format = DateFormat.getTimeInstance(DateFormat.DEFAULT, Locale.getDefault());
+			format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
 		}
 	}
 	

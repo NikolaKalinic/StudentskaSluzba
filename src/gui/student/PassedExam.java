@@ -119,7 +119,7 @@ public class PassedExam extends JPanel{
 	}
 	public void updateLabel() {
 		 Student student = StudentDB.getInstance().getRow(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
-	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg") + student.getAverageMark(student.getGrades()));
+	     label1.setText(MainFrame.getInstance().getResourceBundle().getString("labelAvg") + String.format("%.2f",student.getAverageMark(student.getGrades())));
 	     label2.setText(MainFrame.getInstance().getResourceBundle().getString("labelTotalEspb") + student.getTotalESPB(student.getGrades()));
 	     button.setText(MainFrame.getInstance().getResourceBundle().getString("cancelGrade"));
 	     validate();
