@@ -65,7 +65,6 @@ public class SubjectController {
 	public void addProfessor(Professor professor) {
 		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
 		subject.setProfesor(professor);
-		MyEditingSubjectDialog.updateProfessor();
 	}
 	
 	public void removeProfessor() {
