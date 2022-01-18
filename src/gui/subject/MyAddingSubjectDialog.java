@@ -86,7 +86,7 @@ public class MyAddingSubjectDialog extends JDialog{
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				year=combo.getSelectedIndex();		//KRECE OD NULE TRBEACE TI NEGDE
+				year=combo.getSelectedIndex();		
 			}
 			
 			@Override
@@ -149,30 +149,6 @@ public class MyAddingSubjectDialog extends JDialog{
         focusListener.lostFocus(pESPB, btnOk);
         
         
-        /*Panel for profesor*/
-//        JPanel pProfesor = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//        JLabel lProfesor = new JLabel("Profesor*");
-//        lProfesor.setPreferredSize(dim);
-//        JTextField fProfesor = new JTextField();
-//        fProfesor.setFocusable(false);
-//        fProfesor.setToolTipText("Unesite predmetnog profesora.");
-//        fProfesor.setName("profesor");
-//        //fProfesor.addFocusListener(focusListener);
-//        JToggleButton button1 = new JToggleButton("+");
-//        JToggleButton button2 = new JToggleButton("-");
-//        button2.setEnabled(false);
-//        button1.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
-//        button2.setPreferredSize(new Dimension(kit.getScreenSize().width/45,kit.getScreenSize().height/50));
-//        
-//        fProfesor.setPreferredSize(dim);
-//        pProfesor.add(Box.createHorizontalStrut(konst));
-//        pProfesor.add(lProfesor);
-//        pProfesor.add(fProfesor);
-//        pProfesor.add(button1);
-//        pProfesor.add(button2);
-//        focusListener.lostFocus(pProfesor, btnOk);
-        
-        
         panCenter.add(Box.createVerticalStrut(25));
         panCenter.add(pYear);
         panCenter.add(pCode);
@@ -180,7 +156,6 @@ public class MyAddingSubjectDialog extends JDialog{
         panCenter.add(pSemestar);
 
         panCenter.add(pESPB);
-      //  panCenter.add(pProfesor);
         panCenter.add(Box.createVerticalStrut(25));  
         add(panCenter,BorderLayout.CENTER);
 		
@@ -197,7 +172,6 @@ public class MyAddingSubjectDialog extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(focusListener.getKey()==0b0111) {
 					btnOk.setEnabled(true);
 				}else { 
@@ -212,7 +186,7 @@ public class MyAddingSubjectDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b0111) {
-					SubjectController.getInstance().addSubject(focusListener.getIdSubject(), focusListener.getName(), smestar, year, focusListener.getProfessor(), focusListener.getEspb());
+					SubjectController.getInstance().addSubject(focusListener.getIdSubject(), focusListener.getName(), smestar, combo.getSelectedIndex()+1, focusListener.getProfessor(), focusListener.getEspb());
 					dispose();
 				}
 				

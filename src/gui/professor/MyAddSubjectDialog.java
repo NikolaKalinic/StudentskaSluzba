@@ -90,6 +90,9 @@ public class MyAddSubjectDialog extends JDialog {
 				if(SubjectDB.getInstance().getSubjects().get(i).getIdSubject().equals(p.getCourseList().get(j).getIdSubject()))
 					flag=true;
 			}
+			/*only one profesor on subject*/
+			if(SubjectDB.getInstance().getSubjects().get(i).getProfesor()==null)
+				flag=true;
 			if(flag==false)
 				subjects.add(SubjectDB.getInstance().getSubjects().get(i));
 		}

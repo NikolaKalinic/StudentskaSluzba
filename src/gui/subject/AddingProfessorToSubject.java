@@ -29,7 +29,7 @@ public class AddingProfessorToSubject extends JDialog {
 	public AddingProfessorToSubject() {
 		super(MainFrame.getInstance(),"    " + MainFrame.getInstance().getResourceBundle().getString("addProfessorToSubject"),true);
 		setResizable(false);
-		setSize(200,400);
+		setSize(300,400);
 		setLocationRelativeTo(MainFrame.getInstance());
 		setLayout(new BorderLayout());
 		

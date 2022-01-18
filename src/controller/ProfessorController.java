@@ -61,6 +61,12 @@ public class ProfessorController {
 				}
 			}
 		}
+		for(int i =0;i<professor.getCourseList().size();i++) {
+			for(int j=0;j<SubjectDB.getInstance().getSubjects().size();j++)
+				if(professor.getCourseList().get(i).getKey()==SubjectDB.getInstance().getSubjects().get(j).getKey()) {
+					SubjectDB.getInstance().getSubjects().get(j).removeProfessor();
+			}
+		}
 	}
 	
 	public void editProfessor(int selectedRowIndex, String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
