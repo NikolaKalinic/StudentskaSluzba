@@ -346,9 +346,9 @@ public class MyEditingProfessorInformation extends JPanel {
 			panel.add(idInfo, cIdInfo);
 			
 			JLabel calling = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCalling"));
-			String[] callings = {"-", MainFrame.getInstance().getResourceBundle().getString("profCallingAssistant"), MainFrame.getInstance().getResourceBundle().getString("profCallingLecturer"), MainFrame.getInstance().getResourceBundle().getString("profCallingAssociateProfessor"), MainFrame.getInstance().getResourceBundle().getString("profCallingProfessor")};
+			String[] callings = {"-", MainFrame.getInstance().getResourceBundle().getString("profCallingLecturer"), MainFrame.getInstance().getResourceBundle().getString("profCallingAssociateProfessor"), MainFrame.getInstance().getResourceBundle().getString("profCallingProfessor")};
 			comboCalling = new JComboBox<String>(callings);
-			comboCalling.setSelectedItem(professor.getCalling());
+			comboCalling.setSelectedIndex(professor.getCallingIndex());
 			GridBagConstraints cCalling =  new GridBagConstraints();
 			cCalling.gridx = 0;
 			cCalling.gridy = 18;
@@ -434,14 +434,6 @@ public class MyEditingProfessorInformation extends JPanel {
 						JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatBirthDate"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					
-					try {
-						Integer.parseInt(tfPhoneNumber.getText());
-					} catch(Exception e3) {
-						JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatPhoneNumber"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
-						return;
-					}
-					
 					
 					
 					if(comboCalling.getSelectedItem().toString().equals("-")) {

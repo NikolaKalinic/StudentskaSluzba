@@ -341,7 +341,7 @@ public class ProfessorDialog extends JDialog {
 		panel.add(idInfo, cIdInfo);
 		
 		JLabel calling = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCalling"));
-		String[] callings = {"-", MainFrame.getInstance().getResourceBundle().getString("profCallingAssistant"), MainFrame.getInstance().getResourceBundle().getString("profCallingLecturer"), MainFrame.getInstance().getResourceBundle().getString("profCallingAssociateProfessor"), MainFrame.getInstance().getResourceBundle().getString("profCallingProfessor")};
+		String[] callings = {"-", MainFrame.getInstance().getResourceBundle().getString("profCallingLecturer"), MainFrame.getInstance().getResourceBundle().getString("profCallingAssociateProfessor"), MainFrame.getInstance().getResourceBundle().getString("profCallingProfessor")};
 		comboCalling = new JComboBox<String>(callings);
 		GridBagConstraints cCalling =  new GridBagConstraints();
 		cCalling.gridx = 0;
@@ -432,13 +432,6 @@ public class ProfessorDialog extends JDialog {
 					return;
 				}
 				
-				
-				try {
-					Integer.parseInt(tfPhoneNumber.getText());
-				} catch(Exception e3) {
-					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatPhoneNumber"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
-					return;
-				}
 				
 				
 				if(comboCalling.getSelectedItem().toString().equals("-")) {
