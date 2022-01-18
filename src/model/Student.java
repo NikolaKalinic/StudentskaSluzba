@@ -42,9 +42,10 @@ public class Student {
 		this.totalESPB=initEspb(grades);
 	}
 	
-	public Student(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+	public Student(int key,String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status,List<Grades> grades, List<Subject> failedExams) {
 		super();
+		this.key=key;
 		this.surname = surname;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;

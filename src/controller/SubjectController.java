@@ -42,7 +42,8 @@ public class SubjectController {
 		}
     	Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
 		SubjectDB.getInstance().deleteSubject(subject.getIdSubject());
-		ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
+		if(subject.getProfesor()!=null)
+			ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
 		MySubjectPanel.getInstance().updateView();
     }
 	

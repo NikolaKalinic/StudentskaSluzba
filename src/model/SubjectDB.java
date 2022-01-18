@@ -146,7 +146,7 @@ public class SubjectDB {
 	
 	public void addSubject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		if(existsSubject(idSubject))
-			this.subjects.add(new Subject(idSubject,name, semestar, yearOfStudySub, profesor, espb));
+			this.subjects.add(new Subject(subjects.get(subjects.size()-1).getKey()+1,idSubject,name, semestar, yearOfStudySub, profesor, espb));
 	}
 	public void editSubject(Subject s,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 

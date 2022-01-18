@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -13,14 +14,14 @@ public class Subject {
 	private int yearOfStudySub;
 	private Professor professor;  						//Profesor
 	private int espb;
-	private Set<Student> studentsPassed;
-	private Set<Student> studentsFailed;
+	private List<Student> studentsPassed;
+	private List<Student> studentsFailed;
 	
 	public Subject() {}
 	
 	/*Constructors*/
 	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb,
-			Set<Student> studentsPassed, Set<Student> studentsFailed) {
+			List<Student> studentsPassed, List<Student> studentsFailed) {
 		super();
 		this.idSubject = idSubject;
 		this.name = name;
@@ -32,8 +33,9 @@ public class Subject {
 		this.studentsFailed = studentsFailed;
 	}
 	
-	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+	public Subject(int key,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		super();
+		this.key=key;
 		this.idSubject = idSubject;
 		this.name = name;
 		this.semestar = semestar;
@@ -121,19 +123,19 @@ public class Subject {
 		this.key = id;
 	}
 	
-	public Set<Student> getStudentsPassed() {
+	public List<Student> getStudentsPassed() {
 		return studentsPassed;
 	}
 
-	public void setStudentsPassed(Set<Student> studentsPassed) {
+	public void setStudentsPassed(List<Student> studentsPassed) {
 		this.studentsPassed = studentsPassed;
 	}
 
-	public Set<Student> getStudentsFailed() {
+	public List<Student> getStudentsFailed() {
 		return studentsFailed;
 	}
 
-	public void setStudentsFailed(Set<Student> studentsFailed) {
+	public void setStudentsFailed(List<Student> studentsFailed) {
 		this.studentsFailed = studentsFailed;
 	}
 

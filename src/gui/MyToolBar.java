@@ -159,7 +159,7 @@ public class MyToolBar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				 if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					if(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() > -1) {
-						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
+						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), MainFrame.getInstance().getResourceBundle().getString("deleteProfessor1"), JOptionPane.YES_NO_OPTION);
 						if (a == JOptionPane.YES_OPTION) {
 							ProfessorController.getInstance().removeProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
 						}
@@ -188,7 +188,7 @@ public class MyToolBar extends JToolBar {
 				 else if(MyTabbedPane.getInstance().getSelectedIndex()==3) {
 						if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-									"Da li ste sigurni da zelite da obrisete katedru?", "Brisanje katedre", 
+									MainFrame.getInstance().getResourceBundle().getString("deleteChair"),  MainFrame.getInstance().getResourceBundle().getString("deleteChair1"), 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
 								ChairController.getInstance().deleteChair((MyChairPanel.getInstance().getChairTable().getSelectedRow()));

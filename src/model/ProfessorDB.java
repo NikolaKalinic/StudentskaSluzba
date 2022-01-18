@@ -170,7 +170,7 @@ public class ProfessorDB {
 	
 	
 	public void addProfessor(String surname, String name, String email, String birthDate, Adress homeAdress, Adress workAdress, String phoneNumber, String id, String calling, int experience) {
-		this.professors.add(new Professor(surname, name, email, LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")), homeAdress, workAdress, phoneNumber, id, calling, experience,new ArrayList<Subject>()));
+		this.professors.add(new Professor(professors.get(professors.size()-1).getKey()+1,surname, name, email, LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")), homeAdress, workAdress, phoneNumber, id, calling, experience,new ArrayList<Subject>()));
 	}
 	
 	public void deleteProfessor(String id) {

@@ -107,6 +107,7 @@ public class StudentController {
 		NotPassedExam.getInstance().updateView();
 		PassedExam.getInstance().updateView();
 		PassedExam.getInstance().updateLabel();
+		MyStudentPanel.getInstance().getStudentTable().repaint();
 	}
 	
 	public void cancelGrade() {

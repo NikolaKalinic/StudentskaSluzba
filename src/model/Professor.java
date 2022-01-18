@@ -17,7 +17,7 @@ public class Professor {
 	private int experience;
 	private List<Subject> courseList; 
 
-	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
+	public Professor(int key,String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
 			Adress workAdress, String phoneNumber, String id, String calling, int experience, List<Subject> courseList) {
 		super();
 		this.surname = surname;
@@ -31,6 +31,7 @@ public class Professor {
 		this.calling = calling;
 		this.experience = experience;
 		this.courseList = courseList;
+		this.key=key;
 	}
 	public Professor(String name,String surname) {
 		this.name=name;

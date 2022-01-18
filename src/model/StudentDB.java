@@ -303,7 +303,7 @@ public class StudentDB {
 	public void addStudent(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status){
 		if(existsStudent(index))
-			this.students.add(new Student(surname,name,dateOfBirth,adress,phoneNumber,email,index.toUpperCase(),yearOfEnrollment,currYearOfStudy,status,new ArrayList<Grades>(),new ArrayList<Subject>()));
+			this.students.add(new Student(students.get(students.size()-1).getKey()+1,surname,name,dateOfBirth,adress,phoneNumber,email,index.toUpperCase(),yearOfEnrollment,currYearOfStudy,status,new ArrayList<Grades>(),new ArrayList<Subject>()));
 	}
 	
 	public void deleteStudent(String index) {
