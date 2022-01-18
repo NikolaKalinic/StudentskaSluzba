@@ -94,6 +94,8 @@ public class AddSubjectToStudent extends JDialog{
 		
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.white);
+		label= new JLabel(MainFrame.getInstance().getResourceBundle().getString("profSubjectss"));
+		northPanel.add(label);
 		northPanel.setPreferredSize(new Dimension(1,50));
 		if(subjects.size()<=0) {
 			label= new JLabel(MainFrame.getInstance().getResourceBundle().getString("subLab"));

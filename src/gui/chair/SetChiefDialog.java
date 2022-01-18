@@ -25,7 +25,7 @@ import model.Chair;
 public class SetChiefDialog extends JDialog {
 	
 	public SetChiefDialog() {
-		super(MainFrame.getInstance(),"Informacije o katedri",true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("chairInfo"),true);
 		Chair c = ChairController.getInstance().getSelectedChair(MyChairPanel.getInstance().getChairTable().getSelectedRow());
 		Color color= getContentPane().getBackground();
 		getContentPane().setBackground(Color.white);
@@ -38,9 +38,9 @@ public class SetChiefDialog extends JDialog {
 		/*Top panel for information about chair*/
 		JPanel panTop = new JPanel();
 		panTop.setLayout(new FlowLayout(FlowLayout.CENTER,20,15));
-		JLabel lCode = new JLabel("Šifra: "+c.getIdChair());
+		JLabel lCode = new JLabel(MainFrame.getInstance().getResourceBundle().getString("chairId") + " " + c.getIdChair());
 		panTop.add(lCode);
-		JLabel lName = new JLabel("Naziv: "+c.getNameOfChair());
+		JLabel lName = new JLabel(MainFrame.getInstance().getResourceBundle().getString("chairName") + " " + c.getNameOfChair());
 		panTop.add(lCode);
 		panTop.add(lName);
 		panTop.setPreferredSize(new Dimension(1,50));
@@ -63,14 +63,14 @@ public class SetChiefDialog extends JDialog {
 		cenWest.setBackground(Color.white);
 		panCen.add(cenWest,BorderLayout.WEST);
 		
-		JButton button1 = new JButton("Postavi");
+		JButton button1 = new JButton(MainFrame.getInstance().getResourceBundle().getString("setChief"));
 		JTextField f = new JTextField();
 		button1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(c.getProfessors().size()==0) {
-					JOptionPane.showConfirmDialog(null, "Nema profesora na katedri."," ",JOptionPane.DEFAULT_OPTION);
+					JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("noProfessorInChair")," ",JOptionPane.DEFAULT_OPTION);
 				}else {
 					if(!f.getText().equals("")) {
 						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da smenite trenutnog šefa ?", "Smena šefa", JOptionPane.YES_NO_OPTION);
@@ -86,7 +86,7 @@ public class SetChiefDialog extends JDialog {
 			}
 		});
 		button1.setFocusPainted(false);
-		JButton button2 = new JButton("Ukloni");
+		JButton button2 = new JButton(MainFrame.getInstance().getResourceBundle().getString("chairRemove1"));
 		button2.addActionListener(new ActionListener() {
 			
 			@Override
@@ -117,7 +117,7 @@ public class SetChiefDialog extends JDialog {
 		if(c.getHeadOfChair()!=null)
 			f.setText(c.getHeadOfChair().getProfNameAndSurname());
 		f.setPreferredSize(new Dimension(167,25));
-		JLabel lChief = new JLabel("Šef :");
+		JLabel lChief = new JLabel(MainFrame.getInstance().getResourceBundle().getString("chairChief"));
 		cenSouth.add(lChief);
 		cenSouth.add(f);
 		panCen.add(cenSouth,BorderLayout.SOUTH);
@@ -151,10 +151,10 @@ public class SetChiefDialog extends JDialog {
 			++j;
 		}
 		if(p.size()<=0) {
-			JLabel lab = new JLabel("      Trenutno nema profesora na ovoj katedri. ");
+			JLabel lab = new JLabel("      " + MainFrame.getInstance().getResourceBundle().getString("chairPopUp1") + " ");
 			panBot.add(lab,BorderLayout.NORTH);
 		}else {
-			JLabel lab = new JLabel("      Trenutni profesori na katedri: ");
+			JLabel lab = new JLabel("      " + MainFrame.getInstance().getResourceBundle().getString("chairPopUp2") + " ");
 			panBot.add(lab,BorderLayout.NORTH);
 		}
 		JList<String> listBox = new JList<String>(p);

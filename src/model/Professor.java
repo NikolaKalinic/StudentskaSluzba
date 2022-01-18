@@ -185,6 +185,21 @@ public class Professor {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getCallingIndex() {
+		switch(this.getCalling()) {
+		  case "REDOVNI_PROFESOR":
+		    return 3;
+		  case "VANREDNI_PROFESOR":
+		    return 2;
+		  case "DOCENT":
+			return 1;
+		  default:
+		    return 0;
+		}
+	
+	}
+	
 	public String getProfNameAndSurname() {
 		String ret = name + " " + surname;
 		return ret;
