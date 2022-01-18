@@ -19,9 +19,13 @@ import javax.swing.event.ChangeListener;
 import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
+import controller.SubjectController;
 import gui.chair.MyChairPanel;
+import gui.chair.MyChairTable;
 import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
+import gui.professor.MyProfessorSubjectsTabel;
+import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
@@ -171,6 +175,16 @@ public class MyToolBar extends JToolBar {
 							}
 						}
 				 }
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+						if((MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< (SubjectDB.getInstance().getSubjects().size()) && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow() >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									MainFrame.getInstance().getResourceBundle().getString("deleteSubject"), MainFrame.getInstance().getResourceBundle().getString("deleteSubject1"), 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								SubjectController.getInstance().deleteSubject((MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow())));
+							}
+						}
+				 }
 				 else if(MyTabbedPane.getInstance().getSelectedIndex()==3) {
 						if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
@@ -233,6 +247,11 @@ public class MyToolBar extends JToolBar {
 		MyPassedExamsTable.getInstance().initComponents();
 		MyNotPassedExamsTable.getInstance().initComponents();
 		MySubjectTable.getInstance().initComponents();
+		MyProfessorTable.getInstance().initComponents();
+		MyChairTable.getInstance().initComponents();
+		MyProfessorSubjectsTabel.getInstance().initComponents();
+		MyChairTable.getInstance().repaint();
+		MyProfessorTable.getInstance().repaint();
 		MyStudentTable.getInstance().repaint();
 		MySubjectTable.getInstance().repaint();
 	}

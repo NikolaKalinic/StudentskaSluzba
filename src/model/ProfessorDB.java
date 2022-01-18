@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.MainFrame;
 import gui.professor.MyProfessorPanel;
 
 public class ProfessorDB {
@@ -27,17 +28,17 @@ public class ProfessorDB {
 		
 		initProfessors();
 		this.cols = new ArrayList<String>();
-		this.cols.add("Ime");
-		this.cols.add("Prezime");
-		this.cols.add("Zvanje");
-		this.cols.add("Email");
+		this.cols.add(MainFrame.getInstance().getResourceBundle().getString("professorName"));
+		this.cols.add(MainFrame.getInstance().getResourceBundle().getString("professorSurname"));
+		this.cols.add(MainFrame.getInstance().getResourceBundle().getString("professorCalling"));
+		this.cols.add(MainFrame.getInstance().getResourceBundle().getString("professorEmail"));
 		
 		
 		this.subjects = new ArrayList<String>();
-		this.subjects.add("Šifra predmeta");
-		this.subjects.add("Naziv predmeta");
-		this.subjects.add("Godina studija");
-		this.subjects.add("Semestar");
+		this.subjects.add(MainFrame.getInstance().getResourceBundle().getString("subjectColId"));
+		this.subjects.add(MainFrame.getInstance().getResourceBundle().getString("subjectColName"));
+		this.subjects.add(MainFrame.getInstance().getResourceBundle().getString("subjectColYearOfStudy"));
+		this.subjects.add(MainFrame.getInstance().getResourceBundle().getString("subjectColSemester"));
 	}
 	
 	private void initProfessors() {
@@ -130,9 +131,9 @@ public class ProfessorDB {
 			return Integer.toString(subject.getYearOfStudySub());
 		case 3:
 			if(subject.getSemestar().equals(Semestar.Summer))
-				return "Letnji";
+				return MainFrame.getInstance().getResourceBundle().getString("summer");
 			else
-				return "Zimski";
+				return MainFrame.getInstance().getResourceBundle().getString("winter");
 		default:
 			return null;
 		}

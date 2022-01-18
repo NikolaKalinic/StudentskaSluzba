@@ -7,9 +7,20 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class MyChairTable extends JTable{
+import gui.MainFrame;
+import gui.subject.MySubjectTable;
 
-	public MyChairTable() {
+public class MyChairTable extends JTable{
+	
+	private static MyChairTable instance = null;
+	public static MyChairTable getInstance() {
+		if(instance==null) {
+			instance=new MyChairTable();
+		}
+		return instance;	
+	}
+
+	private MyChairTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -28,5 +39,11 @@ public class MyChairTable extends JTable{
 				c.setBackground(Color.WHITE);
 		}
 		return c;
+	}
+	
+	public void initComponents() {
+		getColumnModel().getColumn(0).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("idChair"));
+		getColumnModel().getColumn(1).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("nameChair"));
+		getColumnModel().getColumn(2).setHeaderValue(MainFrame.getInstance().getResourceBundle().getString("chiefChair"));
 	}
 }

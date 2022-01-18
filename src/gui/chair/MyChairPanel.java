@@ -47,7 +47,7 @@ private static MyChairPanel instance = null;
 	}
 	
 	private void chairTableView() {
-		chairTable = new MyChairTable();
+		chairTable = MyChairTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(chairTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

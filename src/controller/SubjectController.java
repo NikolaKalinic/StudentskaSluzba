@@ -5,12 +5,14 @@ import java.util.List;
 import gui.professor.MyEditingProfessorInformation;
 import gui.professor.MyProfessorPanel;
 import gui.professor.ProfessorSubjects;
+import gui.student.MyStudentPanel;
 import gui.student.MyStudentTable;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
 import model.Professor;
 import model.ProfessorDB;
 import model.Semestar;
+import model.Student;
 import model.StudentDB;
 import model.Subject;
 import model.SubjectDB;
@@ -33,6 +35,15 @@ public class SubjectController {
 		SubjectDB.getInstance().addSubject(idSubject, name, semestar, yearOfStudySub, profesor, espb);
 		MySubjectPanel.getInstance().updateView();
 	}
+	
+	public void deleteSubject(int rowSelectedIndex) {
+    	if (rowSelectedIndex < 0) {
+			return;
+		}
+    	Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
+		SubjectDB.getInstance().deleteSubject(subject.getIdSubject());
+		MySubjectPanel.getInstance().updateView();
+    }
 	
 	public void editStudent(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		if (rowSelectedIndex < 0) {

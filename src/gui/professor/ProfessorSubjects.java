@@ -99,7 +99,7 @@ private static ProfessorSubjects instance = null;
 		validate();
 	}
 	private void subjectsTableView() {
-		subjectsTable = new MyProfessorSubjectsTabel();
+		subjectsTable = MyProfessorSubjectsTabel.getInstance();
 		JScrollPane scrollPane = new JScrollPane(subjectsTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}

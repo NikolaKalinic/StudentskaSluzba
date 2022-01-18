@@ -159,4 +159,13 @@ public class SubjectDB {
 
 	}
 	
+	public void deleteSubject(String id) {
+		for (Subject s : subjects) {
+			if(s.getIdSubject().equals(id)) {
+				subjects.remove(s);
+				break;
+			}
+		}
+	}
+	
 	}

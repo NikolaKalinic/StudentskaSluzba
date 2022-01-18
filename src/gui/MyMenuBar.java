@@ -24,6 +24,7 @@ import javax.swing.border.Border;
 import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
+import controller.SubjectController;
 import gui.chair.MyChairPanel;
 import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
@@ -311,6 +312,16 @@ public class MyMenuBar extends JMenuBar {
 							ProfessorController.getInstance().removeProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
 						}
 					}
+				if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+						if((MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< (SubjectDB.getInstance().getSubjects().size()) && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow() >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									MainFrame.getInstance().getResourceBundle().getString("deleteSubject"), MainFrame.getInstance().getResourceBundle().getString("deleteSubject1"), 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								SubjectController.getInstance().deleteSubject((MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow())));
+							}
+						}
+				 }
 				
 			}
 			
