@@ -38,8 +38,8 @@ private static ProfessorSubjects instance = null;
 		JPanel panTop = new JPanel();
 		panTop.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
 		panTop.setBackground(Color.white);
-		JButton button1 = new JButton("Dodaj predmet");
-		JButton button2 = new JButton("Ukloni predmet");
+		JButton button1 = new JButton(MainFrame.getInstance().getResourceBundle().getString("addSubjectToProf"));
+		JButton button2 = new JButton(MainFrame.getInstance().getResourceBundle().getString("removeSubjectFromProf"));
 		button1.setBackground(new Color(14,98,190));
 		button1.setForeground(Color.white);
 		button2.setBackground(new Color(14,98,190));
@@ -62,7 +62,7 @@ private static ProfessorSubjects instance = null;
 			public void actionPerformed(ActionEvent e) {
 				if(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow() >= 0) {
 					int answer=JOptionPane.showConfirmDialog(ProfessorSubjects.getInstance(), 
-							"Da li ste sigurni da zelite da obrisete predmet?", "Brisanje predmeta", 
+							MainFrame.getInstance().getResourceBundle().getString("deleteSubject"), MainFrame.getInstance().getResourceBundle().getString("deleteSubject1"), 
 					        JOptionPane.YES_NO_OPTION);
 					if(answer==JOptionPane.YES_OPTION) {
 						ProfessorController.getInstance().removeSubject();

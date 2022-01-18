@@ -29,7 +29,7 @@ import model.SubjectDB;
 public class MyAddSubjectDialog extends JDialog {
 	
 	public MyAddSubjectDialog() {
-		super(MainFrame.getInstance(),"Dodaj predmet",true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("addSubjectToProf1"),true);
 		setResizable(false);
 		setSize(500,400);
 		setLocationRelativeTo(ProfessorSubjects.getInstance());
@@ -38,7 +38,7 @@ public class MyAddSubjectDialog extends JDialog {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.white);
 		northPanel.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
-		northPanel.add(new JLabel("Predmeti: "));
+		northPanel.add(new JLabel(MainFrame.getInstance().getResourceBundle().getString("profSubjectss")));
 		northPanel.setPreferredSize(new Dimension(1,50));
 		add(northPanel,BorderLayout.NORTH);
 		
@@ -56,10 +56,10 @@ public class MyAddSubjectDialog extends JDialog {
 		/*panel for bot*/
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
-		JButton btnOk = new JButton("Potvrdi");
+		JButton btnOk = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		btnOk.setFocusPainted(false);
 		
-		JButton btnCancel = new JButton("Odustani");
+		JButton btnCancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.setFocusPainted(false);
 		btnCancel.addActionListener(new ActionListener() {
 			

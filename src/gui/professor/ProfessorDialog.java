@@ -53,7 +53,7 @@ public class ProfessorDialog extends JDialog {
 	
 
 	public ProfessorDialog() {
-		super(MainFrame.getInstance(), "Dodavanje profesora", true);
+		super(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("addingProfessor"), true);
 		setSize(300, 650);
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
@@ -63,10 +63,10 @@ public class ProfessorDialog extends JDialog {
 		panel.setLayout(new GridBagLayout());
 		this.add(panel, BorderLayout.CENTER);
 		
-		JLabel name = new JLabel("Ime*");
+		JLabel name = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profName"));
 		tfName = new JTextField();
 		tfName.addFocusListener(focusListener);
-		tfName.setToolTipText("Unesite ime profesora");
+		tfName.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfName"));
 		GridBagConstraints cName =  new GridBagConstraints();
 		cName.gridx = 0;
 		cName.gridy = 0;
@@ -82,10 +82,10 @@ public class ProfessorDialog extends JDialog {
 		
 		
 		
-		JLabel Surname = new JLabel("Prezime*");
+		JLabel Surname = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profSurname"));
 		tfSurname = new JTextField();
 		tfSurname.addFocusListener(focusListener);
-		tfSurname.setToolTipText("Unesite prezime profesora");
+		tfSurname.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfSurname"));
 		GridBagConstraints cSurname =  new GridBagConstraints();
 		cSurname.gridx = 0;
 		cSurname.gridy = 1;
@@ -99,10 +99,10 @@ public class ProfessorDialog extends JDialog {
 		cSurnameTf.insets = new Insets(5, 5, 0, 10);
 		panel.add(tfSurname, cSurnameTf);
 		
-		JLabel email = new JLabel("E-mail*");
+		JLabel email = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profEmail"));
 		tfEmail = new JTextField();
 		tfEmail.addFocusListener(focusListener);
-		tfEmail.setToolTipText("Unesite e-mail profesora");
+		tfEmail.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfEmail"));
 		GridBagConstraints cEmail =  new GridBagConstraints();
 		cEmail.gridx = 0;
 		cEmail.gridy = 2;
@@ -116,10 +116,10 @@ public class ProfessorDialog extends JDialog {
 		cEmailTf.insets = new Insets(5, 5, 0, 10);
 		panel.add(tfEmail, cEmailTf);
 		
-		JLabel birthDate = new JLabel("Godina rodjenja*");
+		JLabel birthDate = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profYearOfBirth"));
 		tfBirthDate = new JTextField();
 		tfBirthDate.addFocusListener(focusListener);
-		tfBirthDate.setToolTipText("Unesite datum rodjenja [DAY-MONTH-YEAR]");
+		tfBirthDate.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfYearOfBirth"));
 		GridBagConstraints cBirthDate =  new GridBagConstraints();
 		cBirthDate.gridx = 0;
 		cBirthDate.gridy = 3;
@@ -133,11 +133,11 @@ public class ProfessorDialog extends JDialog {
 		cBirthDateTf.insets = new Insets(5, 5, 0, 10);
 		panel.add(tfBirthDate, cBirthDateTf);
 		
-		JLabel homeAdress = new JLabel("========= Kucna adresa =========");
-		JLabel homeStreet = new JLabel("Ulica*");
-		JLabel homeNumber = new JLabel("Broj*");
-		JLabel homeCity = new JLabel("Grad*");
-		JLabel homeCountry = new JLabel("Drzava*");
+		JLabel homeAdress = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profHomeAdressLabel"));
+		JLabel homeStreet = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profStreet"));
+		JLabel homeNumber = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profNumber"));
+		JLabel homeCity = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCity"));
+		JLabel homeCountry = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCountry"));
 		tfStreet = new JTextField();
 		tfStreet.addFocusListener(focusListener);
 		tfNumber = new JTextField();
@@ -147,10 +147,10 @@ public class ProfessorDialog extends JDialog {
 		tfCountry = new JTextField();
 		tfCountry.addFocusListener(focusListener);
 		
-		tfStreet.setToolTipText("Unesite ulicu");
-		tfNumber.setToolTipText("Unesite broj");
-		tfCity.setToolTipText("Unesite grad");
-		tfCountry.setToolTipText("Unesite drzava");
+		tfStreet.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfStreet"));
+		tfNumber.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfNumber"));
+		tfCity.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfCity"));
+		tfCountry.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfCountry"));
 		
 		GridBagConstraints cHA =  new GridBagConstraints();
 		cHA.gridwidth = 2;
@@ -215,11 +215,11 @@ public class ProfessorDialog extends JDialog {
 		cCountryTf.insets = new Insets(10, 5, 0, 10);
 		panel.add(tfCountry, cCountryTf);
 		
-		JLabel workAdress = new JLabel("========= Radna adresa =========");
-		JLabel workStreet = new JLabel("Ulica*");
-		JLabel workNumber = new JLabel("Broj*");
-		JLabel workCity = new JLabel("Grad*");
-		JLabel workCountry = new JLabel("Drzava*");
+		JLabel workAdress = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profWorkAdressLabel"));
+		JLabel workStreet = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profStreet"));
+		JLabel workNumber = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profNumber"));
+		JLabel workCity = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCity"));
+		JLabel workCountry = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCountry"));
 		tfStreetW = new JTextField();
 		tfStreetW.addFocusListener(focusListener);
 		tfNumberW = new JTextField();
@@ -229,10 +229,10 @@ public class ProfessorDialog extends JDialog {
 		tfCountryW = new JTextField();
 		tfCountryW.addFocusListener(focusListener);
 		
-		tfStreetW.setToolTipText("Unesite ulicu");
-		tfStreetW.setToolTipText("Unesite broj");
-		tfStreetW.setToolTipText("Unesite grad");
-		tfStreetW.setToolTipText("Unesite drzava");
+		tfStreetW.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfStreet"));
+		tfNumberW.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfNumber"));
+		tfCityW.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfCity"));
+		tfCountryW.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfCountry"));
 		
 		GridBagConstraints cHAW =  new GridBagConstraints();
 		cHAW.gridwidth = 2;
@@ -298,9 +298,9 @@ public class ProfessorDialog extends JDialog {
 		panel.add(tfCountryW, cCountryTfW);
 		
 		
-		JLabel phoneNumber = new JLabel("Broj telefona*");
+		JLabel phoneNumber = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profPhoneNumber"));
 		tfPhoneNumber = new JTextField();
-		tfPhoneNumber.setToolTipText("Unesite broj telefona");
+		tfPhoneNumber.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfPhoneNumber"));
 		GridBagConstraints cPhoneNumber =  new GridBagConstraints();
 		cPhoneNumber.gridx = 0;
 		cPhoneNumber.gridy = 14;
@@ -314,10 +314,10 @@ public class ProfessorDialog extends JDialog {
 		cPhoneNumberTf.insets = new Insets(10, 5, 0, 10);
 		panel.add(tfPhoneNumber, cPhoneNumberTf);
 		
-		JLabel id = new JLabel("Broj licne karte*");
+		JLabel id = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profId"));
 		tfId = new JTextField();
 		tfId.addFocusListener(focusListener);
-		tfId.setToolTipText("Unesite broj licne karte");
+		tfId.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfId"));
 		GridBagConstraints cId =  new GridBagConstraints();
 		cId.gridx = 0;
 		cId.gridy = 15;
@@ -340,8 +340,8 @@ public class ProfessorDialog extends JDialog {
 		idInfo.setForeground(Color.black);
 		panel.add(idInfo, cIdInfo);
 		
-		JLabel calling = new JLabel("Zvanje");
-		String[] callings = {"-", "Asistent", "Docent", "Vanredni profesor", "Profesor"};
+		JLabel calling = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profCalling"));
+		String[] callings = {"-", MainFrame.getInstance().getResourceBundle().getString("profCallingAssistant"), MainFrame.getInstance().getResourceBundle().getString("profCallingLecturer"), MainFrame.getInstance().getResourceBundle().getString("profCallingAssociateProfessor"), MainFrame.getInstance().getResourceBundle().getString("profCallingProfessor")};
 		comboCalling = new JComboBox<String>(callings);
 		GridBagConstraints cCalling =  new GridBagConstraints();
 		cCalling.gridx = 0;
@@ -356,11 +356,11 @@ public class ProfessorDialog extends JDialog {
 		panel.add(comboCalling, cComboCalling);
 		
 		
-		JLabel exp = new JLabel("Godine iskustva*");
+		JLabel exp = new JLabel(MainFrame.getInstance().getResourceBundle().getString("profExperience"));
 		tfExp = new JTextField();
 		tfExp.setName("exp");
 		tfExp.addFocusListener(focusListener);
-		tfExp.setToolTipText("Unesite godine iskustva [int]");
+		tfExp.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfExperience"));
 		GridBagConstraints cExp =  new GridBagConstraints();
 		cExp.gridx = 0;
 		cExp.gridy = 17;
@@ -379,7 +379,7 @@ public class ProfessorDialog extends JDialog {
 		Dimension botDim = new Dimension();
 		botDim.setSize(200, 50);
 		botPanel.setPreferredSize(botDim);
-		ok = new JButton("OK");
+		ok = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		ok.setEnabled(true);
 		ok.setFocusPainted(false);
 		
@@ -399,7 +399,7 @@ public class ProfessorDialog extends JDialog {
 		}).start();
 	
 		
-		JButton cancel = new JButton("CANCEL");
+		JButton cancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		cancel.setFocusPainted(false);
 		botPanel.add(ok);
 		botPanel.add(cancel);
@@ -421,14 +421,14 @@ public class ProfessorDialog extends JDialog {
 				// TODO Auto-generated method stub
 				
 				if(!(tfEmail.getText().contains("@"))) {
-					JOptionPane.showMessageDialog(null, "Email adresa je u pogresnom formatu!", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatEmail"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
 				try {
 					LocalDate.parse(tfBirthDate.getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 				} catch (Exception e1 ) {
-					JOptionPane.showMessageDialog(null, "Datum mora biti u formatu 'DAY-MONTH-YEAR'", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatBirthDate"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
@@ -436,13 +436,13 @@ public class ProfessorDialog extends JDialog {
 				try {
 					Integer.parseInt(tfPhoneNumber.getText());
 				} catch(Exception e3) {
-					JOptionPane.showMessageDialog(null, "Broj telefona nije validan", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongFormatPhoneNumber"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
 				
 				if(comboCalling.getSelectedItem().toString().equals("-")) {
-					JOptionPane.showMessageDialog(null, "Izabrati zvanje!", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongCalling"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
@@ -450,11 +450,11 @@ public class ProfessorDialog extends JDialog {
 				try {
 					 int a = Integer.parseInt(tfExp.getText());
 					 if(a < 0 || a > 100) {
-						 JOptionPane.showMessageDialog(null, "Radni staz nije validan", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+						 JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongExperience"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 							return;
 					 }
 				} catch(Exception e3) {
-					JOptionPane.showMessageDialog(null, "Radni staz nije validan", "Popuni polja!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("wrongExperience"), MainFrame.getInstance().getResourceBundle().getString("completeFields"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
@@ -490,10 +490,10 @@ public class ProfessorDialog extends JDialog {
 			disableOk();
 			tfId.selectAll();
 			idInfo.setForeground(Color.red);
-			idInfo.setText("Uneti broj licne karte vec postoji!");
-			tfId.setToolTipText("Profesor sa ovim brojem licne karte vec postoji");
+			idInfo.setText(MainFrame.getInstance().getResourceBundle().getString("duplicateProfId1"));
+			tfId.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("duplicateProfId1"));
 		} else {
-			tfId.setToolTipText("Unesite broj licne karte");
+			tfId.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("insertProfId"));
 			idInfo.setForeground(Color.black);
 			idInfo.setText("                                   ");
 			enableOk();
