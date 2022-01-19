@@ -73,7 +73,7 @@ public class SetChiefDialog extends JDialog {
 					JOptionPane.showConfirmDialog(null, MainFrame.getInstance().getResourceBundle().getString("noProfessorInChair")," ",JOptionPane.DEFAULT_OPTION);
 				}else {
 					if(!f.getText().equals("")) {
-						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da smenite trenutnog šefa ?", "Smena šefa", JOptionPane.YES_NO_OPTION);
+						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("changeChief"), MainFrame.getInstance().getResourceBundle().getString("changeChief1"), JOptionPane.YES_NO_OPTION);
 						if (a == JOptionPane.YES_OPTION) {
 							ChooseChiefDialog ccd = new ChooseChiefDialog(c,f);
 							MyChairPanel.getInstance().updateView();

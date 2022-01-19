@@ -192,7 +192,7 @@ public class MyAddingStudentDialog extends JDialog{
 			@Override
 			public void focusLost(FocusEvent e) {
 				// TODO Auto-generated method stub
-				currYear=combo.getSelectedIndex()+1;		//KRECE OD NULE TRBEACE TI NEGDE
+				currYear=combo.getSelectedIndex()+1;		
 			}
 			
 			@Override

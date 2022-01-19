@@ -26,7 +26,7 @@ public class ChooseChiefDialog extends JDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 	public ChooseChiefDialog(Chair c,JTextField f) {
-		super(MainFrame.getInstance(),"Postavi šefa",true);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("setChief1"),true);
 		getContentPane().setBackground(Color.white);
 		setResizable(false);
 		setSize(new Dimension(300,350));
@@ -36,8 +36,6 @@ public class ChooseChiefDialog extends JDialog {
 		JPanel top = new JPanel();
 		top.setPreferredSize(new Dimension(1,25));
 		top.setBackground(Color.white);
-//		JLabel lab= new JLabel("Izaberite šefa:");
-//		top.add(lab);
 		add(top,BorderLayout.NORTH);
 		JPanel bot = new JPanel();
 		bot.setPreferredSize(new Dimension(1,50));
@@ -47,7 +45,7 @@ public class ChooseChiefDialog extends JDialog {
 		JPanel center = new JPanel();
 		center.setLayout(new BorderLayout());
 		center.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-		btnOk = new JButton("Postavi");
+		btnOk = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		Vector<Professor> p = new Vector<Professor>();
 		boolean tmp ;
 		for(int i =0 ; i<c.getProfessors().size();i++) {
@@ -60,11 +58,11 @@ public class ChooseChiefDialog extends JDialog {
 				p.add(c.getProfessors().get(i));
 		}
 		if(p.size()<=0) {
-			JLabel lab= new JLabel("Ni jedan profesor ne ispunjava uslov da bude šef.");
+			JLabel lab= new JLabel(MainFrame.getInstance().getResourceBundle().getString("condChief"));
 			btnOk.setEnabled(false);
 			top.add(lab);
 		}else {
-			JLabel lab= new JLabel("Izaberite šefa:");
+			JLabel lab= new JLabel(MainFrame.getInstance().getResourceBundle().getString("chooseChief"));
 			top.add(lab);
 		}
 		JList<Professor> listBox = new JList<Professor>(p);
@@ -86,7 +84,7 @@ public class ChooseChiefDialog extends JDialog {
 				}
 			}
 		});
-		btnCancel = new JButton("Odustani");
+		btnCancel = new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override

@@ -55,14 +55,9 @@ public class MyStatusBar {
 		statusPanel.add(statusLabel);
 		statusPanel.add(Box.createGlue());
 
-            
-//		 DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy.");
-//		 Calendar cal = Calendar.getInstance();
-//		 JLabel statusTime = new JLabel(dateFormat.format(cal.getTime()));
+     
 		
 		dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-		
-		
 		format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
 		Calendar cal = Calendar.getInstance();
 		 JLabel statusTime = new JLabel(format.format(cal.getTime())+ " "+LocalDate.now().format(dateFormat));

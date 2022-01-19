@@ -68,7 +68,7 @@ public class SubjectController {
 		 if(SubjectDB.getInstance().existsSubject(id)) {
 			 return true;
 		 }else {
-			 if (getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()).getIdSubject().equals(id)) {
+			 if (getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow())).getIdSubject().equals(id)) {
 				 return true;
 			 }else
 				 return false;

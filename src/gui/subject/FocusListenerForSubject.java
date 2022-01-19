@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import controller.SubjectController;
+import gui.MainFrame;
 import model.Professor;
 
 public class FocusListenerForSubject implements FocusListener{
@@ -60,7 +61,7 @@ public class FocusListenerForSubject implements FocusListener{
 		if (txt.getName().equals("code")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite šifru predmeta...")) {
 				idSubjectBackUp=txt.getText();
-				txt.setText("Unesite šifru predmeta...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("insertSubjectId"));
 				idSubject="Unesite sifru...";
 				key = key & 0b1110;
 				txt.setForeground(Color.RED);
@@ -70,11 +71,11 @@ public class FocusListenerForSubject implements FocusListener{
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
-					idSubject=txt.getText().toUpperCase();
-					idSubjectBackUp=idSubject;
+					idSubject=txt.getText().trim();
+					idSubjectBackUp=txt.getText();
 					if(i==1) {
 						if(!SubjectController.getInstance().existsSubject(idSubject)) {
-							txt.setText("Šifra već postoji...");
+							txt.setText(MainFrame.getInstance().getResourceBundle().getString("subjectIdAlredyExists"));
 							idSubject="Unesite sifru...";
 							key = key & 0b1110;
 							txt.setForeground(Color.RED);
@@ -87,7 +88,7 @@ public class FocusListenerForSubject implements FocusListener{
 						}
 					}else {
 						if(!SubjectController.getInstance().editExistsSubject(idSubject)) {
-							txt.setText("Šifra već postoji...");
+							txt.setText(MainFrame.getInstance().getResourceBundle().getString("subjectIdAlredyExists"));
 							idSubject="Unesite sifru...";
 							key = key & 0b1110;
 							txt.setForeground(Color.RED);
@@ -101,7 +102,7 @@ public class FocusListenerForSubject implements FocusListener{
 					}
 				} else {
 					idSubjectBackUp=txt.getText();
-					txt.setText("Unesite šifru predmeta...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("subjectIdAlredyExists"));
 					idSubject="Unesite sifru...";
 					key = key & 0b1110;
 					txt.setForeground(Color.RED);
@@ -115,7 +116,7 @@ public class FocusListenerForSubject implements FocusListener{
 		if (txt.getName().equals("name")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite ime predmeta...")) {
 				nameBackUp=txt.getText();
-				txt.setText("Unesite Ime...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("insertSubjectName"));
 				name="Unesite Ime...";
 				key = key & 0b1101;
 				txt.setForeground(Color.RED);
@@ -133,7 +134,7 @@ public class FocusListenerForSubject implements FocusListener{
 					txt.setBorder(defaultBorder);
 				} else {
 					nameBackUp=txt.getText();
-					txt.setText("Unesite ime predmeta...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("insertSubjectName"));
 					name="Unesite Ime...";
 					key = key & 0b1101;
 					txt.setForeground(Color.RED);
@@ -147,7 +148,7 @@ public class FocusListenerForSubject implements FocusListener{
 		if (txt.getName().equals("espb")) {
 			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite espb...")) {
 				espbBackUp=txt.getText();
-				txt.setText("Unesite espb...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("insertEspb"));
 				espb=-1;
 				key = key & 0b1011;
 				txt.setForeground(Color.RED);
@@ -165,7 +166,7 @@ public class FocusListenerForSubject implements FocusListener{
 					txt.setBorder(defaultBorder);
 				} else {
 					espbBackUp=txt.getText();
-					txt.setText("Unesite espb...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("insertEspb"));
 					espb=-1;
 					key = key & 0b1011;
 					txt.setForeground(Color.RED);

@@ -64,12 +64,10 @@ public class MyToolBar extends JToolBar {
 		 create = new JButton();
 		create.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipNew"));
 		Image createImg = kit.getImage("images/create4.png");
-		//Image resizedCreateImg = createImg.getScaledInstance(25, 24, java.awt.Image.SCALE_SMOOTH);
 		create.setIcon(new ImageIcon(createImg));
 		create.setBorderPainted(false);
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
-		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
 		
 		
 		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
@@ -87,7 +85,6 @@ public class MyToolBar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyAddingStudentDialog masd = new MyAddingStudentDialog();
 				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
@@ -107,7 +104,6 @@ public class MyToolBar extends JToolBar {
 		 edit = new JButton();
 		edit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipEdit"));
 		Image editImg = kit.getImage("images/edit4.png");
-		//Image resizedEditImg = editImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		edit.setIcon(new ImageIcon(editImg));
 		edit.setBorderPainted(false);
 		edit.setFocusPainted(false);
@@ -146,7 +142,6 @@ public class MyToolBar extends JToolBar {
 		 delete = new JButton();
 		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
 		Image deleteImg = kit.getImage("images/delete4.png");
-		//Image resizedDeleteImg = deleteImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		delete.setIcon(new ImageIcon(deleteImg));
 		delete.setBorderPainted(false);
 		delete.setFocusPainted(false);

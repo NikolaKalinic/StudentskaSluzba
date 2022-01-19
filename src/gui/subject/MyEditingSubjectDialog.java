@@ -248,13 +248,6 @@ public class MyEditingSubjectDialog extends JDialog{
         JPanel panBottom=new JPanel();
 		BoxLayout box=new BoxLayout(panBottom, BoxLayout.X_AXIS);
 		panBottom.setLayout(box);
-		
-		
-		btnOk.setPreferredSize(new Dimension(90,30));
-		
-	
-
-		
 		btnOk.setEnabled(false);
 		
 		new Timer(100,new ActionListener() {
@@ -282,13 +275,12 @@ public class MyEditingSubjectDialog extends JDialog{
 		});
 		
 		
-		JButton btnCancel=new JButton("Odustani");
-		btnCancel.setPreferredSize(new Dimension(90,30));
+		JButton btnCancel=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnCancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da odustanete ?", "Potvrda odustajanja", JOptionPane.YES_NO_OPTION);
+				int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("studentExitDialog"), MainFrame.getInstance().getResourceBundle().getString("studentExitDialogTitle"), JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
 					dispose();
 				}	

@@ -69,7 +69,6 @@ public class MyMenuBar extends JMenuBar {
 		file = new JMenu(MainFrame.getInstance().getResourceBundle().getString("mFile"));
 		char c  = MainFrame.getInstance().getResourceBundle().getString("mFile").charAt(0);
 		file.setMnemonic((int)c);
-		//file.setMnemonic('f');
 		file.setCursor(new Cursor(12));
 		fileNew = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miNew"));
 		c=MainFrame.getInstance().getResourceBundle().getString("miNew").charAt(0);
@@ -84,7 +83,6 @@ public class MyMenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyAddingStudentDialog masd = new MyAddingStudentDialog();
 				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
@@ -339,9 +337,10 @@ public class MyMenuBar extends JMenuBar {
 		 c=MainFrame.getInstance().getResourceBundle().getString("mHelp").charAt(0);
 		 help.setMnemonic((int)c);
 		help.setCursor(new Cursor(12));
-		 helpHelp = new JMenuItem("Help");
+		 helpHelp = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("mHelp"));
+		 c=MainFrame.getInstance().getResourceBundle().getString("mHelp").charAt(0);
 		helpHelp.setCursor(new Cursor(12));
-		helpHelp.setMnemonic('h');
+		helpHelp.setMnemonic((int)c);
 		helpHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 		Image img6 = kit.getImage("Images/help.png");
 		Image iconHelp = img6.getScaledInstance(15, 15, 4);
@@ -464,6 +463,8 @@ public class MyMenuBar extends JMenuBar {
 		lEng.setMnemonic((int)c);
 		c=MainFrame.getInstance().getResourceBundle().getString("mLanguage").charAt(0);
 		language.setMnemonic((int)c);
+		c=MainFrame.getInstance().getResourceBundle().getString("mHelp").charAt(0);
+		helpHelp.setMnemonic((int)c);
 	}
 	
 }
