@@ -52,10 +52,26 @@ public class ChooseChiefDialog extends JDialog {
 			tmp=true;
 			if(c.getProfessors().get(i).getExperience()<5)
 				tmp=false;
-			if(c.getProfessors().get(i).getCalling()!="REDOVNI_PROFESOR" && c.getProfessors().get(i).getCalling()!="VANREDNI_PROFESOR")
-				tmp=false;
-			if(tmp)
-				p.add(c.getProfessors().get(i));
+			if(c.getProfessors().get(i).getCalling().equals("REDOVNI_PROFESOR")) {
+				if(tmp) {
+					p.add(c.getProfessors().get(i));
+				}
+			}
+			if(c.getProfessors().get(i).getCalling().equals("Professor")) {
+				if(tmp) {
+					p.add(c.getProfessors().get(i));
+				}
+			}
+			if(c.getProfessors().get(i).getCalling().equals("VANREDNI_PROFESOR")) {
+				if(tmp) {
+					p.add(c.getProfessors().get(i));
+				}
+			}
+			if(c.getProfessors().get(i).getCalling().equals("Associate professor")) {
+				if(tmp) {
+					p.add(c.getProfessors().get(i));
+				}
+			}
 		}
 		if(p.size()<=0) {
 			JLabel lab= new JLabel(MainFrame.getInstance().getResourceBundle().getString("condChief"));

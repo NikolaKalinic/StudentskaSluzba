@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controller.StudentController;
 import gui.MainFrame;
@@ -115,7 +116,8 @@ public class AddSubjectToStudent extends JDialog{
 			}
 		});
 
-		centerPanel.add(listBox);
+		JScrollPane scrollPane = new JScrollPane(listBox);
+		centerPanel.add(scrollPane,BorderLayout.CENTER);
 
 		listBox.setSelectedIndex(0);
 		

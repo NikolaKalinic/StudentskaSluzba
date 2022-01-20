@@ -1,13 +1,25 @@
 package model;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import gui.MainFrame;
 
-public class SubjectDB {
+public class SubjectDB implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8755389994193550307L;
 	private static SubjectDB instance = null;
 	
 	public static SubjectDB getInstance() {
@@ -80,12 +92,41 @@ public class SubjectDB {
 		ProfessorDB.getInstance().getProfessors().get(6).getCourseList().add(subjects.get(15));
 		ProfessorDB.getInstance().getProfessors().get(16).getCourseList().add(subjects.get(24));
 		ProfessorDB.getInstance().getProfessors().get(16).getCourseList().add(subjects.get(28));
-		ProfessorDB.getInstance().getProfessors().get(17).getCourseList().add(subjects.get(25));
 		ProfessorDB.getInstance().getProfessors().get(17).getCourseList().add(subjects.get(27));
+		ProfessorDB.getInstance().getProfessors().get(17).getCourseList().add(subjects.get(25));
 		ProfessorDB.getInstance().getProfessors().get(18).getCourseList().add(subjects.get(26));
 		
-		}
+		save();
+//		File f = new File("subjectDatebase.txt");
+//		try {
+//			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
+//			try {
+//				this.subjects = (ArrayList<Subject>)ois.readObject();
+//				
+//			} finally {
+//				ois.close();
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam ucitao");
+//		}
+
+	}
 	
+	
+	public void save() {
+//		File f = new File("subjectDatebase.txt");
+//		try {
+//			f.createNewFile();
+//			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+//			try {
+//				oos.writeObject(subjects);
+//			} finally {
+//				oos.close(); //Zatvara i tok nizeg nivoa.
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam uspeo");
+//		}
+	}
 	/*getters/setter*/
 	
 	public List<Subject> getSubjects() {

@@ -35,7 +35,9 @@ public class SubjectController {
 		SubjectDB.getInstance().addSubject(idSubject, name, semestar, yearOfStudySub, profesor, espb);
 		MySubjectPanel.getInstance().updateView();
 	}
-	
+	public void save() {
+		SubjectDB.getInstance().save();
+	}
 	public void deleteSubject(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {
 			return;
@@ -47,12 +49,14 @@ public class SubjectController {
 		MySubjectPanel.getInstance().updateView();
     }
 	
-	public void editStudent(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+	public void editSubject(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
 		SubjectDB.getInstance().editSubject(subject,idSubject, name, semestar, yearOfStudySub, profesor, espb);
+		StudentDB.getInstance().editSubject(subject);
+		ProfessorDB.getInstance().editSubject(subject);
 		MySubjectPanel.getInstance().updateView();
 	}
 	public Subject getSelectedSubject(int rowSelectedIndex) {

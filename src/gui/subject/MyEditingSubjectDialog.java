@@ -268,7 +268,7 @@ public class MyEditingSubjectDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b1111) {
-					SubjectController.getInstance().editStudent(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, s.getProfesor(), focusListener.getEspb());
+					SubjectController.getInstance().editSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, s.getProfesor(), focusListener.getEspb());
 					dispose();
 				}
 			}

@@ -28,7 +28,9 @@ public class ProfessorController {
 	public boolean alreadyExists(String id) {
 		return ProfessorDB.getInstance().alreadyExists(id);
 	}
-	
+	public void save() {
+		ProfessorDB.getInstance().save();
+	}
 	public boolean alreadyExists(String id, int selectedRowIndex) {
 		if(selectedRowIndex < 0) {
 			return true;

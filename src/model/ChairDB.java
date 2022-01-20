@@ -1,9 +1,21 @@
 package model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChairDB {
+public class ChairDB implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8822835790378039803L;
 	/*Singltone*/
 	private static ChairDB instance = null;
 	public static ChairDB getInstance() {
@@ -56,8 +68,36 @@ public class ChairDB {
 		chairs.add(new Chair(4,	"e45",	"Katedra za primenjene računarske nauke",	ProfessorDB.getInstance().getProfWithKey(7),professorsOnChair4));
 		chairs.add(new Chair(5,	"e46",	"Katedra za informatiku",	ProfessorDB.getInstance().getProfWithKey(13),professorsOnChair5));
 		chairs.add(new Chair(6,	"e47",	"Katedra za automatiku",	ProfessorDB.getInstance().getProfWithKey(18),professorsOnChair6));
-	}
+		save();
+		/*------------------------------------*/
+//		File f = new File("chairDatebase.txt");
+//		try {
+//			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
+//			try {
+//				this.chairs = (ArrayList<Chair>)ois.readObject();
+//				
+//			} finally {
+//				ois.close();
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam ucitao");
+//		}
 	
+	}
+	public void save() {
+//		File f = new File("chairDatebase.txt");
+//		try {
+//			f.createNewFile();
+//			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+//			try {
+//				oos.writeObject(chairs);
+//			} finally {
+//				oos.close(); //Zatvara i tok nizeg nivoa.
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam uspeo");
+//		}
+	}
 	/*Methods for student views*/
 	public List<Chair> getChairs(){
 		return chairs;

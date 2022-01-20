@@ -42,7 +42,9 @@ public class StudentController {
 		StudentDB.getInstance().deleteStudent(student.getIndex());
 		MyStudentPanel.getInstance().updateView();
     }
-	
+	public void save() {
+		StudentDB.getInstance().save();
+	}
 	public void editStudent(int rowSelectedIndex,String surname, String name,LocalDate date, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
 		if (rowSelectedIndex < 0) {

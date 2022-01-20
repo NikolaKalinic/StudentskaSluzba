@@ -36,6 +36,9 @@ public class ChairController {
     	ChairDB.getInstance().deleteChair(chairs.getIdChair());
     	MyChairPanel.getInstance().updateView();
     }
+	public void save() {
+		ChairDB.getInstance().save();
+	}
 	public void editChair(int rowSelectedIndex,String id, String name,Professor p) {
 		if (rowSelectedIndex < 0) {
 			return;

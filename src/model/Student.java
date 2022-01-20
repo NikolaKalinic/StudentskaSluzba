@@ -1,10 +1,15 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 
-public class Student {
+public class Student implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5233691978237375528L;
 	/*Fields*/
 	private int key;
 	private String surname;
@@ -24,24 +29,6 @@ public class Student {
 	private int totalESPB;
 	
 	/*Constructor*/
-	public Student(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
-			String index, int yearOfEnrollment, int currYearOfStudy, Status status,List<Grades> grades) {
-		super();
-		this.surname = surname;
-		this.name = name;
-		this.dateOfBirth = dateOfBirth;
-		this.adress = adress;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.index = index;
-		this.yearOfEnrollment = yearOfEnrollment;
-		this.currYearOfStudy = currYearOfStudy;
-		this.status = status;
-		this.grades=grades;
-		this.avgMark = initAvg(grades);
-		this.totalESPB=initEspb(grades);
-	}
-	
 	public Student(int key,String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
 			String index, int yearOfEnrollment, int currYearOfStudy, Status status,List<Grades> grades, List<Subject> failedExams) {
 		super();
@@ -60,21 +47,6 @@ public class Student {
 		this.avgMark = initAvg(grades);
 		this.totalESPB=initEspb(grades);
 		this.failedExams = failedExams;
-	}
-	
-	public Student (String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
-			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
-		super();
-		this.surname = surname;
-		this.name = name;
-		this.dateOfBirth = dateOfBirth;
-		this.adress = adress;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.index = index;
-		this.yearOfEnrollment = yearOfEnrollment;
-		this.currYearOfStudy = currYearOfStudy;
-		this.status = status;
 	}
 	
 	public Student (int key,String index,String name, String surname, int currYearOfStudy,LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,

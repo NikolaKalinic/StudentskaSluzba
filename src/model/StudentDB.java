@@ -1,5 +1,13 @@
  package model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -9,7 +17,12 @@ import java.util.List;
 import gui.MainFrame;
 import gui.student.MyStudentPanel;
 
-public class StudentDB {
+public class StudentDB implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5687443410911286675L;
 	/*Singltone*/
 	private static StudentDB instance = null;
 	public static StudentDB getInstance() {
@@ -142,9 +155,38 @@ public class StudentDB {
 		studGrades16.add(new Grades(getStudWithKey(16),SubjectDB.getInstance().getSubjectWithKey(16),9,LocalDate.parse("04.02.2019.",formatter)));
 		getStudWithKey(16).setGrades(studGrades16);
 		/*---------------------------------------------------*/
+		save();
+		
+		/*Ovo odkomenarisi u drugom paljenju*/
+//		File f = new File("studentDatebase.txt");
+//		try {
+//			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
+//			try {
+//				this.students = (ArrayList<Student>)ois.readObject();
+//				
+//			} finally {
+//				ois.close();
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam ucitao");
+//		}
+		/*Ovo  odkomenarisi*/
 	}
 	
-	
+	public void save() {
+//		File f = new File("studentDatebase.txt");
+//		try {
+//			f.createNewFile();
+//			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+//			try {
+//				oos.writeObject(students);
+//			} finally {
+//				oos.close(); //Zatvara i tok nizeg nivoa.
+//			}
+//		}catch(Exception e) {
+//			System.out.println("Nisam uspeo");
+//		}
+	}
 	/*Methods for student views*/
 	public List<Student> getStudents(){
 		return students;
@@ -283,6 +325,30 @@ public class StudentDB {
 		student.getFailedExams().add(grade.getSubject());
 	}
 	
+	public void editSubject(Subject s) {
+		for(int i=0;i<students.size();i++) {
+			for(int j=0;j<students.get(i).getGrades().size();j++) {
+				if(students.get(i).getGrades().get(j).getSubject().getKey()==s.getKey()) {
+					students.get(i).getGrades().get(j).getSubject().setEspb(s.getEspb());
+					students.get(i).getGrades().get(j).getSubject().setIdSubject(s.getIdSubject());
+					students.get(i).getGrades().get(j).getSubject().setName(s.getName());
+					students.get(i).getGrades().get(j).getSubject().setSemestar(s.getSemestar());;
+					students.get(i).getGrades().get(j).getSubject().setYearOfStudySub(s.getYearOfStudySub());
+					students.get(i).getGrades().get(j).getSubject().setProfesor(s.getProfesor());
+				}
+			}
+			for(int j=0;j<students.get(i).getFailedExams().size();j++) {
+				if(students.get(i).getFailedExams().get(j).getKey()==s.getKey()) {
+					students.get(i).getFailedExams().get(j).setEspb(s.getEspb());
+					students.get(i).getFailedExams().get(j).setIdSubject(s.getIdSubject());
+					students.get(i).getFailedExams().get(j).setName(s.getName());
+					students.get(i).getFailedExams().get(j).setSemestar(s.getSemestar());;
+					students.get(i).getFailedExams().get(j).setYearOfStudySub(s.getYearOfStudySub());
+					students.get(i).getFailedExams().get(j).setProfesor(s.getProfesor());
+				}
+			}
+		}
+	}
 	
 	
 	

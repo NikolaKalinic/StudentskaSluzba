@@ -101,7 +101,17 @@ public class MyMenuBar extends JMenuBar {
 		Image iconSave = img1.getScaledInstance(15, 15, 4);
 		Icon fileIconSave = new ImageIcon(iconSave);
 		fileSave.setIcon(fileIconSave);
-		
+		fileSave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StudentController.getInstance().save();
+				ProfessorController.getInstance().save();
+				SubjectController.getInstance().save();
+				ChairController.getInstance().save();
+				
+			}
+		});
 		
 		fileOpen = new JMenu(MainFrame.getInstance().getResourceBundle().getString("miOpen"));
 		c=MainFrame.getInstance().getResourceBundle().getString("miOpen").charAt(0);

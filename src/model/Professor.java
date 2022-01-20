@@ -1,9 +1,15 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Professor {
+public class Professor implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1254621852444018464L;
 	private int key;
 	private String surname;
 	private String name;
@@ -33,29 +39,6 @@ public class Professor {
 		this.courseList = courseList;
 		this.key=key;
 	}
-	public Professor(String name,String surname) {
-		this.name=name;
-		this.surname=surname;
-	}
-	
-	
-	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, int experience) {
-		super();
-		this.surname = surname;
-		this.name = name;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.homeAdress = homeAdress;
-		this.workAdress = workAdress;
-		this.phoneNumber = phoneNumber;
-		this.id = id;
-		this.calling = calling;
-		this.experience = experience;
-	}
-
-	
-
 	public Professor(int key, String id, String name, String surname, LocalDate birthDate, Adress homeAdress, String phoneNumber, String email,
 			Adress workAdress, int experience, String calling,List<Subject> courseList) {
 		super();
