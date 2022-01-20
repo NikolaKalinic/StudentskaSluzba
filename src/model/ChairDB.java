@@ -35,68 +35,68 @@ public class ChairDB implements Serializable {
 		this.columns.add("Šef");
 	}
 	private void initChair() {
-		this.chairs=new ArrayList<Chair>();
-		List<Professor> professorsOnChair1 = new ArrayList<Professor>();
-		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(1));
-		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(7));
-		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(13));
-		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(19));
-		List<Professor> professorsOnChair2 = new ArrayList<Professor>();
-		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(2));
-		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(8));
-		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(14));
-		List<Professor> professorsOnChair3 = new ArrayList<Professor>();
-		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(3));
-		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(9));
-		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(15));
-		List<Professor> professorsOnChair4 = new ArrayList<Professor>();
-		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(4));
-		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(10));
-		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(16));
-		List<Professor> professorsOnChair5 = new ArrayList<Professor>();
-		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(5));
-		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(11));
-		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(17));
-		List<Professor> professorsOnChair6 = new ArrayList<Professor>();
-		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(6));
-		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(12));
-		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(18));
-		
-		chairs.add(new Chair(1,	"e42",	"Katedra za matematiku",	ProfessorDB.getInstance().getProfWithKey(2),professorsOnChair1));                    
-		chairs.add(new Chair(2,	"e43",	"Katedra za fiziku",	ProfessorDB.getInstance().getProfWithKey(3),professorsOnChair2));
-		chairs.add(new Chair(3,	"e44",	"Katedra za elektrotehniku",	ProfessorDB.getInstance().getProfWithKey(4),professorsOnChair3));
-		chairs.add(new Chair(4,	"e45",	"Katedra za primenjene računarske nauke",	ProfessorDB.getInstance().getProfWithKey(7),professorsOnChair4));
-		chairs.add(new Chair(5,	"e46",	"Katedra za informatiku",	ProfessorDB.getInstance().getProfWithKey(13),professorsOnChair5));
-		chairs.add(new Chair(6,	"e47",	"Katedra za automatiku",	ProfessorDB.getInstance().getProfWithKey(18),professorsOnChair6));
-		save();
+//		this.chairs=new ArrayList<Chair>();
+//		List<Professor> professorsOnChair1 = new ArrayList<Professor>();
+//		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(1));
+//		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(7));
+//		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(13));
+//		professorsOnChair1.add(ProfessorDB.getInstance().getProfWithKey(19));
+//		List<Professor> professorsOnChair2 = new ArrayList<Professor>();
+//		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(2));
+//		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(8));
+//		professorsOnChair2.add(ProfessorDB.getInstance().getProfWithKey(14));
+//		List<Professor> professorsOnChair3 = new ArrayList<Professor>();
+//		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(3));
+//		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(9));
+//		professorsOnChair3.add(ProfessorDB.getInstance().getProfWithKey(15));
+//		List<Professor> professorsOnChair4 = new ArrayList<Professor>();
+//		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(4));
+//		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(10));
+//		professorsOnChair4.add(ProfessorDB.getInstance().getProfWithKey(16));
+//		List<Professor> professorsOnChair5 = new ArrayList<Professor>();
+//		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(5));
+//		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(11));
+//		professorsOnChair5.add(ProfessorDB.getInstance().getProfWithKey(17));
+//		List<Professor> professorsOnChair6 = new ArrayList<Professor>();
+//		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(6));
+//		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(12));
+//		professorsOnChair6.add(ProfessorDB.getInstance().getProfWithKey(18));
+//		
+//		chairs.add(new Chair(1,	"e42",	"Katedra za matematiku",	ProfessorDB.getInstance().getProfWithKey(2),professorsOnChair1));                    
+//		chairs.add(new Chair(2,	"e43",	"Katedra za fiziku",	ProfessorDB.getInstance().getProfWithKey(3),professorsOnChair2));
+//		chairs.add(new Chair(3,	"e44",	"Katedra za elektrotehniku",	ProfessorDB.getInstance().getProfWithKey(4),professorsOnChair3));
+//		chairs.add(new Chair(4,	"e45",	"Katedra za primenjene računarske nauke",	ProfessorDB.getInstance().getProfWithKey(7),professorsOnChair4));
+//		chairs.add(new Chair(5,	"e46",	"Katedra za informatiku",	ProfessorDB.getInstance().getProfWithKey(13),professorsOnChair5));
+//		chairs.add(new Chair(6,	"e47",	"Katedra za automatiku",	ProfessorDB.getInstance().getProfWithKey(18),professorsOnChair6));
+//		save();
 		/*------------------------------------*/
-//		File f = new File("chairDatebase.txt");
-//		try {
-//			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
-//			try {
-//				this.chairs = (ArrayList<Chair>)ois.readObject();
-//				
-//			} finally {
-//				ois.close();
-//			}
-//		}catch(Exception e) {
-//			System.out.println("Nisam ucitao");
-//		}
+		File f = new File("chairDatebase.txt");
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
+			try {
+				this.chairs = (ArrayList<Chair>)ois.readObject();
+				
+			} finally {
+				ois.close();
+			}
+		}catch(Exception e) {
+			System.out.println("Nisam ucitao");
+		}
 	
 	}
 	public void save() {
-//		File f = new File("chairDatebase.txt");
-//		try {
-//			f.createNewFile();
-//			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
-//			try {
-//				oos.writeObject(chairs);
-//			} finally {
-//				oos.close(); //Zatvara i tok nizeg nivoa.
-//			}
-//		}catch(Exception e) {
-//			System.out.println("Nisam uspeo");
-//		}
+		File f = new File("chairDatebase.txt");
+		try {
+			f.createNewFile();
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+			try {
+				oos.writeObject(chairs);
+			} finally {
+				oos.close(); //Zatvara i tok nizeg nivoa.
+			}
+		}catch(Exception e) {
+			System.out.println("Nisam uspeo");
+		}
 	}
 	/*Methods for student views*/
 	public List<Chair> getChairs(){
