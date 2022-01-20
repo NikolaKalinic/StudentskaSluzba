@@ -47,8 +47,9 @@ public class MyEditigStudentInformation extends JPanel {
 		panCenter.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2-kit.getScreenSize().height/10));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);		
-		Dimension dim=new Dimension(kit.getScreenSize().width/14,kit.getScreenSize().height/50);
-		int konst=kit.getScreenSize().width/15;
+		Dimension dim=new Dimension(kit.getScreenSize().width/10,kit.getScreenSize().height/45);
+		Dimension dim1=new Dimension(kit.getScreenSize().width/8,kit.getScreenSize().height/45);
+		int konst=kit.getScreenSize().width/20;
 		FocusListenerForStudent focusListener = new FocusListenerForStudent(2);
 		
 		
@@ -57,7 +58,7 @@ public class MyEditigStudentInformation extends JPanel {
 		
 		JPanel pName=new JPanel(new FlowLayout(FlowLayout.LEFT));	
         JLabel lName=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentName"));
-        lName.setPreferredSize(dim);
+        lName.setPreferredSize(dim1);
         JTextField fName=new JTextField();
         fName.setText(s.getName());
         focusListener.setName(s.getName());
@@ -66,14 +67,13 @@ public class MyEditigStudentInformation extends JPanel {
         fName.addFocusListener(focusListener);
         pName.add(Box.createHorizontalStrut(konst));
         pName.add(lName);
-        pName.add(Box.createHorizontalStrut(konst/2));
         pName.add(fName);
         focusListener.lostFocus(pName, btnOk);
         
         /*Panel for surname*/
         JPanel pSurname=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lSurname=new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentSurname"));
-        lSurname.setPreferredSize(dim);
+        lSurname.setPreferredSize(dim1);
         JTextField fSurname=new JTextField();
         fSurname.setText(s.getSurname());
         focusListener.setSurname(s.getSurname());
@@ -82,14 +82,13 @@ public class MyEditigStudentInformation extends JPanel {
         fSurname.addFocusListener(focusListener);
         pSurname.add(Box.createHorizontalStrut(konst));
         pSurname.add(lSurname);
-        pSurname.add(Box.createHorizontalStrut(konst/2));
         pSurname.add(fSurname);
         focusListener.lostFocus(pSurname, btnOk);
         
         /*Panel for birth date*/
         JPanel pBirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lBirthDate = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentDate"));
-        lBirthDate.setPreferredSize(dim);
+        lBirthDate.setPreferredSize(dim1);
         JTextField fBirthDate = new JTextField();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY.");
         fBirthDate.setText(formatter.format(s.getDaateOfBirth()));
@@ -99,14 +98,13 @@ public class MyEditigStudentInformation extends JPanel {
         fBirthDate.setPreferredSize(dim);
         pBirthDate.add(Box.createHorizontalStrut(konst));
         pBirthDate.add(lBirthDate);
-        pBirthDate.add(Box.createHorizontalStrut(konst/2));
         pBirthDate.add(fBirthDate);
         focusListener.lostFocus(pBirthDate, btnOk);
         
         /*Panel for adress*/
         JPanel pAdress = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lAdress = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentAdress"));
-        lAdress.setPreferredSize(dim);
+        lAdress.setPreferredSize(dim1);
         JTextField fAdress = new JTextField();
         try {
         fAdress.setText(s.getAdress().toString());
@@ -123,14 +121,13 @@ public class MyEditigStudentInformation extends JPanel {
         fAdress.setPreferredSize(dim);
         pAdress.add(Box.createHorizontalStrut(konst));
         pAdress.add(lAdress);
-        pAdress.add(Box.createHorizontalStrut(konst/2));
         pAdress.add(fAdress);
         focusListener.lostFocus(pAdress, btnOk);
         
         /*Panel for phone number*/
         JPanel pNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lNumber = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentPhone"));
-        lNumber.setPreferredSize(dim);
+        lNumber.setPreferredSize(dim1);
         JTextField fNumber = new JTextField();
         fNumber.setText(s.getContactPhone());
         focusListener.setNumber(s.getContactPhone());
@@ -139,14 +136,13 @@ public class MyEditigStudentInformation extends JPanel {
         fNumber.setPreferredSize(dim);
         pNumber.add(Box.createHorizontalStrut(konst));
         pNumber.add(lNumber);
-        pNumber.add(Box.createHorizontalStrut(konst/2));
         pNumber.add(fNumber);
         focusListener.lostFocus(pNumber, btnOk);
         
         /*Panel for email*/
         JPanel pEmail = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lEmail = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentEmail"));
-        lEmail.setPreferredSize(dim);
+        lEmail.setPreferredSize(dim1);
         JTextField fEmail = new JTextField();
         fEmail.setText(s.getEmail());
         focusListener.setEmail(s.getEmail());
@@ -155,14 +151,13 @@ public class MyEditigStudentInformation extends JPanel {
         fEmail.setPreferredSize(dim);
         pEmail.add(Box.createHorizontalStrut(konst));
         pEmail.add(lEmail);
-        pEmail.add(Box.createHorizontalStrut(konst/2));
         pEmail.add(fEmail);
         focusListener.lostFocus(pEmail, btnOk);
         
         /*Panel for index*/
         JPanel pId = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lId = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentId"));
-        lId.setPreferredSize(dim);
+        lId.setPreferredSize(dim1);
         JTextField fId = new JTextField();
         fId.setText(s.getIndex());
         focusListener.setIndex(s.getIndex());
@@ -171,14 +166,13 @@ public class MyEditigStudentInformation extends JPanel {
         fId.setPreferredSize(dim);
         pId.add(Box.createHorizontalStrut(konst));
         pId.add(lId);
-        pId.add(Box.createHorizontalStrut(konst/2));
         pId.add(fId);
         focusListener.lostFocus(pId, btnOk);
         
         /*Panel for year of entrollment*/
         JPanel pYearOfEntrollment = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lYearOfEntrollment = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentYearEn"));
-        lYearOfEntrollment.setPreferredSize(dim);
+        lYearOfEntrollment.setPreferredSize(dim1);
         JTextField fYearOfEntrollment = new JTextField();
         fYearOfEntrollment.setText(Integer.toString(s.getYearOfEnrollment()));
         focusListener.setYearOfEntrollment(s.getYearOfEnrollment());
@@ -187,14 +181,13 @@ public class MyEditigStudentInformation extends JPanel {
         fYearOfEntrollment.setPreferredSize(dim);
         pYearOfEntrollment.add(Box.createHorizontalStrut(konst));
         pYearOfEntrollment.add(lYearOfEntrollment);
-        pYearOfEntrollment.add(Box.createHorizontalStrut(konst/2));
         pYearOfEntrollment.add(fYearOfEntrollment);
         focusListener.lostFocus(pYearOfEntrollment, btnOk);
         
         /*Panel for current year of study*/
         JPanel pCurrYearOfStudy = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lCurrYearOfStudy = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentYearCur"));
-        lCurrYearOfStudy.setPreferredSize(dim);
+        lCurrYearOfStudy.setPreferredSize(dim1);
         String[] CurrYear = { MainFrame.getInstance().getResourceBundle().getString("studentFirst"), MainFrame.getInstance().getResourceBundle().getString("studentSecond"), MainFrame.getInstance().getResourceBundle().getString("studentThird"), MainFrame.getInstance().getResourceBundle().getString("studentFourth"), MainFrame.getInstance().getResourceBundle().getString("studentMaster"), MainFrame.getInstance().getResourceBundle().getString("studentDoctor"),};
         JComboBox<String> combo = new JComboBox<String>(CurrYear);
         combo.setName("currYear");
@@ -217,14 +210,13 @@ public class MyEditigStudentInformation extends JPanel {
 		combo.setPreferredSize(dim);
         pCurrYearOfStudy.add(Box.createHorizontalStrut(konst));
         pCurrYearOfStudy.add(lCurrYearOfStudy);
-        pCurrYearOfStudy.add(Box.createHorizontalStrut(konst/2));
         pCurrYearOfStudy.add(combo);
         
         
         /*Panel for status student*/
         JPanel pStatus = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lStatus = new JLabel(MainFrame.getInstance().getResourceBundle().getString("studentStatus"));
-        lStatus.setPreferredSize(dim);
+        lStatus.setPreferredSize(dim1);
         String[] status = { MainFrame.getInstance().getResourceBundle().getString("studentBudget") , MainFrame.getInstance().getResourceBundle().getString("studentSelf")};
         JComboBox<String> combo1 = new JComboBox<String>(status);
         combo1.setSelectedIndex(s.getStatus()==Status.B?0:1);
@@ -278,7 +270,6 @@ public class MyEditigStudentInformation extends JPanel {
         combo1.setPreferredSize(dim);
         pStatus.add(Box.createHorizontalStrut(konst));
         pStatus.add(lStatus);
-        pStatus.add(Box.createHorizontalStrut(konst/2));
         pStatus.add(combo1);
         
         

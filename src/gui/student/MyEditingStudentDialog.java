@@ -31,10 +31,10 @@ public class MyEditingStudentDialog extends JDialog{
 		
 		PassedExam.getInstance().updateLabel();
 		NotPassedExam.getInstance().initComponents();
-		JPanel panelBot = new JPanel();
-		panelBot.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-		panelBot.setPreferredSize(new Dimension(1,10));	
-		panel.add(panelBot,BorderLayout.SOUTH);
+//		JPanel panelBot = new JPanel();
+//		panelBot.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+//		panelBot.setPreferredSize(new Dimension(1,10));	
+//		panel.add(panelBot,BorderLayout.SOUTH);
 		
 		add(panel);
 		setVisible(true);

@@ -37,7 +37,7 @@ public class SetChiefDialog extends JDialog {
 		
 		/*Top panel for information about chair*/
 		JPanel panTop = new JPanel();
-		panTop.setLayout(new FlowLayout(FlowLayout.CENTER,20,15));
+		panTop.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
 		JLabel lCode = new JLabel(MainFrame.getInstance().getResourceBundle().getString("chairId") + " " + c.getIdChair());
 		panTop.add(lCode);
 		JLabel lName = new JLabel(MainFrame.getInstance().getResourceBundle().getString("chairName") + " " + c.getNameOfChair());
