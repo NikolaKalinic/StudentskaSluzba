@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.Set;
 
 
 
@@ -12,27 +11,14 @@ public class Subject {
 	private String name;
 	private Semestar semestar;
 	private int yearOfStudySub;
-	private Professor professor;  						//Profesor
+	private Professor professor;  						
 	private int espb;
 	private List<Student> studentsPassed;
 	private List<Student> studentsFailed;
 	
 	public Subject() {}
 	
-	/*Constructors*/
-	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb,
-			List<Student> studentsPassed, List<Student> studentsFailed) {
-		super();
-		this.idSubject = idSubject;
-		this.name = name;
-		this.semestar = semestar;
-		this.yearOfStudySub = yearOfStudySub;
-		this.professor = profesor;
-		this.espb = espb;
-		this.studentsPassed = studentsPassed;
-		this.studentsFailed = studentsFailed;
-	}
-	
+	/*Constructors*/	
 	public Subject(int key,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		super();
 		this.key=key;
@@ -42,15 +28,6 @@ public class Subject {
 		this.yearOfStudySub = yearOfStudySub;
 		this.professor = profesor;
 		this.espb = espb;
-	}
-	
-	public Subject(String idSubject, String name, int espb, int yearOfStudySub, Semestar semestar) {
-		this.idSubject = idSubject;
-		this.name = name;
-		this.espb = espb;
-		this.yearOfStudySub = yearOfStudySub;
-		this.semestar = semestar;
-		
 	}
 	public Subject(int key,String idSbuject,String name,int yearOfStudySub,int espb,Professor p,Semestar semestar) {
 		this.key=key;

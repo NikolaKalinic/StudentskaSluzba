@@ -17,10 +17,9 @@ import javax.swing.JTable;
 
 import controller.StudentController;
 import gui.MainFrame;
-import gui.MyTabbedPane;
-import gui.professor.ProfessorDialog;
-import gui.subject.MyAddingSubjectDialog;
+import model.Student;
 import model.StudentDB;
+import model.SubjectDB;
 
 public class NotPassedExam extends JPanel{
 	
@@ -82,8 +81,18 @@ public class NotPassedExam extends JPanel{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GradeStudent gs = new GradeStudent();
+					if(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()>-1) {
+						Student s=StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
+						;
+						if(SubjectDB.getInstance().existsSubject(s.getFailedExams().get(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()).getIdSubject())) {
+							JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("subjectErr"));
+						}
+						else {
+							GradeStudent gs = new GradeStudent();
+						}
+					}
 				}
+				
 			});
 		
 		button.setBackground(new Color(14,98,190));

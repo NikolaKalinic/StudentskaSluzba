@@ -27,6 +27,7 @@ public class MyStatusBar {
 	JLabel statusLabel;
 	private DateFormat format;
 	private  DateTimeFormatter dateFormat;
+	private String loc;
 	
 	public MyStatusBar(MainFrame mf) {
 		
@@ -37,7 +38,7 @@ public class MyStatusBar {
 		BoxLayout box = new BoxLayout(statusPanel, BoxLayout.X_AXIS);
 		statusPanel.setLayout(box);
 		 statusLabel = new JLabel(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
-		
+		loc=MainFrame.getInstance().getResourceBundle().getString("loc");
 		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
@@ -60,14 +61,14 @@ public class MyStatusBar {
 		dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 		format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
 		Calendar cal = Calendar.getInstance();
-		 JLabel statusTime = new JLabel(format.format(cal.getTime())+ " "+LocalDate.now().format(dateFormat));
+		 JLabel statusTime = new JLabel(format.format(cal.getTime())+ " | "+LocalDate.now().format(dateFormat)+ " | "+ loc);
 		
 		 /*taken from stackoverflow*/
 		new Timer(1000, new ActionListener() {						
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            Calendar cal = Calendar.getInstance();
-	           statusTime.setText(format.format(cal.getTime()) + " "+LocalDate.now().format(dateFormat));
+	           statusTime.setText(format.format(cal.getTime()) + " | "+LocalDate.now().format(dateFormat) + " | "+ loc);
 	        }
 	    }).start();
 		
@@ -86,6 +87,7 @@ public class MyStatusBar {
 				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
 			dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
 			format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
+			loc=MainFrame.getInstance().getResourceBundle().getString("loc");
 		}
 	}
 	
