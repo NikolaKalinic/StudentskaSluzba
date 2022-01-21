@@ -160,7 +160,6 @@ public class Student implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}

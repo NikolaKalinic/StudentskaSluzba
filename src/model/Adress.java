@@ -45,9 +45,9 @@ public class Adress implements Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
 	public String toString() {
 		return street + "," + number + "," + city + "," + country;
 	}
+
 
 }
