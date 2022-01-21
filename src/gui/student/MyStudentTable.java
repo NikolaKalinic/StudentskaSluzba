@@ -33,6 +33,7 @@ public class MyStudentTable extends JTable {
 		trs = new TableRowSorter(new AbstractTableModelStudent());
 		this.setRowSorter(trs);
 		trs.setComparator(0, c1);
+		trs.setComparator(5, c2);
 	}
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -69,6 +70,26 @@ public class MyStudentTable extends JTable {
                 return intCompare2;
 			}else
 				return intCompare1;
+		}
+		
+	};
+	Comparator c2 = new Comparator() {
+
+		@Override
+		public int compare(Object o1, Object o2) {
+			String oo1=o1.toString();
+			String oo2=o2.toString();
+			int intCompare1 = Double.valueOf(oo2.split(",")[0]).compareTo(Double.valueOf((oo1.split(",")[0])));
+			if(intCompare1==0) {
+				int intCompare2 = Double.valueOf(oo2.split(",")[1]).compareTo(Double.valueOf(oo1.split(",")[1]));
+				if (intCompare2 == 0) {
+					return oo1.compareToIgnoreCase(oo2);
+				}else {
+					return intCompare2;
+				}
+			}else {
+				return intCompare1;
+			}
 		}
 		
 	};

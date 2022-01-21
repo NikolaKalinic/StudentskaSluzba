@@ -83,13 +83,8 @@ public class NotPassedExam extends JPanel{
 				public void actionPerformed(ActionEvent e) {
 					if(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()>-1) {
 						Student s=StudentController.getInstance().getSelectedStudent(MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow()));
-						;
-						if(SubjectDB.getInstance().existsSubject(s.getFailedExams().get(NotPassedExam.getInstance().getNotPassedExamsTable().getSelectedRow()).getIdSubject())) {
-							JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("subjectErr"));
-						}
-						else {
-							GradeStudent gs = new GradeStudent();
-						}
+						GradeStudent gs = new GradeStudent();
+						
 					}
 				}
 				

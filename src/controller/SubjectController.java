@@ -2,6 +2,9 @@ package controller;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import gui.MainFrame;
 import gui.professor.MyEditingProfessorInformation;
 import gui.professor.MyProfessorPanel;
 import gui.professor.ProfessorSubjects;
@@ -43,10 +46,15 @@ public class SubjectController {
 			return;
 		}
     	Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
-		SubjectDB.getInstance().deleteSubject(subject.getIdSubject());
-		if(subject.getProfesor()!=null)
-			ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
-		MySubjectPanel.getInstance().updateView();
+    	if(StudentDB.getInstance().checkSubject(subject.getKey())) {
+    		JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("deleteSubjectErr"), MainFrame.getInstance().getResourceBundle().getString("deleteSubjectErr1"), JOptionPane.WARNING_MESSAGE);
+    	}else {
+			SubjectDB.getInstance().deleteSubject(subject.getIdSubject());
+			StudentDB.getInstance().deleteFailed(subject.getKey());
+			if(subject.getProfesor()!=null)
+				ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
+			MySubjectPanel.getInstance().updateView();
+    	}
     }
 	
 	public void editSubject(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {

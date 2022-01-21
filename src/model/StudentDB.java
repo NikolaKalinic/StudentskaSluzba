@@ -350,7 +350,26 @@ public class StudentDB implements Serializable {
 	}
 	
 	
-	
+	public boolean checkSubject(int key) {
+		for(int i=0;i<students.size();i++) {
+			for(int j=0;j<students.get(i).getGrades().size();j++) {
+				if(students.get(i).getGrades().get(j).getSubject().getKey()==key) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	public void deleteFailed(int key) {
+		for(int i=0;i<students.size();i++) {
+			for(int j=0;j<students.get(i).getFailedExams().size();j++) {
+				if(students.get(i).getFailedExams().get(j).getKey()==key) {
+					students.get(i).getFailedExams().remove(j);
+				}
+				
+			}
+		}
+	}
 	
 	
 	
