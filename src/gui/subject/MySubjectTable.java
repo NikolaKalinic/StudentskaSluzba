@@ -26,7 +26,7 @@ public class MySubjectTable extends JTable {
 		return instance;	
 	}
 	
-	public TableRowSorter myTableRowSorter;
+	public static TableRowSorter myTableRowSorter;
 	
 	private MySubjectTable() {
 		this.setRowSelectionAllowed(true);

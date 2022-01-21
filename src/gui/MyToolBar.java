@@ -40,6 +40,7 @@ import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
+import gui.subject.MySubjectRowFilter;
 import gui.subject.MySubjectTable;
 import model.ChairDB;
 import model.ProfessorDB;
@@ -233,6 +234,10 @@ public class MyToolBar extends JToolBar {
 				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
 					String searchText = searchField.getText();
 					MyProfessorTable.myTableRowSorter.setRowFilter(new MyProfessorRowFilter(searchText));
+				}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					String searchText = searchField.getText();
+					MySubjectTable.myTableRowSorter.setRowFilter(new MySubjectRowFilter(searchText));
 				}
 				
 			}
