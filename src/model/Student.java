@@ -1,11 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 
-public class Student {
+public class Student implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5233691978237375528L;
 	/*Fields*/
+	private int key;
 	private String surname;
 	private String name;
 	private LocalDate dateOfBirth;
@@ -17,14 +23,16 @@ public class Student {
 	private int currYearOfStudy;
 	private Status status;
 	private double avgMark;
-	private Set<Subject> passedExams;  		
-	private Set<Subject> failedExams;
+	private List<Subject> passedExams;  		
+	private List<Subject> failedExams;
+	private List<Grades> grades;
+	private int totalESPB;
 	
 	/*Constructor*/
-
-	public Student(String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
-			String index, int yearOfEnrollment, int currYearOfStudy, Status status, double avgMark,Set<Subject> passedExams, Set<Subject> failedExams) {
+	public Student(int key,String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			String index, int yearOfEnrollment, int currYearOfStudy, Status status,List<Grades> grades, List<Subject> failedExams) {
 		super();
+		this.key=key;
 		this.surname = surname;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
@@ -35,13 +43,16 @@ public class Student {
 		this.yearOfEnrollment = yearOfEnrollment;
 		this.currYearOfStudy = currYearOfStudy;
 		this.status = status;
-		this.avgMark = avgMark;
-		this.passedExams = passedExams;
+		this.grades=grades;
+		this.avgMark = initAvg(grades);
+		this.totalESPB=initEspb(grades);
 		this.failedExams = failedExams;
 	}
-	public Student (String surname, String name, LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
-			String index, int yearOfEnrollment, int currYearOfStudy, Status status) {
+	
+	public Student (int key,String index,String name, String surname, int currYearOfStudy,LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			 Status status,int yearOfEnrollment) {
 		super();
+		this.key=key;
 		this.surname = surname;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
@@ -53,11 +64,91 @@ public class Student {
 		this.currYearOfStudy = currYearOfStudy;
 		this.status = status;
 	}
+	
+	public Student (int key,String index,String name, String surname, int currYearOfStudy,LocalDate dateOfBirth, Adress adress, String phoneNumber, String email,
+			 Status status,int yearOfEnrollment,List<Grades> grades, List<Subject> failedExams) {
+		super();
+		this.key=key;
+		this.surname = surname;
+		this.name = name;
+		this.dateOfBirth = dateOfBirth;
+		this.adress = adress;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.index = index;
+		this.yearOfEnrollment = yearOfEnrollment;
+		this.currYearOfStudy = currYearOfStudy;
+		this.status = status;
+		this.grades=grades;
+		this.avgMark = initAvg(grades);
+		this.totalESPB=initEspb(grades);
+		this.failedExams = failedExams;
+	}
 	/*Seters and geters*/
+	
+	private double initAvg(List<Grades> l) {
+		if(l.isEmpty()) {
+			return 0;
+		}
+		double sum=0;
+		for(Grades g : l) {
+			sum+=g.getGrades();
+		}
+		return sum/l.size();
+	}
+	private int initEspb(List<Grades> l) {
+		int sum=0;
+		for(Grades g:l) {
+			sum+=g.getSubject().getEspb();
+		}
+		return sum;
+	}
+	
+	public double getAverageMark(List<Grades> l) {
+		if(l.isEmpty()){
+			return 0;
+		} 
+		double sum = 0;
+		for(Grades g : l) {
+			sum += g.getGrades();
+		}
+		return sum/(l.size());
+	}
+	
+	
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+	public int getTotalESPB(List<Grades> l) {
+		int sum = 0;
+		for(Grades g : l) {
+			sum += g.getSubject().getEspb();
+		}
+		return sum;
+	}
+	
+	public int getTotalESPB() {
+		return totalESPB;
+	}
+	
+	public void setTotalESPB(int totalESPB) {
+		this.totalESPB = totalESPB;
+	}
 	public String getSurname() {
 		return surname;
 	}
 
+	public List<Grades> getGrades() {
+		return grades;
+	}
+	public void setGrades(List<Grades> grades) {
+		this.grades = grades;
+	}
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
@@ -140,19 +231,19 @@ public class Student {
 		this.avgMark = avgMark;
 	}
 
-	public Set<Subject> getPassedExams() {
+	public List<Subject> getPassedExams() {
 		return passedExams;
 	}
 
-	public void setPassedExams(Set<Subject> passedExams) {
+	public void setPassedExams(List<Subject> passedExams) {
 		this.passedExams = passedExams;
 	}
 
-	public Set<Subject> getFailedExams() {
+	public List<Subject> getFailedExams() {
 		return failedExams;
 	}
 
-	public void setFailedExams(Set<Subject> failedExams) {
+	public void setFailedExams(List<Subject> failedExams) {
 		this.failedExams = failedExams;
 	}
 	@Override

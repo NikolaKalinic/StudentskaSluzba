@@ -11,12 +11,22 @@ public class FocusListenerForProfessor implements FocusListener {
 	public void focusGained(FocusEvent e) {
 		JTextField tf = (JTextField) e.getComponent();
 		tf.setBackground(Color.WHITE);
-		ProfessorDialog.checkValidity();
+		try {
+			ProfessorDialog.checkValidity();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		ProfessorDialog.checkValidity();
+		try {
+			ProfessorDialog.checkValidity();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 }

@@ -3,6 +3,8 @@ package gui.student;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,12 +13,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import controller.StudentController;
+import gui.MainFrame;
 import model.Adress;
 
 public class FocusListenerForStudent implements FocusListener {
@@ -43,7 +47,7 @@ public class FocusListenerForStudent implements FocusListener {
 		this.i=i;
 	}
 	/*stackoverflow*/
-	final static String DATE_FORMAT = "dd-MM-yyyy";
+	final static String DATE_FORMAT = "dd.MM.yyyy.";
 
 	public static boolean isDateValid(String date) 
 	{
@@ -103,15 +107,15 @@ public class FocusListenerForStudent implements FocusListener {
 		
 		/*Vadilidation for name*/
 		if (txt.getName().equals("name")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite Ime...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentNameTooltip"))) {
 				nameBackUp=txt.getText();
-				txt.setText("Unesite Ime...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentNameTooltip"));
 				name="Unesite Ime...";
 				key = key & 0b11111110;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *[A-Za-z][a-z]+ *";
+				String regex =" *[A-Ša-š][a-š]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -124,7 +128,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					nameBackUp=txt.getText();
-					txt.setText("Unesite Ime...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentNameTooltip"));
 					name="Unesite Ime...";
 					key = key & 0b11111110;;
 					txt.setForeground(Color.RED);
@@ -135,15 +139,15 @@ public class FocusListenerForStudent implements FocusListener {
 		}
 		/*Vadilidation for surname*/
 		if (txt.getName().equals("surname")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite Prezime...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentSurnameTooltip"))) {
 				surnameBackUp=txt.getText();
-				txt.setText("Unesite Prezime...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentSurnameTooltip"));
 				surname="Unesite Prezime...";
 				key = key & 0b11111101;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *[A-Za-z][a-z]+ *";
+				String regex =" *[A-Ša-š][a-š]+ *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -156,7 +160,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					surnameBackUp=txt.getText();
-					txt.setText("Unesite Prezime...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentSurnameTooltip"));
 					surname="Unesite Prezime...";
 					key = key & 0b11111101;
 					txt.setForeground(Color.RED);
@@ -167,22 +171,23 @@ public class FocusListenerForStudent implements FocusListener {
 		}
 		/*Vadilidation for birth date*/
 		if (txt.getName().equals("date")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite datum...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentDateTooltip"))) {
 				dateBackUp=txt.getText();
-				txt.setText("Unesite datum...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentDateTooltip"));
 				key = key & 0b11111011;
 				date = LocalDate.of(1111,1, 1);
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *[0-9]{1,2}-[0-9]{1,2}-[0-9]{4,4} *";
+				String regex =" *[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{4,4}\\. *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
+					System.out.println("AAAAA");
 					if(isDateValid(txt.getText())) {
 					dateBackUp=txt.getText();
 					String tmp = txt.getText().trim();
-					String [] splits =tmp.split("-");
+					String [] splits =tmp.split("\\.");
 					int year =  Integer.parseInt(splits[2]);
 					int mounth =Integer.parseInt(splits[1]);
 					int day = Integer.parseInt(splits[0]);
@@ -194,7 +199,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 					}else {
 						dateBackUp=txt.getText();
-						txt.setText("Format:\"DD-MM-YYYY\"");
+						txt.setText("Format:\"DD.MM.YYYY\"");
 						key = key & 0b11111011;
 						txt.setForeground(Color.RED);
 						txt.setBorder(invalidBorder);
@@ -202,7 +207,7 @@ public class FocusListenerForStudent implements FocusListener {
 					
 				} else {
 					dateBackUp=txt.getText();
-					txt.setText("Format:\"DD-MM-YYYY\"");
+					txt.setText("Format:\"DD.MM.YYYY\"");
 					key = key & 0b11111011;
 					txt.setForeground(Color.RED);
 					txt.setBorder(invalidBorder);
@@ -213,15 +218,15 @@ public class FocusListenerForStudent implements FocusListener {
 		
 		/*Vadilidation for adress*/
 		if (txt.getName().equals("adress")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite adresu...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentAdressTooltip"))) {
 				adressBackUp=txt.getText();
-				txt.setText("Unesite adresu...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentAdressTooltip"));
 				adress = new Adress("Adresa","a1","Nije","Validna");
 				key = key & 0b11110111;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z0-9]+ *, *[A-Za-z]+( *[A-Za-z])* *, *[A-Za-z]+( *[A-Za-z])* *";
+				String regex =" *[A-Ša-š]+( *[A-Ša-š])* *, *[A-Ša-š0-9]+ *, *[A-Ša-š]+( *[A-Ša-š])* *, *[A-Ša-š]+( *[A-Ša-š])* *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -234,7 +239,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					adressBackUp=txt.getText();
-					txt.setText("\"ulica,broj,grad,drzava\"");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentAdressErr"));
 					adress = new Adress("Adresa","a1","Nije","Validna");
 					key = key & 0b11110111;
 					txt.setForeground(Color.RED);
@@ -245,15 +250,15 @@ public class FocusListenerForStudent implements FocusListener {
 		
 		/*Vadilidation for number*/
 		if (txt.getName().equals("number")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite broj...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentPhoneTooltip"))) {
 				numberBackUp=txt.getText();
-				txt.setText("Unesite broj...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentPhoneTooltip"));
 				number = "Unesite broj...";
 				key = key & 0b11101111;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *\\+? *[0-9]+ *";
+				String regex =" * *[0-9]{3}/[0-9]{3,4}-[0-9]{3} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -265,7 +270,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					numberBackUp=txt.getText();
-					txt.setText("Unesite broj...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentPhoneTooltip"));
 					number = "Unesite broj...";
 					key = key & 0b11101111;
 					txt.setForeground(Color.RED);
@@ -275,9 +280,9 @@ public class FocusListenerForStudent implements FocusListener {
 		}
 		/*Vadilidation for email*/
 		if (txt.getName().equals("email")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite email...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentEmailTooltip"))) {
 				emailBackUp=txt.getText();
-				txt.setText("Unesite emal...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentEmailTooltip"));
 				email="Unesite emal...";
 				key = key & 0b11011111;
 				txt.setForeground(Color.RED);
@@ -295,7 +300,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					emailBackUp=txt.getText();
-					txt.setText("Unesite email...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentEmailTooltip"));
 					email="Unesite emal...";
 					key = key & 0b11011111;
 					txt.setForeground(Color.RED);
@@ -305,15 +310,15 @@ public class FocusListenerForStudent implements FocusListener {
 		}
 		/*Vadilidation for index*/
 		if (txt.getName().equals("index")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite index...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentIdTooltip"))) {
 				indexBackUp=txt.getText();
-				txt.setText("Unesite index...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentIdTooltip"));
 				index = "Unesite index...";
 				key = key & 0b10111111;
 				txt.setForeground(Color.RED);
 				txt.setBorder(invalidBorder);
 			} else {
-				String regex =" *[A-Za-z]{1,3}-[0-9]{1,3}-[0-9]{1,4} *";
+				String regex =" *[A-Za-z]{1,3} [0-9]{1,3}/[0-9]{1,4} *";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(txt.getText());
 				if(matcher.matches()) {
@@ -322,7 +327,7 @@ public class FocusListenerForStudent implements FocusListener {
 					if(i==1) {				//1-POZIVAM IZ DODAVANJA 2-POZIVAM IZ IZMENE
 						if(!StudentController.getInstance().existsStudent(index)) {
 							//JOptionPane.showMessageDialog(null, "Student sa tim indexom vec postoji ! ");
-							txt.setText("Index već postoji !");
+							txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentIdErr"));
 							index = "Unesite index...";
 							key = key & 0b10111111;
 							txt.setForeground(Color.RED);
@@ -337,7 +342,7 @@ public class FocusListenerForStudent implements FocusListener {
 						if(!StudentController.getInstance().editExistsStudent(index)) {
 							key = key & 0b10111111;
 							//JOptionPane.showMessageDialog(null, "Student sa tim indexom vec postoji ! ");
-							txt.setText("Index već postoji !");
+							txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentIdErr"));
 							index = "Unesite index...";
 							System.out.println(Integer. toBinaryString(key));
 							txt.setForeground(Color.RED);
@@ -353,7 +358,7 @@ public class FocusListenerForStudent implements FocusListener {
 					
 				} else {
 					indexBackUp=txt.getText();
-					txt.setText("\"RA-1-2021\"");
+					txt.setText("\"RA 1/2021\"");
 					index = "Unesite index...";
 					key = key & 0b10111111;
 					txt.setForeground(Color.RED);
@@ -364,9 +369,9 @@ public class FocusListenerForStudent implements FocusListener {
 		
 		/*Vadilidation for year of enrtrollment*/
 		if (txt.getName().equals("yearOfEntrollment")) {
-			if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite godinu upisa...")) {
+			if (txt.getText().trim().equals("") || txt.getText().trim().equals(MainFrame.getInstance().getResourceBundle().getString("studentYearEnTooltip"))) {
 				yearBackUp=txt.getText();
-				txt.setText("Unesite godinu upisa...");
+				txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentYearEnTooltip"));
 				yearOfEntrollment=-1;
 				key = key & 0b01111111;
 				txt.setForeground(Color.RED);
@@ -384,7 +389,7 @@ public class FocusListenerForStudent implements FocusListener {
 					txt.setBorder(defaultBorder);
 				} else {
 					yearBackUp=txt.getText();
-					txt.setText("Unesite godinu upisa...");
+					txt.setText(MainFrame.getInstance().getResourceBundle().getString("studentYearEnTooltip"));
 					yearOfEntrollment=-1;
 					key = key & 0b01111111;
 					txt.setForeground(Color.RED);
@@ -393,6 +398,26 @@ public class FocusListenerForStudent implements FocusListener {
 				
 			}
 		}
+	}
+	public void lostFocus(JPanel panel,JButton btnOk) {
+		panel.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				try{
+					Thread.sleep(100);
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+				btnOk.requestFocus();}
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
 	}
 	
 	public int getKey() {

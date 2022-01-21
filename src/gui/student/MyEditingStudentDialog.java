@@ -16,7 +16,7 @@ public class MyEditingStudentDialog extends JDialog{
 
 	
 	public MyEditingStudentDialog(){
-		super(MainFrame.getInstance(),"Izmena studenta",true);
+		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("editStudent"),true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2+60));
 		setResizable(false);
@@ -29,15 +29,15 @@ public class MyEditingStudentDialog extends JDialog{
 		MyEditingStudentTabbedPane mestp = new MyEditingStudentTabbedPane();
 		panel.add(mestp);
 		
-		
-		JPanel panelBot = new JPanel();
-		panelBot.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-		panelBot.setPreferredSize(new Dimension(1,10));	
-		panel.add(panelBot,BorderLayout.SOUTH);
+		PassedExam.getInstance().updateLabel();
+		NotPassedExam.getInstance().initComponents();
+//		JPanel panelBot = new JPanel();
+//		panelBot.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
+//		panelBot.setPreferredSize(new Dimension(1,10));	
+//		panel.add(panelBot,BorderLayout.SOUTH);
 		
 		add(panel);
 		setVisible(true);
-    	pack();
 	}
 	
 }

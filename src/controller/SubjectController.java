@@ -1,8 +1,22 @@
 package controller;
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import gui.MainFrame;
+import gui.professor.MyEditingProfessorInformation;
+import gui.professor.MyProfessorPanel;
+import gui.professor.ProfessorSubjects;
+import gui.student.MyStudentPanel;
+import gui.student.MyStudentTable;
+import gui.subject.MyEditingSubjectDialog;
 import gui.subject.MySubjectPanel;
 import model.Professor;
+import model.ProfessorDB;
 import model.Semestar;
+import model.Student;
+import model.StudentDB;
 import model.Subject;
 import model.SubjectDB;
 
@@ -24,13 +38,33 @@ public class SubjectController {
 		SubjectDB.getInstance().addSubject(idSubject, name, semestar, yearOfStudySub, profesor, espb);
 		MySubjectPanel.getInstance().updateView();
 	}
+	public void save() {
+		SubjectDB.getInstance().save();
+	}
+	public void deleteSubject(int rowSelectedIndex) {
+    	if (rowSelectedIndex < 0) {
+			return;
+		}
+    	Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
+    	if(StudentDB.getInstance().checkSubject(subject.getKey())) {
+    		JOptionPane.showMessageDialog(null, MainFrame.getInstance().getResourceBundle().getString("deleteSubjectErr"), MainFrame.getInstance().getResourceBundle().getString("deleteSubjectErr1"), JOptionPane.WARNING_MESSAGE);
+    	}else {
+			SubjectDB.getInstance().deleteSubject(subject.getIdSubject());
+			StudentDB.getInstance().deleteFailed(subject.getKey());
+			if(subject.getProfesor()!=null)
+				ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
+			MySubjectPanel.getInstance().updateView();
+    	}
+    }
 	
-	public void editStudent(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
+	public void editSubject(int rowSelectedIndex,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		if (rowSelectedIndex < 0) {
 			return;
 		}
 		Subject subject = SubjectDB.getInstance().getRow(rowSelectedIndex);
 		SubjectDB.getInstance().editSubject(subject,idSubject, name, semestar, yearOfStudySub, profesor, espb);
+		StudentDB.getInstance().editSubject(subject);
+		ProfessorDB.getInstance().editSubject(subject);
 		MySubjectPanel.getInstance().updateView();
 	}
 	public Subject getSelectedSubject(int rowSelectedIndex) {
@@ -38,5 +72,30 @@ public class SubjectController {
 		return subject;
 	}
 	
+	public boolean existsSubject(String id) {
+		return SubjectDB.getInstance().existsSubject(id);
+	}
+	
+	public boolean editExistsSubject(String id) {
+		 if(SubjectDB.getInstance().existsSubject(id)) {
+			 return true;
+		 }else {
+			 if (getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow())).getIdSubject().equals(id)) {
+				 return true;
+			 }else
+				 return false;
+		 }
+	}
+	
+	public void addProfessor(Professor professor) {
+		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()));
+		subject.setProfesor(professor);
+	}
+	
+	public void removeProfessor() {
+		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()));
+		ProfessorController.getInstance().removeSubjectFromProfessor(subject.getKey(),subject.getProfesor().getKey());
+		subject.removeProfessor();
+	}
 
 }

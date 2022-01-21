@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class MyStudentPanel extends JPanel {
 
@@ -43,7 +45,7 @@ public class MyStudentPanel extends JPanel {
 		studentTableView();
 	}
 	private void studentTableView() {
-		studentTable = new MyStudentTable();
+		studentTable = MyStudentTable.getInstance();
 		JScrollPane scrollPane = new JScrollPane(studentTable);
 		add(scrollPane, BorderLayout.CENTER);
 	}
@@ -52,4 +54,9 @@ public class MyStudentPanel extends JPanel {
 		model.fireTableDataChanged();
 		validate();
 	}
+	public JTable getStudentTable() {
+		return studentTable;
+	}
+
+	
 }

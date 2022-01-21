@@ -1,38 +1,32 @@
 package model;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.List;
 
 
 
-public class Subject {
+public class Subject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7399269298579518184L;
 	/*Fields*/
+	private int key;
 	private String idSubject;
 	private String name;
 	private Semestar semestar;
 	private int yearOfStudySub;
 	private Professor professor;  						
 	private int espb;
-	private Set<Student> studentsPassed;
-	private Set<Student> studentsFailed;
+	private List<Student> studentsPassed;
+	private List<Student> studentsFailed;
 	
 	public Subject() {}
 	
-	/*Constructors*/
-	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb,
-			Set<Student> studentsPassed, Set<Student> studentsFailed) {
+	/*Constructors*/	
+	public Subject(int key,String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
 		super();
-		this.idSubject = idSubject;
-		this.name = name;
-		this.semestar = semestar;
-		this.yearOfStudySub = yearOfStudySub;
-		this.professor = profesor;
-		this.espb = espb;
-		this.studentsPassed = studentsPassed;
-		this.studentsFailed = studentsFailed;
-	}
-	
-	public Subject(String idSubject, String name, Semestar semestar, int yearOfStudySub, Professor profesor, int espb) {
-		super();
+		this.key=key;
 		this.idSubject = idSubject;
 		this.name = name;
 		this.semestar = semestar;
@@ -40,14 +34,14 @@ public class Subject {
 		this.professor = profesor;
 		this.espb = espb;
 	}
-	
-	public Subject(String idSubject, String name, int espb, int yearOfStudySub, Semestar semestar) {
-		this.idSubject = idSubject;
+	public Subject(int key,String idSbuject,String name,int yearOfStudySub,int espb,Professor p,Semestar semestar) {
+		this.key=key;
+		this.idSubject = idSbuject;
 		this.name = name;
 		this.espb = espb;
 		this.yearOfStudySub = yearOfStudySub;
 		this.semestar = semestar;
-		
+		this.professor=p;
 	}
 
 	/* Seters and geters*/
@@ -90,6 +84,10 @@ public class Subject {
 	public void setProfesor(Professor profesor) {
 		this.professor = profesor;
 	}
+	
+	public void removeProfessor() {
+		this.professor = null;
+	}
 
 	public int getEspb() {
 		return espb;
@@ -98,21 +96,34 @@ public class Subject {
 	public void setEspb(int espb) {
 		this.espb = espb;
 	}
+	
+	public int getKey() {
+		return key;
+	}
 
-	public Set<Student> getStudentsPassed() {
+	public void setKey(int id) {
+		this.key = id;
+	}
+	
+	public List<Student> getStudentsPassed() {
 		return studentsPassed;
 	}
 
-	public void setStudentsPassed(Set<Student> studentsPassed) {
+	public void setStudentsPassed(List<Student> studentsPassed) {
 		this.studentsPassed = studentsPassed;
 	}
 
-	public Set<Student> getStudentsFailed() {
+	public List<Student> getStudentsFailed() {
 		return studentsFailed;
 	}
 
-	public void setStudentsFailed(Set<Student> studentsFailed) {
+	public void setStudentsFailed(List<Student> studentsFailed) {
 		this.studentsFailed = studentsFailed;
+	}
+
+	@Override
+	public String toString() {
+		return  idSubject + "  -  " + name;
 	}
 	
 	

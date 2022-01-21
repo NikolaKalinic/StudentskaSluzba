@@ -1,8 +1,15 @@
 package model;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Grades {
+public class Grades implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1905092334293030379L;
 	/*Fields*/
 	private Student studentPassed;
 	private Subject subject;

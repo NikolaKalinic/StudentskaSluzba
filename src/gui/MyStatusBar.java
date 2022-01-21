@@ -5,8 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,9 +18,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 public class MyStatusBar {
+
+	JLabel statusLabel;
+	private DateFormat format;
+	private  DateTimeFormatter dateFormat;
+	private String loc;
+	
 	public MyStatusBar(MainFrame mf) {
 		
 		JPanel statusPanel = new JPanel();
@@ -26,42 +37,58 @@ public class MyStatusBar {
 		statusPanel.setPreferredSize(new Dimension(mf.getWidth(), 20));
 		BoxLayout box = new BoxLayout(statusPanel, BoxLayout.X_AXIS);
 		statusPanel.setLayout(box);
-		JLabel statusLabel = new JLabel("Studentska Slu�ba-Studenti");
-		new Timer(100,new ActionListener() {
-			
+		 statusLabel = new JLabel(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
+		loc=MainFrame.getInstance().getResourceBundle().getString("loc");
+		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			public void stateChanged(ChangeEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					statusLabel.setText("Studentska Služba-Studenti");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
 				else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
-					statusLabel.setText("Studentska Služba-Profesori");
-				else
-				statusLabel.setText("Studentska Služba-Predmeti");
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusProfessor"));
+				else if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusSubject"));
+				else 
+					statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
 			}
-		}).start();
-		
-		
+		});
 		statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		statusPanel.add(statusLabel);
 		statusPanel.add(Box.createGlue());
 
-            
-		 DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy.");
-		 Calendar cal = Calendar.getInstance();
-		 JLabel statusTime = new JLabel(dateFormat.format(cal.getTime()));
+     
+		
+		dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+		format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
+		Calendar cal = Calendar.getInstance();
+		 JLabel statusTime = new JLabel(format.format(cal.getTime())+ " | "+LocalDate.now().format(dateFormat)+ " | "+ loc);
 		
 		 /*taken from stackoverflow*/
 		new Timer(1000, new ActionListener() {						
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            Calendar cal = Calendar.getInstance();
-	           statusTime.setText(dateFormat.format(cal.getTime()));
+	           statusTime.setText(format.format(cal.getTime()) + " | "+LocalDate.now().format(dateFormat) + " | "+ loc);
 	        }
 	    }).start();
 		
 	   	 statusPanel.add(statusTime);
 	   	 statusPanel.add(Box.createHorizontalStrut(20));
+	}
+	public void initComponents() {
+		{
+			if(MyTabbedPane.getInstance().getSelectedIndex()==0)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusStudent"));
+			else if(MyTabbedPane.getInstance().getSelectedIndex()==1)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusProfessor"));
+			else if(MyTabbedPane.getInstance().getSelectedIndex()==2)
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusSubject"));
+			else 
+				statusLabel.setText(MainFrame.getInstance().getResourceBundle().getString("statusChair"));
+			dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+			format = DateFormat.getTimeInstance(DateFormat.MEDIUM, Locale.getDefault());
+			loc=MainFrame.getInstance().getResourceBundle().getString("loc");
+		}
 	}
 	
 	

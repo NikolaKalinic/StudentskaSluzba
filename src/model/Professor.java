@@ -1,10 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
-public class Professor {
+public class Professor implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1254621852444018464L;
+	private int key;
 	private String surname;
 	private String name;
 	private String email;
@@ -14,12 +20,11 @@ public class Professor {
 	private String phoneNumber;
 	private String id;
 	private String calling;
-	private String title;
 	private int experience;
-	private Set<Subject> courseList; 
+	private List<Subject> courseList; 
 
-	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience, Set<Subject> courseList) {
+	public Professor(int key,String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
+			Adress workAdress, String phoneNumber, String id, String calling, int experience, List<Subject> courseList) {
 		super();
 		this.surname = surname;
 		this.name = name;
@@ -30,41 +35,39 @@ public class Professor {
 		this.phoneNumber = phoneNumber;
 		this.id = id;
 		this.calling = calling;
-		this.title = title;
+		this.experience = experience;
+		this.courseList = courseList;
+		this.key=key;
+	}
+	public Professor(int key, String id, String name, String surname, LocalDate birthDate, Adress homeAdress, String phoneNumber, String email,
+			Adress workAdress, int experience, String calling,List<Subject> courseList) {
+		super();
+		this.key = key;
+		this.surname = surname;
+		this.name = name;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.homeAdress = homeAdress;
+		this.workAdress = workAdress;
+		this.phoneNumber = phoneNumber;
+		this.id = id;
+		this.calling = calling;
 		this.experience = experience;
 		this.courseList = courseList;
 	}
-	public Professor(String name,String surname) {
-		this.name=name;
-		this.surname=surname;
-	}
-	
-	
-	public Professor(String surname, String name, String email, LocalDate birthDate, Adress homeAdress,
-			Adress workAdress, String phoneNumber, String id, String calling, String title, int experience) {
-		super();
-		this.surname = surname;
-		this.name = name;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.homeAdress = homeAdress;
-		this.workAdress = workAdress;
-		this.phoneNumber = phoneNumber;
-		this.id = id;
-		this.calling = calling;
-		this.title = title;
-		this.experience = experience;
-	}
-
-
-
-	public Set<Subject> getCourseList() {
+	public List<Subject> getCourseList() {
 		return courseList;
 	}
 
+	
 
-
-	public void setCourseList(Set<Subject> courseList) {
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
+	public void setCourseList(List<Subject> courseList) {
 		this.courseList = courseList;
 	}
 
@@ -141,17 +144,6 @@ public class Professor {
 	}
 
 
-
-	public String getTitle() {
-		return title;
-	}
-
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
 	public int getExperience() {
 		return experience;
 	}
@@ -177,9 +169,29 @@ public class Professor {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getCallingIndex() {
+		switch(this.getCalling()) {
+		  case "REDOVNI_PROFESOR":
+		    return 3;
+		  case "VANREDNI_PROFESOR":
+		    return 2;
+		  case "DOCENT":
+			return 1;
+		  default:
+		    return 0;
+		}
+	
+	}
+	
 	public String getProfNameAndSurname() {
 		String ret = name + " " + surname;
 		return ret;
+	}
+	@Override
+	public String toString() {
+		return  surname + " " + name + " -- " + calling + " -- "
+				+ experience;
 	}
 	
 

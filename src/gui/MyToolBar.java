@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -12,21 +14,36 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import controller.ChairController;
 import controller.ProfessorController;
 import controller.StudentController;
-import model.Professor;
-import model.ProfessorDB;
+import controller.SubjectController;
+import gui.chair.MyChairPanel;
+import gui.chair.MyChairTable;
+import gui.chair.SetChiefDialog;
+import gui.professor.MyProfessorPanel;
+import gui.professor.MyProfessorRowFilter;
+import gui.professor.MyProfessorSubjectsTabel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
 import gui.professor.ProfessorEditDialog;
 import gui.student.MyAddingStudentDialog;
 import gui.student.MyEditingStudentDialog;
+import gui.student.MyNotPassedExamsTable;
+import gui.student.MyPassedExamsTable;
+import gui.student.MyStudentPanel;
+import gui.student.MyStudentRowFilter;
 import gui.student.MyStudentTable;
 import gui.subject.MyAddingSubjectDialog;
 import gui.subject.MyEditingSubjectDialog;
+import gui.subject.MySubjectPanel;
+import gui.subject.MySubjectRowFilter;
 import gui.subject.MySubjectTable;
-import model.Student;
+import model.ChairDB;
+import model.ProfessorDB;
 import model.StudentDB;
 import model.SubjectDB;
 
@@ -36,27 +53,41 @@ public class MyToolBar extends JToolBar {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	private JButton create;
+	private JButton edit;
+	private JButton delete;
+	private JTextField searchField;
+	private JButton loupe;
 	public MyToolBar() {
 		
 		super(SwingConstants.HORIZONTAL);
 		
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		
-		JButton create = new JButton();
-		create.setToolTipText("Create entity");
+		 create = new JButton();
+		create.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipNew"));
 		Image createImg = kit.getImage("images/create4.png");
-		//Image resizedCreateImg = createImg.getScaledInstance(25, 24, java.awt.Image.SCALE_SMOOTH);
 		create.setIcon(new ImageIcon(createImg));
 		create.setBorderPainted(false);
 		create.setFocusPainted(false);
 		create.setBackground(Color.white);
-		//create.getInputMap().put(KeyStroke.getKeyStroke("pressed");
+		
+		
+		MyTabbedPane.getInstance().addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==3)
+					create.setEnabled(false);
+				else
+					create.setEnabled(true);
+				
+			}
+		});
         create.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyAddingStudentDialog masd = new MyAddingStudentDialog();
 				}else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
@@ -73,10 +104,9 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JButton edit = new JButton();
-		edit.setToolTipText("Edit entity");
+		 edit = new JButton();
+		edit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipEdit"));
 		Image editImg = kit.getImage("images/edit4.png");
-		//Image resizedEditImg = editImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		edit.setIcon(new ImageIcon(editImg));
 		edit.setBorderPainted(false);
 		edit.setFocusPainted(false);
@@ -85,18 +115,24 @@ public class MyToolBar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-					if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 						MyEditingStudentDialog mesd = new MyEditingStudentDialog();
 					}
-				if(MyTabbedPane.getInstance().getSelectedIndex()==2)
-					if((MySubjectTable.selectedRow < (SubjectDB.getInstance().getSubjects().size()) && MySubjectTable.selectedRow >= 0)) {
-						MyEditingSubjectDialog mesd = new MyEditingSubjectDialog();
+				}
+				else if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+					if(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< SubjectDB.getInstance().getSubjects().size() && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()>=0) {
+						MyEditingSubjectDialog ms = new MyEditingSubjectDialog();
 					}
-				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
-					if((MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex >= 0)){
-						Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorTable.rowIndex);
-						ProfessorEditDialog ped = new ProfessorEditDialog(professor);
+				}
+				else if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					if((MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()>= 0)){
+						ProfessorEditDialog ped = new ProfessorEditDialog();
+					}
+				}
+				else if(MyTabbedPane.getInstance().getSelectedIndex() == 3) {
+					if((MyChairPanel.getInstance().getChairTable().getSelectedRow() < (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow()>= 0)){
+						SetChiefDialog ped = new SetChiefDialog();
 					}
 				}
 			}
@@ -106,10 +142,9 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JButton delete = new JButton();
-		delete.setToolTipText("Delete entity");
+		 delete = new JButton();
+		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
 		Image deleteImg = kit.getImage("images/delete4.png");
-		//Image resizedDeleteImg = deleteImg.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
 		delete.setIcon(new ImageIcon(deleteImg));
 		delete.setBorderPainted(false);
 		delete.setFocusPainted(false);
@@ -121,24 +156,43 @@ public class MyToolBar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				 if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
-					if(MyProfessorTable.rowIndex < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorTable.rowIndex > -1) {
-						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), "Da li ste sigurni da zelite da obrisete profesora ?", "Brisanje profesora", JOptionPane.YES_NO_OPTION);
+					if(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() < (ProfessorDB.getInstance().getProfessors().size()) && MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow() > -1) {
+						int a = JOptionPane.showConfirmDialog(MainFrame.getInstance(), MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), MainFrame.getInstance().getResourceBundle().getString("deleteProfessor1"), JOptionPane.YES_NO_OPTION);
 						if (a == JOptionPane.YES_OPTION) {
-							ProfessorController.getInstance().removeProfessor(MyProfessorTable.rowIndex);
-							MyProfessorTable.rowIndex = -1;
+							ProfessorController.getInstance().removeProfessor((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())));
 						}
 					}
 				 }
-				 if(MyTabbedPane.getInstance().getSelectedIndex()==0)
-						if((MyStudentTable.selectedRow < (StudentDB.getInstance().getStudents().size()) && MyStudentTable.selectedRow >= 0)) {
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+						if((MyStudentPanel.getInstance().getStudentTable().getSelectedRow()< (StudentDB.getInstance().getStudents().size()) && MyStudentPanel.getInstance().getStudentTable().getSelectedRow() >= 0)) {
 							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
-									"Da li ste sigurni da zelite da obrisete studenta", "Brisanje studenta", 
+									MainFrame.getInstance().getResourceBundle().getString("deleteStudent"), MainFrame.getInstance().getResourceBundle().getString("deleteStudent1"), 
 							        JOptionPane.YES_NO_OPTION);
 							if(answer==JOptionPane.YES_OPTION) {
-								StudentController.getInstance().deleteStudent(MyStudentTable.selectedRow);
-								MyStudentTable.selectedRow=-1;
+								StudentController.getInstance().deleteStudent((MyStudentPanel.getInstance().getStudentTable().convertRowIndexToModel(MyStudentPanel.getInstance().getStudentTable().getSelectedRow())));
 							}
 						}
+				 }
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==2) {
+						if((MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()< (SubjectDB.getInstance().getSubjects().size()) && MySubjectPanel.getInstance().getSubjectTable().getSelectedRow() >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									MainFrame.getInstance().getResourceBundle().getString("deleteSubject"), MainFrame.getInstance().getResourceBundle().getString("deleteSubject1"), 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								SubjectController.getInstance().deleteSubject((MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow())));
+							}
+						}
+				 }
+				 else if(MyTabbedPane.getInstance().getSelectedIndex()==3) {
+						if((MyChairPanel.getInstance().getChairTable().getSelectedRow()< (ChairDB.getInstance().getChairs().size()) && MyChairPanel.getInstance().getChairTable().getSelectedRow() >= 0)) {
+							int answer=JOptionPane.showConfirmDialog(MainFrame.getInstance(), 
+									MainFrame.getInstance().getResourceBundle().getString("deleteChair"),  MainFrame.getInstance().getResourceBundle().getString("deleteChair1"), 
+							        JOptionPane.YES_NO_OPTION);
+							if(answer==JOptionPane.YES_OPTION) {
+								ChairController.getInstance().deleteChair((MyChairPanel.getInstance().getChairTable().getSelectedRow()));
+							}
+						}
+				 }
 			}
 		});
 			
@@ -149,14 +203,45 @@ public class MyToolBar extends JToolBar {
 		
 		addSeparator();
 		
-		JTextField searchField = new JTextField(10);
+		 searchField = new JTextField(10);
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.setToolTipText("Type here");
+		searchField.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipField"));
+		searchField.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(searchField.getText().equals(""))
+					MyStudentTable.trs.setRowFilter(new MyStudentRowFilter(searchField.getText()));	
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
 		
 		add(searchField);
 	
-		JButton loupe = new JButton();
-		loupe.setToolTipText("Search");
+		 loupe = new JButton();
+		loupe.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipSearch"));
+		loupe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
+					MyStudentTable.trs.setRowFilter(new MyStudentRowFilter(searchField.getText()));
+				}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					String searchText = searchField.getText();
+					MyProfessorTable.myTableRowSorter.setRowFilter(new MyProfessorRowFilter(searchText));
+				}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 2) {
+					String searchText = searchField.getText();
+					MySubjectTable.myTableRowSorter.setRowFilter(new MySubjectRowFilter(searchText));
+				}
+				
+			}
+		});
 		Image searchImg = kit.getImage("images/loupe.png");
 		Image resizedSearchImg = searchImg.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
 		loupe.setIcon(new ImageIcon(resizedSearchImg));
@@ -168,6 +253,25 @@ public class MyToolBar extends JToolBar {
 
 		setFloatable(false);
 		setBackground(new Color(255, 255, 255));
+	}
+	
+	public void initComponents() {
+		create.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipNew"));
+		edit.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipEdit"));
+		delete.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipDelete"));
+		searchField.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipField"));
+		loupe.setToolTipText(MainFrame.getInstance().getResourceBundle().getString("tooltipSearch"));
+		MyStudentTable.getInstance().initComponents();
+		MyPassedExamsTable.getInstance().initComponents();
+		MyNotPassedExamsTable.getInstance().initComponents();
+		MySubjectTable.getInstance().initComponents();
+		MyProfessorTable.getInstance().initComponents();
+		MyChairTable.getInstance().initComponents();
+		MyProfessorSubjectsTabel.getInstance().initComponents();
+		MyChairTable.getInstance().repaint();
+		MyProfessorTable.getInstance().repaint();
+		MyStudentTable.getInstance().repaint();
+		MySubjectTable.getInstance().repaint();
 	}
 
 }

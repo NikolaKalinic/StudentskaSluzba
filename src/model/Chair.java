@@ -1,28 +1,58 @@
 package model;
 
-import java.util.Set;
 
-public class Chair {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Chair implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8251911705595003187L;
+	
 	/*Fields*/
+	private int key;
 	private String idChair;
 	private String nameOfChair;
-	private String headOfChair; 		
-	private Set<Professor> professors;
+	private Professor headOfChair; 		
+	private List<Professor> professors;
 	
 	/*Construcor*/
-	public Chair(String idChair, String nameOfChair, String headOfChair, Set<Professor> professors) {
+	public Chair(String idChair, String nameOfChair, List<Professor> professors) {
 		super();
+		this.idChair = idChair;
+		this.nameOfChair = nameOfChair;
+		this.professors = professors;
+	}
+	public Chair(String idChair, String nameOfChair) {
+		super();
+		this.idChair = idChair;
+		this.nameOfChair = nameOfChair;
+		this.professors= new ArrayList<Professor>();
+	}
+	
+
+	public Chair(int key, String idChair, String nameOfChair, Professor headOfChair,List<Professor> professors) {
+		super();
+		this.key = key;
 		this.idChair = idChair;
 		this.nameOfChair = nameOfChair;
 		this.headOfChair = headOfChair;
 		this.professors = professors;
 	}
-
 	/*Getter and setter*/
 	public String getIdChair() {
 		return idChair;
 	}
-
+	
+	
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
 	public void setIdChair(String idChair) {
 		this.idChair = idChair;
 	}
@@ -35,19 +65,19 @@ public class Chair {
 		this.nameOfChair = nameOfChair;
 	}
 
-	public String getHeadOfChair() {
+	public Professor getHeadOfChair() {
 		return headOfChair;
 	}
 
-	public void setHeadOfChair(String headOfChair) {
+	public void setHeadOfChair(Professor headOfChair) {
 		this.headOfChair = headOfChair;
 	}
 
-	public Set<Professor> getProfessors() {
+	public List<Professor> getProfessors() {
 		return professors;
 	}
 
-	public void setProfessors(Set<Professor> professors) {
+	public void setProfessors(List<Professor> professors) {
 		this.professors = professors;
 	}
 	
