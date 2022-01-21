@@ -6,9 +6,10 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import gui.MainFrame;
-import gui.subject.MySubjectTable;
+import gui.student.AbstractTableModelStudent;
 
 public class MyProfessorTable extends JTable {
 
@@ -22,12 +23,15 @@ public class MyProfessorTable extends JTable {
 		return instance;	
 	}
 	
+	public static TableRowSorter myTableRowSorter;
 	
 	private MyProfessorTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
+		myTableRowSorter = new TableRowSorter(new AbstractTableModelProfessors());
+		this.setRowSorter(myTableRowSorter);
 	}
 
 	@Override

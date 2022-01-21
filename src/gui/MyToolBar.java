@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -16,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,6 +25,7 @@ import gui.chair.MyChairPanel;
 import gui.chair.MyChairTable;
 import gui.chair.SetChiefDialog;
 import gui.professor.MyProfessorPanel;
+import gui.professor.MyProfessorRowFilter;
 import gui.professor.MyProfessorSubjectsTabel;
 import gui.professor.MyProfessorTable;
 import gui.professor.ProfessorDialog;
@@ -231,6 +229,10 @@ public class MyToolBar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				if(MyTabbedPane.getInstance().getSelectedIndex()==0) {
 					MyStudentTable.trs.setRowFilter(new MyStudentRowFilter(searchField.getText()));
+				}
+				if(MyTabbedPane.getInstance().getSelectedIndex() == 1) {
+					String searchText = searchField.getText();
+					MyProfessorTable.myTableRowSorter.setRowFilter(new MyProfessorRowFilter(searchText));
 				}
 				
 			}
