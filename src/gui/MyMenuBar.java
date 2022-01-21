@@ -356,6 +356,16 @@ public class MyMenuBar extends JMenuBar {
 		Image iconHelp = img6.getScaledInstance(15, 15, 4);
 		Icon helpIconHelp = new ImageIcon(iconHelp);
 		helpHelp.setIcon(helpIconHelp);
+		helpHelp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Help hp = new Help();
+				
+			}
+			
+		});
 		
 		 helpAbout = new JMenuItem(MainFrame.getInstance().getResourceBundle().getString("miAbout"));
 		 c=MainFrame.getInstance().getResourceBundle().getString("miAbout").charAt(0);
