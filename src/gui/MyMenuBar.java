@@ -352,7 +352,7 @@ public class MyMenuBar extends JMenuBar {
 		helpHelp.setCursor(new Cursor(12));
 		helpHelp.setMnemonic((int)c);
 		helpHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-		Image img6 = kit.getImage("Images/help.png");
+		Image img6 = kit.getImage("images/help.png");
 		Image iconHelp = img6.getScaledInstance(15, 15, 4);
 		Icon helpIconHelp = new ImageIcon(iconHelp);
 		helpHelp.setIcon(helpIconHelp);
@@ -398,7 +398,7 @@ public class MyMenuBar extends JMenuBar {
 		 lSrb.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("Serbian").charAt(0);
 		 lSrb.setMnemonic((int)c);
-		 Image imgSrb = kit.getImage("Images/serbia .png");
+		 Image imgSrb = kit.getImage("images/serbia .png");
 			Image iconSrb = imgSrb.getScaledInstance(15, 15, 4);
 			Icon helpIconSrb = new ImageIcon(iconSrb);
 			lSrb.setIcon(helpIconSrb);
@@ -417,7 +417,7 @@ public class MyMenuBar extends JMenuBar {
 		 lEng.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("English").charAt(0);
 		 lEng.setMnemonic((int)c);
-		 Image imgUSA = kit.getImage("Images/USA.png");
+		 Image imgUSA = kit.getImage("images/USA.png");
 			Image iconUsa = imgUSA.getScaledInstance(15, 15, 4);
 			Icon helpIconUsa = new ImageIcon(iconUsa);
 			lEng.setIcon(helpIconUsa);

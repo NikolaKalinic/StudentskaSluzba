@@ -44,7 +44,7 @@ public class MyEditigStudentInformation extends JPanel {
 		
 		JPanel panCenter=new JPanel();
 		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
-		panCenter.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2-kit.getScreenSize().height/10));
+		panCenter.setPreferredSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2-kit.getScreenSize().height/12));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);		
 		Dimension dim=new Dimension(kit.getScreenSize().width/10,kit.getScreenSize().height/45);
