@@ -480,7 +480,7 @@ public class MyEditingProfessorInformation extends JPanel {
 		}
 		
 		public static void checkValidity() {
-			int temp = (MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()));
+			int temp = MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow();
 			if (temp == -1) {
 				return;
 			}

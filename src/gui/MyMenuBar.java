@@ -398,6 +398,10 @@ public class MyMenuBar extends JMenuBar {
 		 lSrb.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("Serbian").charAt(0);
 		 lSrb.setMnemonic((int)c);
+		 Image imgSrb = kit.getImage("Images/serbia .png");
+			Image iconSrb = imgSrb.getScaledInstance(15, 15, 4);
+			Icon helpIconSrb = new ImageIcon(iconSrb);
+			lSrb.setIcon(helpIconSrb);
 		lSrb.addActionListener(new ActionListener() {
 			
 			@Override
@@ -413,6 +417,10 @@ public class MyMenuBar extends JMenuBar {
 		 lEng.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("English").charAt(0);
 		 lEng.setMnemonic((int)c);
+		 Image imgUSA = kit.getImage("Images/USA.png");
+			Image iconUsa = imgUSA.getScaledInstance(15, 15, 4);
+			Icon helpIconUsa = new ImageIcon(iconUsa);
+			lEng.setIcon(helpIconUsa);
 		lEng.addActionListener(new ActionListener() {
 			
 			@Override
