@@ -366,6 +366,14 @@ public class MyMenuBar extends JMenuBar {
 		Image iconAbout = img7.getScaledInstance(15, 15, 4);
 		Icon helpIconAbout = new ImageIcon(iconAbout);
 		helpAbout.setIcon(helpIconAbout);
+		helpAbout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				About ab = new About();
+				
+			}
+		});
 		
 		help.add(helpHelp);
 		help.addSeparator();
@@ -377,6 +385,7 @@ public class MyMenuBar extends JMenuBar {
 		 language.setMnemonic((int)c);
 		language.setCursor(new Cursor(12));
 		 lSrb = new JCheckBoxMenuItem(MainFrame.getInstance().getResourceBundle().getString("Serbian"));
+		 lSrb.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("Serbian").charAt(0);
 		 lSrb.setMnemonic((int)c);
 		lSrb.addActionListener(new ActionListener() {
@@ -391,6 +400,7 @@ public class MyMenuBar extends JMenuBar {
 		lSrb.setSelected(true);
 		lSrb.setCursor(new Cursor(12));
 		 lEng = new JCheckBoxMenuItem(MainFrame.getInstance().getResourceBundle().getString("English"));
+		 lEng.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK+ActionEvent.SHIFT_MASK));
 		 c=MainFrame.getInstance().getResourceBundle().getString("English").charAt(0);
 		 lEng.setMnemonic((int)c);
 		lEng.addActionListener(new ActionListener() {

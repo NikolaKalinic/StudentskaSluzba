@@ -56,14 +56,15 @@ public class MyAddingStudentDialog extends JDialog{
 	public MyAddingStudentDialog() {
 		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("addStudent"),true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/2));
+		setSize(new Dimension(kit.getScreenSize().width/3,kit.getScreenSize().height/2));
 		setResizable(false);
 		setLocationRelativeTo(MainFrame.getInstance());
 		JPanel panCenter=new JPanel();
 		 btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
+		Dimension dim=new Dimension(kit.getScreenSize().width/10,kit.getScreenSize().height/45);
+		Dimension dim1=new Dimension(kit.getScreenSize().width/8,kit.getScreenSize().height/45);
 		int konst=kit.getScreenSize().width/20;
 		FocusListenerForStudent focusListener = new FocusListenerForStudent(1);
 		

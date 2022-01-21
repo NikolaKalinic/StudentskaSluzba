@@ -94,7 +94,7 @@ public class PassedExam extends JPanel{
 		
 		JPanel panLabel = new JPanel();
 		panLabel.setBackground(Color.white);
-		panLabel.setPreferredSize(new Dimension(kit.getScreenSize().width/8,kit.getScreenSize().height/10));
+		panLabel.setPreferredSize(new Dimension(kit.getScreenSize().width/6-10,kit.getScreenSize().height/10));
 		panLabel.setLayout(new BorderLayout());
 		panLabel.add(label1,BorderLayout.NORTH);
 		
