@@ -34,7 +34,7 @@ public class MyEditingSubjectDialog extends JDialog{
 	public Semestar smestar=Semestar.Summer;
 	public MyEditingSubjectDialog() {
 		super(MainFrame.getInstance(),MainFrame.getInstance().getResourceBundle().getString("editSubject"),true);
-		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		Subject s=SubjectController.getInstance().getSelectedSubject(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()));
 		smestar=s.getSemestar();
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setSize(new Dimension(kit.getScreenSize().width/4,kit.getScreenSize().height/3+50));
@@ -44,8 +44,8 @@ public class MyEditingSubjectDialog extends JDialog{
 		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
-		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/50);
+		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/45);
+		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/45);
 		int konst=kit.getScreenSize().width/30;
 		FocusListenerForSubject focusListener = new FocusListenerForSubject(2);
 		
@@ -268,7 +268,7 @@ public class MyEditingSubjectDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(focusListener.getKey()==0b1111) {
-					SubjectController.getInstance().editSubject(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow(), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, s.getProfesor(), focusListener.getEspb());
+					SubjectController.getInstance().editSubject(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()), focusListener.getIdSubject(), focusListener.getName(),smestar , combo.getSelectedIndex()+1, s.getProfesor(), focusListener.getEspb());
 					dispose();
 				}
 			}

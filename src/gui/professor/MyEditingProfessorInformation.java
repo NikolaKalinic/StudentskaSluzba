@@ -25,6 +25,7 @@ import controller.ProfessorController;
 import gui.MainFrame;
 import model.Adress;
 import model.Professor;
+import model.ProfessorDB;
 
 public class MyEditingProfessorInformation extends JPanel {
 	
@@ -60,7 +61,7 @@ public class MyEditingProfessorInformation extends JPanel {
 			
 			
 			
-			Professor professor = ProfessorController.getInstance().getSelectedProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+			Professor professor = ProfessorController.getInstance().getSelectedProfessor((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())));
 			setSize(300, 650);
 			FocusListenerForEditProfessor focusListener = new FocusListenerForEditProfessor();
 			
@@ -458,7 +459,7 @@ public class MyEditingProfessorInformation extends JPanel {
 					
 					Adress home = new Adress(tfStreet.getText(), tfNumber.getText(), tfCity.getText(), tfCountry.getText());
 					Adress work = new Adress(tfStreetW.getText(), tfNumberW.getText(), tfCityW.getText(), tfCountryW.getText());
-					ProfessorController.getInstance().editProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(),tfSurname.getText(), tfName.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
+					ProfessorController.getInstance().editProfessor((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())),tfSurname.getText(), tfName.getText(), tfEmail.getText(), tfBirthDate.getText(), home, work, tfPhoneNumber.getText(), tfId.getText(), comboCalling.getSelectedItem().toString(), Integer.parseInt(tfExp.getText()));
 					
 					
 					
@@ -479,7 +480,7 @@ public class MyEditingProfessorInformation extends JPanel {
 		}
 		
 		public static void checkValidity() {
-			int temp = MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow();
+			int temp = (MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()));
 			if (temp == -1) {
 				return;
 			}

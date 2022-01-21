@@ -40,8 +40,8 @@ public class MyAddingSubjectDialog extends JDialog{
 		JButton btnOk=new JButton(MainFrame.getInstance().getResourceBundle().getString("btnConfirm"));
 		BoxLayout boxCenter=new BoxLayout(panCenter, BoxLayout.Y_AXIS);
 		panCenter.setLayout(boxCenter);
-		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/50);
-		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/50);
+		Dimension dim=new Dimension(kit.getScreenSize().width/16,kit.getScreenSize().height/45);
+		Dimension fdim=new Dimension(kit.getScreenSize().width/9,kit.getScreenSize().height/45);
 		int konst=kit.getScreenSize().width/30;
 		FocusListenerForSubject focusListener = new FocusListenerForSubject(1);
 		

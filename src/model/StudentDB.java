@@ -70,9 +70,9 @@ public class StudentDB implements Serializable {
 	}
 	
 	private void initStudent() {
-//		this.students=new ArrayList<Student>();
-//		
-//		/* TESTIIIIIIIIIIIIIIIIIIIING */
+		this.students=new ArrayList<Student>();
+		
+		/* TESTIIIIIIIIIIIIIIIIIIIING */
 //		Adress l1 = new Adress("Šafarikova","2","Novi Sad","Srbija");
 //		Adress l2 = new Adress("Nikole Tesle","56","Novi Sad","Srbija");
 //		Adress l3 = new Adress("Bulevar Patrijaha Pavla","3","Beograd","Srbija");

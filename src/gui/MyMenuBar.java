@@ -317,7 +317,7 @@ public class MyMenuBar extends JMenuBar {
 								MainFrame.getInstance().getResourceBundle().getString("deleteProfessor"), MainFrame.getInstance().getResourceBundle().getString("deleteProfessor1"), 
 						        JOptionPane.YES_NO_OPTION);
 						if(answer == JOptionPane.YES_OPTION) {
-							ProfessorController.getInstance().removeProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+							ProfessorController.getInstance().removeProfessor((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())));
 						}
 					}
 				if(MyTabbedPane.getInstance().getSelectedIndex()==2) {

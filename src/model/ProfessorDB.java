@@ -172,7 +172,7 @@ public class ProfessorDB implements Serializable {
 		}
 	}
 	public String getSubjectValueAt(int row, int column) {
-		Subject subject = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()).getCourseList().get(row);
+		Subject subject = ProfessorDB.getInstance().getRow((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()))).getCourseList().get(row);
 		switch(column) {
 		case 0:
 			return subject.getIdSubject();

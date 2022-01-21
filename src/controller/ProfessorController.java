@@ -76,7 +76,7 @@ public class ProfessorController {
 			return;
 		}
 		
-		ProfessorDB.getInstance().editProfessor(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow(), surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, experience);
+		ProfessorDB.getInstance().editProfessor((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())), surname, name, email, birthDate, homeAdress, workAdress, phoneNumber, id, calling, experience);
 		MyProfessorPanel.getInstance().updateView();
 		
 		Professor p = ProfessorDB.getInstance().getRow(selectedRowIndex);
@@ -101,7 +101,7 @@ public class ProfessorController {
 	public void removeSubject() {
 		if(ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRow()<0)
 			return;
-		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		Professor p = ProfessorDB.getInstance().getRow((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())));
 		List<String> subs  = new ArrayList<String>();
 		int[] index = ProfessorSubjects.getInstance().getSubjectsTable().getSelectedRows();
 		for (int i = 0 ;i< index.length;i++) {
@@ -112,7 +112,7 @@ public class ProfessorController {
 		ProfessorSubjects.getInstance().updateView();
 	}
 	public void addSubject(List<Subject> s) {
-		Professor p = ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		Professor p = ProfessorDB.getInstance().getRow((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow())));
 		for(int i = 0 ; i<s.size();i++) {
 			s.get(i).setProfesor(p);
 		}

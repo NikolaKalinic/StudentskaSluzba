@@ -11,7 +11,7 @@ public class AbstractTableModelProfessorSubjects extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()).getCourseList().size();
+		return ProfessorDB.getInstance().getRow((MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()))).getCourseList().size();
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class MyAddSubjectDialog extends JDialog {
 		centerPanel.setLayout(new BorderLayout());
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		Vector<Subject> subjects = new Vector<Subject>();
-		Professor p=ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow());
+		Professor p=ProfessorDB.getInstance().getRow(MyProfessorPanel.getInstance().getProfessorTable().convertRowIndexToModel(MyProfessorPanel.getInstance().getProfessorTable().getSelectedRow()));
 		boolean flag;
 		for (int i =0 ; i<SubjectDB.getInstance().getSubjects().size();i++) {
 			flag=false;
@@ -91,7 +91,7 @@ public class MyAddSubjectDialog extends JDialog {
 					flag=true;
 			}
 			/*only one profesor on subject*/
-			if(SubjectDB.getInstance().getSubjects().get(i).getProfesor()==null)
+			if(SubjectDB.getInstance().getSubjects().get(i).getProfesor()!=null)
 				flag=true;
 			if(flag==false)
 				subjects.add(SubjectDB.getInstance().getSubjects().get(i));

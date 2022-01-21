@@ -75,7 +75,7 @@ public class AddingProfessorToSubject extends JDialog {
 		
 		Vector<Professor> professors = new Vector<Professor>();
 		
-		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow());
+		Subject subject = SubjectDB.getInstance().getRow(MySubjectPanel.getInstance().getSubjectTable().convertRowIndexToModel(MySubjectPanel.getInstance().getSubjectTable().getSelectedRow()));
 		
 		for(Professor p : ProfessorDB.getInstance().getProfessors()) {
 			professors.add(p);
